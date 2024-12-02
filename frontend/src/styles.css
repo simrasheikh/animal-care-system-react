@@ -1,0 +1,21 @@
+/* Animation for the moving background */
+@keyframes moveBg {
+    0% {
+      background-position: center;
+    }
+    50% {
+      background-position: top;
+    }
+    100% {
+      background-position: center;
+    }
+  }
+  
+  /* Apply the animation to the banner */
+  .hero-bg {
+    animation: moveBg 15s ease infinite; /* 15 seconds for smooth transition */
+    background-size: cover;
+    background-attachment: fixed; /* Fixes the background while scrolling */
+    background-position: center;
+  }
+  
