@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-// Dummy data for vets (you'll replace this with data fetched from your backend)
+import vet1Image from './assets/vet1.jpg';
+import vet2Image from './assets/vet2.jpg';
+import vet3Image from './assets/vet3.jpg';
+
+// Dummy data for vets (using imported images)
 const vetsData = [
   {
     id: 1,
     name: 'Dr. Alice Green',
     specialty: 'General Medicine',
-    profilePicture: 'https://via.placeholder.com/150',
+    profilePicture: vet1Image,  // Use imported image here
     availableTimes: ['Mon - 10:00 AM - 2:00 PM', 'Wed - 9:00 AM - 1:00 PM'],
     contact: 'alicegreen@vetclinic.com',
   },
@@ -15,7 +19,7 @@ const vetsData = [
     id: 2,
     name: 'Dr. Bob Brown',
     specialty: 'Surgery',
-    profilePicture: 'https://via.placeholder.com/150',
+    profilePicture: vet2Image,  // Use imported image here
     availableTimes: ['Tue - 11:00 AM - 3:00 PM', 'Thu - 9:00 AM - 12:00 PM'],
     contact: 'bobbrown@vetclinic.com',
   },
@@ -23,7 +27,7 @@ const vetsData = [
     id: 3,
     name: 'Dr. Matt Damon',
     specialty: 'General Veterinary Care',
-    profilePicture: 'https://via.placeholder.com/150',
+    profilePicture: vet3Image,  // Use imported image here
     availableTimes: ['Fri - 11:00 AM - 3:00 PM', 'Sat - 9:00 AM - 12:00 PM'],
     contact: 'mattdamon@vetclinic.com',
   },
