@@ -119,7 +119,7 @@ const VetPage = () => {
       {/* Vet Listings Section */}
       <section className="container mx-auto p-6 bg-gray-50 rounded-lg">
       <h2 className="text-2xl font-bold text-center mt-3">Explore Our Veterinarians and Find the Perfect Match for Your Pet!</h2>
-      <p className="text-lg mt-1 text-center">Click on your chosen profiles and fill the appointment form!</p>
+      <p className="text-lg mt-1 text-center mb-8">Click on your chosen profiles and fill the appointment form!</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {vetsData.map((vet) => (
             <div
