@@ -43,26 +43,20 @@ const Home = () => {
             We believe that every animal deserves love, care, and a forever home. Our team is dedicated to providing expert veterinary services, helping you find the perfect companion, and making sure that animals receive the care they need to thrive.
           </p>
           <div className="mt-6">
-            <Link to="/animals">
+          <Link to="/animals">
             <button
-              className="px-8 py-3 rounded-lg text-white animate__animated animate__slideInUp transition transform hover:scale-105"
-              style={{ backgroundColor: '#4992b8' }}  // Main color
-              onMouseEnter={(e) => e.target.style.backgroundColor = '#3e7a99'}  // Darker color on hover
-              onMouseLeave={(e) => e.target.style.backgroundColor = '#4992b8'}  // Revert back to main color
+              className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99]"
             >
               Browse Animals
             </button>
-            </Link>
-            <Link to="/donate">
-              <button
-              className="px-8 py-3 rounded-lg text-white animate__animated animate__slideInUp transition ml-6 transform hover:scale-105"
-              style={{ backgroundColor: '#4992b8' }}  // Main color
-              onMouseEnter={(e) => e.target.style.backgroundColor = '#3e7a99'}  // Darker color on hover
-              onMouseLeave={(e) => e.target.style.backgroundColor = '#4992b8'}  // Revert back to main color
+          </Link>
+          <Link to="/donate">
+            <button
+              className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99] ml-6"
             >
               Donate Now
             </button>
-            </Link>
+          </Link>
           </div>
         </div>
       </section>      
