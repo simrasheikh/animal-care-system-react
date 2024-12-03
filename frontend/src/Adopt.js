@@ -10,6 +10,7 @@ const Adopt = () => {
   const [isLoading, setIsLoading] = useState(false);  // Loading state
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [formErrors, setFormErrors] = useState({}); // To store form validation errors
   const { id } = useParams();  // Get animal id from URL
   const navigate = useNavigate();
   
@@ -18,25 +19,79 @@ const Adopt = () => {
   
   useEffect(() => {
     if (!isAuthenticated) {
-      // Redirect to login page if not authenticated
-      navigate('/login');
+      navigate('/login'); // Redirect if not authenticated
     } else {
-      // Fetch animal details if authenticated
       const fetchAnimalDetails = async () => {
         const response = await fetch(`http://localhost:3000/animals/${id}`);
         const animalData = await response.json();
         setAnimal(animalData);
       };
-      
+
       fetchAnimalDetails();
     }
   }, [isAuthenticated, id, navigate]);
 
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case 'adopterName':
+        setAdopterName(value);
+        break;
+      case 'adopterEmail':
+        setAdopterEmail(value);
+        break;
+      case 'adopterPhone':
+        setAdopterPhone(value);
+        break;
+      case 'adopterAddress':
+        setAdopterAddress(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    // Validate Adopter Name
+    if (!adopterName) {
+      errors.adopterName = 'Name is required';
+      isValid = false;
+    }
+
+    // Validate Adopter Email
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!adopterEmail || !emailRegex.test(adopterEmail)) {
+      errors.adopterEmail = 'Please enter a valid email address';
+      isValid = false;
+    }
+
+    // Validate Adopter Phone (only numbers, and minimum length)
+    const phoneRegex = /^[0-9]{10,15}$/;
+    if (!adopterPhone || !phoneRegex.test(adopterPhone)) {
+      errors.adopterPhone = 'Please enter a valid phone number (10-15 digits)';
+      isValid = false;
+    }
+
+    // Validate Adopter Address
+    if (!adopterAddress) {
+      errors.adopterAddress = 'Address is required';
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    if (!validateForm()) {
+      return; // If validation fails, prevent form submission
+    }
 
-    // Prepare the application data
+    setIsLoading(true);
     const applicationData = {
       adopter_name: adopterName,
       adopter_email: adopterEmail,
@@ -74,9 +129,8 @@ const Adopt = () => {
       {/* Header */}
       <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#1a2b3b' }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
-            {/* Logo to the left */}
-            <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
-            Animal Care
+          <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
+          Animal Care
         </Link>
         <div className="space-x-4">
           <Link to="/" className="text-white hover:text-gray-300">Home</Link>
@@ -109,43 +163,91 @@ const Adopt = () => {
         )}
 
         {/* Adoption Form */}
-        <form onSubmit={handleSubmit} className="space-y-4 max-w-xl mx-auto">
-          <input
-            type="text"
-            value={adopterName}
-            onChange={(e) => setAdopterName(e.target.value)}
-            placeholder="Your Name"
-            className="w-full p-3 border border-gray-300 rounded"
-            required
-          />
+        <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
+          {/* Name Field */}
+          <div className="relative mb-6"> {/* Added margin-bottom here */}
+            <input
+              id="adopterName"
+              type="text"
+              name="adopterName"
+              value={adopterName}
+              onChange={handleFormChange}
+              placeholder=" " // Placeholder is needed to trigger the floating label
+              className="w-full p-3 pt-4 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent peer"
+              required
+            />
+            <label
+              htmlFor="adopterName"
+              className="absolute text-gray-500 left-3 top-1 transform -translate-y-1/2 transition-all duration-300 scale-75 origin-top-left peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-[-100%] peer-focus:text-red-700 peer-valid:translate-y-[-100%] peer-valid:scale-75"
+            >
+              Your Name
+            </label>
+            {formErrors.adopterName && <p className="text-red-500 text-sm">{formErrors.adopterName}</p>}
+          </div>
 
-          <input
-            type="email"
-            value={adopterEmail}
-            onChange={(e) => setAdopterEmail(e.target.value)}
-            placeholder="Your Email"
-            className="w-full p-3 border border-gray-300 rounded"
-            required
-          />
+          {/* Email Field */}
+          <div className="relative mb-6"> {/* Added margin-bottom here */}
+            <input
+              id="adopterEmail"
+              type="email"
+              name="adopterEmail"
+              value={adopterEmail}
+              onChange={handleFormChange}
+              placeholder=" " // Placeholder is needed to trigger the floating label
+              className="w-full p-3 pt-4 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent peer"
+              required
+            />
+            <label
+              htmlFor="adopterEmail"
+              className="absolute text-gray-500 left-3 top-1 transform -translate-y-1/2 transition-all duration-300 scale-75 origin-top-left peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-[-100%] peer-focus:text-red-700 peer-valid:translate-y-[-100%] peer-valid:scale-75"
+            >
+              Your Email
+            </label>
+            {formErrors.adopterEmail && <p className="text-red-500 text-sm">{formErrors.adopterEmail}</p>}
+          </div>
 
-          <input
-            type="phone"
-            value={adopterPhone}
-            onChange={(e) => setAdopterPhone(e.target.value)}
-            placeholder="Your Phone Number"
-            className="w-full p-3 border border-gray-300 rounded"
-            required
-          />
+          {/* Phone Field */}
+          <div className="relative mb-6"> {/* Added margin-bottom here */}
+            <input
+              id="adopterPhone"
+              type="phone"
+              name="adopterPhone"
+              value={adopterPhone}
+              onChange={handleFormChange}
+              placeholder=" " // Placeholder is needed to trigger the floating label
+              className="w-full p-3 pt-4 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent peer"
+              required
+            />
+            <label
+              htmlFor="adopterPhone"
+              className="absolute text-gray-500 left-3 top-1 transform -translate-y-1/2 transition-all duration-300 scale-75 origin-top-left peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-[-100%] peer-focus:text-red-700 peer-valid:translate-y-[-100%] peer-valid:scale-75"
+            >
+              Your Phone Number
+            </label>
+            {formErrors.adopterPhone && <p className="text-red-500 text-sm">{formErrors.adopterPhone}</p>}
+          </div>
 
-          <textarea
-            value={adopterAddress}
-            onChange={(e) => setAdopterAddress(e.target.value)}
-            placeholder="Your Address"
-            className="w-full p-3 border border-gray-300 rounded"
-            required
-          />
+          {/* Address Field */}
+          <div className="relative mb-6"> {/* Added margin-bottom here */}
+            <textarea
+              id="adopterAddress"
+              name="adopterAddress"
+              value={adopterAddress}
+              onChange={handleFormChange}
+              placeholder=" " // Placeholder is needed to trigger the floating label
+              className="w-full p-3 pt-6 pb-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent peer"
+              required
+            />
+            <label
+              htmlFor="adopterAddress"
+              className="absolute text-gray-500 left-3 top-1 transform -translate-y-1/2 transition-all duration-300 scale-75 origin-top-left peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-[-100%] peer-focus:text-red-700 peer-valid:translate-y-[-100%] peer-valid:scale-75"
+            >
+              Your Address
+            </label>
+            {formErrors.adopterAddress && <p className="text-red-500 text-sm">{formErrors.adopterAddress}</p>}
+          </div>
 
-          {/* Loading Spinner */}
+          {/* Submit Button */}
           {isLoading ? (
             <div className="text-center">
               <div className="spinner-border animate-spin w-12 h-12 border-4 border-t-4 border-gray-500 rounded-full"></div>
