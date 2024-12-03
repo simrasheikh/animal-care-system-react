@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import textbg from './assets/vetlandingbg.png'; // The background image
+import textbg from './assets/vetlandingbg.jpg'; // The background image
 
 import vet1Image from './assets/vet1.jpg';
 import vet2Image from './assets/vet2.jpg';
@@ -103,7 +103,7 @@ const VetPage = () => {
 
       {/* Banner Section */}
       <section
-        className="relative bg-cover bg-center"
+        className="relative hero-bg bg-cover bg-center"
           style={{
           backgroundImage: `url(${textbg})`,
           height: '430px' // You can change this value as needed
@@ -118,7 +118,8 @@ const VetPage = () => {
 
       {/* Vet Listings Section */}
       <section className="container mx-auto p-6 bg-gray-50 rounded-lg">
-      <h2 className="text-2xl text-center mb-6">Explore Our Veterinarians and Find the Perfect Match for Your Pet!</h2>
+      <h2 className="text-2xl font-bold text-center mt-3">Explore Our Veterinarians and Find the Perfect Match for Your Pet!</h2>
+      <p className="text-lg mt-1 text-center">Click on your chosen profiles and fill the appointment form!</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {vetsData.map((vet) => (
             <div

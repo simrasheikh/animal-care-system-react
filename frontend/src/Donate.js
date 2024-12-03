@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import textbg from './assets/donationlandingbg.png'; // The background image
+import textbg from './assets/donationlandingbg.jpg'; // The background image
 
 const Donate = () => {
   const [donorName, setDonorName] = useState('');
@@ -69,12 +69,12 @@ const Donate = () => {
 
       {/* Banner Section */}
       <section
-          className="relative bg-cover bg-center"
-            style={{
-            backgroundImage: `url(${textbg})`,
-            height: '500px' // You can change this value as needed
-          }}
-        >
+        className="relative hero-bg bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${textbg})`,
+          height: '450px' // You can change this value as needed
+        }}
+      >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
           <h1 className="text-5xl font-extrabold text-center">Be a Hero for Animals: Donate Now</h1>
           <p className="text-lg mt-6 text-center">Your generosity helps us provide essential care, treatments, and support for animals in need.</p>
