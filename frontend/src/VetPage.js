@@ -113,7 +113,7 @@ const VetPage = () => {
       <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-1s">
         Meet Our Veterinarians
       </h1>
-      <p className="text-lg md:text-xl text-center mb-6 animate__animated animate__slideInUp">
+      <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
         Dedicated, compassionate, and highly skilled – our veterinarians are here to provide the best care for your beloved pets.
       </p>
       <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
