@@ -1,5 +1,5 @@
 import React from "react";
-import textbg from './assets/textbg.png'; // Adjust the path based on your folder structure
+import textbg from './assets/homebg.jpg'; // Adjust the path based on your folder structure
 import { Link } from "react-router-dom";
 import './styles.css';  // Make sure this points to the correct path
 
@@ -28,11 +28,11 @@ const Home = () => {
         className="relative hero-bg bg-cover bg-center"
         style={{ 
           backgroundImage: `url(${textbg})`,
-          height: '450px' // Set your custom height here (e.g., 500px)
+          height: '450px' // Set your custom height here
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-white px-6">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-1s">
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white px-6">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-2s">
             Welcome to Animal Care System
           </h1>
           <p className="text-lg md:text-xl text-center mb-6 animate__animated animate__fadeIn animate__delay-1s">

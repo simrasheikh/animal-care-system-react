@@ -110,8 +110,8 @@ const VetPage = () => {
         }}
       >
       <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
-        <h1 className="text-4xl font-bold text-center">Meet Our Veterinarians</h1>
-        <p className="text-lg mt-2 text-center">Dedicated, compassionate, and highly skilled – our veterinarians are here to provide the best care for your beloved pets.</p>
+        <h1 className="text-5xl font-extrabold text-center">Meet Our Veterinarians</h1>
+        <p className="text-lg mt-4 text-center">Dedicated, compassionate, and highly skilled – our veterinarians are here to provide the best care for your beloved pets.</p>
         <p className="text-lg mt-1 text-center">Browse through their profiles and easily book an appointment today!</p>
       </div>
       </section>

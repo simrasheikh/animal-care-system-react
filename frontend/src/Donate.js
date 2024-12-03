@@ -76,10 +76,10 @@ const Donate = () => {
           }}
         >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
-          <h1 className="text-4xl font-bold text-center">Be a Hero for Animals: Donate Now</h1>
-          <p className="text-lg mt-2 text-center">Your generosity helps us provide essential care, treatments, and support for animals in need.</p>
+          <h1 className="text-5xl font-extrabold text-center">Be a Hero for Animals: Donate Now</h1>
+          <p className="text-lg mt-6 text-center">Your generosity helps us provide essential care, treatments, and support for animals in need.</p>
           <p className="text-lg mt-1 text-center">Whether it's life-saving surgery, emergency care, or general wellness services, your donation makes a real difference.</p>
-          <p className="text-lg mt-1 text-center">Fill out the form below to make your contribution and select how you'd like your donation to support our efforts.</p>          
+          <p className="text-lg mt-10 text-center">Fill out the form below to make your contribution and select how you'd like your donation to support our efforts.</p>          
         </div>
       </section>
 
