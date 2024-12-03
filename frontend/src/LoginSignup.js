@@ -24,6 +24,7 @@ const LoginSignup = () => {
             Animal Care
         </Link>
         <div className="space-x-4">
+          <Link to="/" className="text-white hover:text-gray-300">Home</Link>
           <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>
           <Link to="/donate" className="text-white hover:text-gray-300">Donate</Link>

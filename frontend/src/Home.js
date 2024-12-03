@@ -14,6 +14,7 @@ const Home = () => {
             Animal Care
         </Link>
         <div className="space-x-4">
+          <Link to="/">Home</Link>
           <Link to="/animals">Browse Animals</Link>
           <Link to="/adopt">Adopt</Link>
           <Link to="/donate">Donate</Link>

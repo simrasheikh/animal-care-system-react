@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import textbg from './assets/donationlandingbg.png'; // The background image
 
 const Donate = () => {
   const [donorName, setDonorName] = useState('');
@@ -57,6 +58,7 @@ const Donate = () => {
             Animal Care
         </Link>
         <div className="space-x-4">
+          <Link to="/" className="text-white hover:text-gray-300">Home</Link>
           <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>
           <Link to="/donate" className="text-white hover:text-gray-300">Donate</Link>
@@ -65,12 +67,28 @@ const Donate = () => {
         </div>
       </nav>
 
+      {/* Banner Section */}
+      <section
+          className="relative bg-cover bg-center"
+            style={{
+            backgroundImage: `url(${textbg})`,
+            height: '500px' // You can change this value as needed
+          }}
+        >
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
+          <h1 className="text-4xl font-bold text-center">Be a Hero for Animals: Donate Now</h1>
+          <p className="text-lg mt-2 text-center">Your generosity helps us provide essential care, treatments, and support for animals in need.</p>
+          <p className="text-lg mt-1 text-center">Whether it's life-saving surgery, emergency care, or general wellness services, your donation makes a real difference.</p>
+          <p className="text-lg mt-1 text-center">Fill out the form below to make your contribution and select how you'd like your donation to support our efforts.</p>          
+        </div>
+      </section>
+
       <div className="container mx-auto p-4">
-        <h2 className="text-2xl text-center mb-6">Your contribution makes a difference!</h2>
+        <h2 className="text-2xl font-bold text-center mb-6">Donation Form</h2>
 
         {/* Success/Error Message */}
         {successMessage && <div className="success-message text-green-500 text-center mb-4">{successMessage}</div>}
-        {errorMessage && <div className="error-message text-red-500 text-center mb-4">{errorMessage}</div>}
+        {errorMessage && <div className="error-message text-red-500 text-center mb-4">{errorMessage}</div>}        
 
         {/* Donation Form */}
         <form onSubmit={handleSubmit} className="space-y-4 max-w-xl mx-auto">

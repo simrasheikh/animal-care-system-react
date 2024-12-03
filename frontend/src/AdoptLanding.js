@@ -14,6 +14,7 @@ const AdoptLanding = () => {
             Animal Care
         </Link>
         <div className="space-x-4">
+          <Link to="/" className="text-white hover:text-gray-300">Home</Link>
           <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>
           <Link to="/donate" className="text-white hover:text-gray-300">Donate</Link>
@@ -29,7 +30,7 @@ const AdoptLanding = () => {
           backgroundImage: `url(${textbg})`
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
+        <div className="absolute inset-0 bg-black bg-opacity-45 flex flex-col items-center justify-center text-white">
           <h1 className="text-4xl font-bold text-center">Thank You for Wanting to Adopt!</h1>
           <p className="text-lg mt-2 text-center">You're doing a great thing! Let's find your new best friend.</p>
           <p className="text-center mt-4 text-lg">Select an animal below and fill out the form to adopt.</p>

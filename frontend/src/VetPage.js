@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import textbg from './assets/vetlandingbg.png'; // The background image
 
 import vet1Image from './assets/vet1.jpg';
 import vet2Image from './assets/vet2.jpg';
@@ -91,6 +92,7 @@ const VetPage = () => {
           Animal Care
         </Link>
         <div className="space-x-4">
+          <Link to="/" className="text-white hover:text-gray-300">Home</Link>
           <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>
           <Link to="/donate" className="text-white hover:text-gray-300">Donate</Link>
@@ -99,10 +101,24 @@ const VetPage = () => {
         </div>
       </nav>
 
+      {/* Banner Section */}
+      <section
+        className="relative bg-cover bg-center"
+          style={{
+          backgroundImage: `url(${textbg})`,
+          height: '430px' // You can change this value as needed
+        }}
+      >
+      <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
+        <h1 className="text-4xl font-bold text-center">Meet Our Veterinarians</h1>
+        <p className="text-lg mt-2 text-center">Dedicated, compassionate, and highly skilled – our veterinarians are here to provide the best care for your beloved pets.</p>
+        <p className="text-lg mt-1 text-center">Browse through their profiles and easily book an appointment today!</p>
+      </div>
+      </section>
+
       {/* Vet Listings Section */}
       <section className="container mx-auto p-6 bg-gray-50 rounded-lg">
-        <h2 className="text-4xl font-extrabold text-center text-teal-800 mb-8">Meet Our Veterinarians</h2>
-
+      <h2 className="text-2xl text-center mb-6">Explore Our Veterinarians and Find the Perfect Match for Your Pet!</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {vetsData.map((vet) => (
             <div
