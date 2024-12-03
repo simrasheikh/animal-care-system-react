@@ -43,16 +43,17 @@ const Home = () => {
             We believe that every animal deserves love, care, and a forever home. Our team is dedicated to providing expert veterinary services, helping you find the perfect companion, and making sure that animals receive the care they need to thrive.
           </p>
           <div className="mt-6">
-          <Link to="/animals">
+            
+            <Link to="/animals">
             <button
-              className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99]"
+              className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99] animate__animated animate__slideInUp"
             >
               Browse Animals
             </button>
           </Link>
           <Link to="/donate">
             <button
-              className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99] ml-6"
+              className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99] animate__animated animate__slideInUp ml-6"
             >
               Donate Now
             </button>
