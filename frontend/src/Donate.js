@@ -51,7 +51,7 @@ const Donate = () => {
   return (
     <div className="donate-container">
       {/* Header */}
-      <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#66443e' }}>
+      <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#1a2b3b' }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
             {/* Logo to the left */}
             <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
