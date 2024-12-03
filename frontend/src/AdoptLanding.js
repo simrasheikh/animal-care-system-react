@@ -32,13 +32,19 @@ const AdoptLanding = () => {
         }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white px-6">
-          <h1 className="text-5xl font-extrabold text-center">Thank You for Wanting to Adopt!</h1>
-          <p className="text-lg mt-6 text-center">Every animal deserves a chance to be loved. By adopting, you're not just gaining a pet; you're making a lifelong friend.</p>
-          <p className="text-lg mt-2 text-center">Explore our adoptable animals and find your perfect companion today!</p>
+        <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-1s">
+          Thank You for Wanting to Adopt!
+          </h1>
+          <p className="text-lg md:text-xl text-center mb-6 animate__animated animate__slideInUp">
+            Every animal deserves a chance to be loved. By adopting, you're not just gaining a pet; you're making a lifelong friend.
+          </p>
+          <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
+            Explore our adoptable animals and find your perfect companion today!
+          </p>
         <div className="mt-10">
           <Link to="/animals">
           <button
-            className="px-8 py-3 rounded-lg text-white transition transform hover:scale-105"
+            className="px-8 py-3 rounded-lg text-white animate__animated animate__slideInUp transition transform hover:scale-105"
             style={{ backgroundColor: '#4992b8' }}  // Main color
             onMouseEnter={(e) => e.target.style.backgroundColor = '#3e7a99'}  // Darker color on hover
             onMouseLeave={(e) => e.target.style.backgroundColor = '#4992b8'}  // Revert back to main color

@@ -40,7 +40,7 @@ const Home = () => {
             Helping Animals Thrive, One Paw at a Time
           </p>
           <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
-          We believe that every animal deserves love, care, and a forever home. Our team is dedicated to providing expert veterinary services, helping you find the perfect companion, and making sure that animals receive the care they need to thrive.
+            We believe that every animal deserves love, care, and a forever home. Our team is dedicated to providing expert veterinary services, helping you find the perfect companion, and making sure that animals receive the care they need to thrive.
           </p>
           <div className="mt-6">
             <Link to="/animals">
