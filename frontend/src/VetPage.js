@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import textbg from './assets/vetlandingbg.jpg'; // The background image
 
@@ -12,7 +12,7 @@ const vetsData = [
     id: 1,
     name: 'Dr. Alice Green',
     specialty: 'General Medicine',
-    profilePicture: vet1Image,  // Use imported image here
+    profilePicture: vet1Image,
     availableTimes: ['Mon - 10:00 AM - 2:00 PM', 'Wed - 9:00 AM - 1:00 PM'],
     contact: 'alicegreen@vetclinic.com',
   },
@@ -20,7 +20,7 @@ const vetsData = [
     id: 2,
     name: 'Dr. Bob Brown',
     specialty: 'Surgery',
-    profilePicture: vet2Image,  // Use imported image here
+    profilePicture: vet2Image,
     availableTimes: ['Tue - 11:00 AM - 3:00 PM', 'Thu - 9:00 AM - 12:00 PM'],
     contact: 'bobbrown@vetclinic.com',
   },
@@ -28,11 +28,10 @@ const vetsData = [
     id: 3,
     name: 'Dr. Matt Damon',
     specialty: 'General Veterinary Care',
-    profilePicture: vet3Image,  // Use imported image here
+    profilePicture: vet3Image,
     availableTimes: ['Fri - 11:00 AM - 3:00 PM', 'Sat - 9:00 AM - 12:00 PM'],
     contact: 'mattdamon@vetclinic.com',
   },
-  // More vets can be added here
 ];
 
 const VetPage = () => {
@@ -47,6 +46,7 @@ const VetPage = () => {
   const [isBooking, setIsBooking] = useState(false); // Simulating loading state
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [formErrors, setFormErrors] = useState({}); // For validation errors
 
   const handleVetClick = (vet) => {
     setSelectedVet(vet);
@@ -57,19 +57,58 @@ const VetPage = () => {
   };
 
   const handleFormChange = (e) => {
+    const { name, value } = e.target;
     setAppointmentDetails({
       ...appointmentDetails,
-      [e.target.name]: e.target.value,
+      [name]: value,
     });
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    // Validate Name
+    if (!appointmentDetails.name) {
+      errors.name = 'Name is required';
+      isValid = false;
+    }
+
+    // Validate Email
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!appointmentDetails.email || !emailRegex.test(appointmentDetails.email)) {
+      errors.email = 'Please enter a valid email address';
+      isValid = false;
+    }
+
+    // Validate Phone
+    const phoneRegex = /^[0-9]{10,15}$/;
+    if (!appointmentDetails.phone || !phoneRegex.test(appointmentDetails.phone)) {
+      errors.phone = 'Please enter a valid phone number (10-15 digits)';
+      isValid = false;
+    }
+
+    // Validate Appointment Time
+    if (!appointmentDetails.appointmentTime) {
+      errors.appointmentTime = 'Please select an appointment time';
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
   };
 
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return; // Prevent submission if validation fails
+    }
+
     setIsBooking(true);
 
-    // Simulate sending data to the backend
+    // Simulate booking request
     try {
-      // Simulating backend booking request
+      // Simulating a backend request with a timeout
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setSuccessMessage('Appointment successfully booked!');
@@ -87,7 +126,6 @@ const VetPage = () => {
       {/* Header */}
       <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#1a2b3b' }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
-          {/* Logo to the left */}
           <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
           Animal Care
         </Link>
@@ -104,28 +142,28 @@ const VetPage = () => {
       {/* Banner Section */}
       <section
         className="relative hero-bg bg-cover bg-center"
-          style={{
+        style={{
           backgroundImage: `url(${textbg})`,
-          height: '430px' // You can change this value as needed
+          height: '430px',
         }}
       >
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
-      <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-1s">
-        Meet Our Veterinarians
-      </h1>
-      <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
-        Dedicated, compassionate, and highly skilled – our veterinarians are here to provide the best care for your beloved pets.
-      </p>
-      <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
-        Browse through their profiles and easily book an appointment today!
-      </p>      
-      </div>
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-1s">
+            Meet Our Veterinarians
+          </h1>
+          <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
+            Dedicated, compassionate, and highly skilled – our veterinarians are here to provide the best care for your beloved pets.
+          </p>
+          <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
+            Browse through their profiles and easily book an appointment today!
+          </p>
+        </div>
       </section>
 
       {/* Vet Listings Section */}
       <section className="container mx-auto p-6 bg-gray-50 rounded-lg">
-      <h2 className="text-2xl font-bold text-center mt-3">Explore Our Veterinarians and Find the Perfect Match for Your Pet</h2>
-      <p className="text-lg mt-1 text-center mb-8">Click on your chosen profile and fill the appointment form!</p>
+        <h2 className="text-2xl font-bold text-center mt-3">Explore Our Veterinarians and Find the Perfect Match for Your Pet</h2>
+        <p className="text-lg mt-1 text-center mb-8">Click on your chosen profile and fill the appointment form!</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {vetsData.map((vet) => (
             <div
@@ -174,52 +212,72 @@ const VetPage = () => {
 
           {/* Appointment Booking Form */}
           <form onSubmit={handleBookingSubmit} className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
-            <input
-              type="text"
-              name="name"
-              value={appointmentDetails.name}
-              onChange={handleFormChange}
-              placeholder="Your Name"
-              className="w-full p-3 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              value={appointmentDetails.email}
-              onChange={handleFormChange}
-              placeholder="Your Email"
-              className="w-full p-3 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <input
-              type="tel"
-              name="phone"
-              value={appointmentDetails.phone}
-              onChange={handleFormChange}
-              placeholder="Your Phone"
-              className="w-full p-3 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <select
-              name="appointmentTime"
-              value={appointmentDetails.appointmentTime}
-              onChange={handleFormChange}
-              className="w-full p-3 mb-4 border border-gray-300 rounded"
-              required
-            >
-              <option value="">Select Available Time</option>
-              {selectedVet.availableTimes.map((time, index) => (
-                <option key={index} value={time}>{time}</option>
-              ))}
-            </select>
+            <div>
+              <input
+                type="text"
+                name="name"
+                value={appointmentDetails.name}
+                onChange={handleFormChange}
+                placeholder="Your Name"
+                className="w-full p-3 mb-4 border border-gray-300 rounded"
+                required
+              />
+              {formErrors.name && <p className="text-red-500 text-sm">{formErrors.name}</p>}
+            </div>
+
+            <div>
+              <input
+                type="email"
+                name="email"
+                value={appointmentDetails.email}
+                onChange={handleFormChange}
+                placeholder="Your Email"
+                className="w-full p-3 mb-4 border border-gray-300 rounded"
+                required
+              />
+              {formErrors.email && <p className="text-red-500 text-sm">{formErrors.email}</p>}
+            </div>
+
+            <div>
+              <input
+                type="tel"
+                name="phone"
+                value={appointmentDetails.phone}
+                onChange={handleFormChange}
+                placeholder="Your Phone"
+                className="w-full p-3 mb-4 border border-gray-300 rounded"
+                required
+              />
+              {formErrors.phone && <p className="text-red-500 text-sm">{formErrors.phone}</p>}
+            </div>
+
+            <div>
+              <select
+                name="appointmentTime"
+                value={appointmentDetails.appointmentTime}
+                onChange={handleFormChange}
+                className="w-full p-3 mb-4 border border-gray-300 rounded"
+                required
+              >
+                <option value="">Select Available Time</option>
+                {selectedVet.availableTimes.map((time, index) => (
+                  <option key={index} value={time}>
+                    {time}
+                  </option>
+                ))}
+              </select>
+              {formErrors.appointmentTime && <p className="text-red-500 text-sm">{formErrors.appointmentTime}</p>}
+            </div>
 
             {isBooking ? (
               <div className="text-center">
                 <div className="spinner-border animate-spin w-12 h-12 border-4 border-t-4 border-gray-500 rounded-full"></div>
               </div>
             ) : (
-              <button type="submit" className="w-full py-3 bg-teal-600 text-white font-semibold rounded hover:bg-teal-700 transition-colors duration-200">
+              <button
+                type="submit"
+                className="w-full py-3 bg-teal-600 text-white font-semibold rounded hover:bg-teal-700 transition-colors duration-200"
+              >
                 Book Appointment
               </button>
             )}
