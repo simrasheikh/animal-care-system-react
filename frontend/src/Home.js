@@ -2,6 +2,7 @@ import React from "react";
 import textbg from './assets/homebg.jpg'; // Adjust the path based on your folder structure
 import { Link } from "react-router-dom";
 import './styles.css';  // Make sure this points to the correct path
+import 'animate.css';
 
 const Home = () => {
   return (
@@ -35,16 +36,16 @@ const Home = () => {
           <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-1s">
             Welcome to Animal Care System
           </h1>
-          <p className="text-lg md:text-xl text-center mb-6 animate__animated animate__fadeIn animate__delay-1s">
+          <p className="text-lg md:text-xl text-center mb-6 animate__animated animate__slideInUp">
             Helping Animals Thrive, One Paw at a Time
           </p>
-          <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__fadeIn animate__delay-1s">
+          <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
           We believe that every animal deserves love, care, and a forever home. Our team is dedicated to providing expert veterinary services, helping you find the perfect companion, and making sure that animals receive the care they need to thrive.
           </p>
           <div className="mt-6">
             <Link to="/animals">
             <button
-              className="px-8 py-3 rounded-lg text-white transition transform hover:scale-105"
+              className="px-8 py-3 rounded-lg text-white animate__animated animate__slideInUp transition transform hover:scale-105"
               style={{ backgroundColor: '#4992b8' }}  // Main color
               onMouseEnter={(e) => e.target.style.backgroundColor = '#3e7a99'}  // Darker color on hover
               onMouseLeave={(e) => e.target.style.backgroundColor = '#4992b8'}  // Revert back to main color
@@ -54,7 +55,7 @@ const Home = () => {
             </Link>
             <Link to="/donate">
               <button
-              className="px-8 py-3 rounded-lg text-white transition ml-6 transform hover:scale-105"
+              className="px-8 py-3 rounded-lg text-white animate__animated animate__slideInUp transition ml-6 transform hover:scale-105"
               style={{ backgroundColor: '#4992b8' }}  // Main color
               onMouseEnter={(e) => e.target.style.backgroundColor = '#3e7a99'}  // Darker color on hover
               onMouseLeave={(e) => e.target.style.backgroundColor = '#4992b8'}  // Revert back to main color
