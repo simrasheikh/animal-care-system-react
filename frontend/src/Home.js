@@ -25,11 +25,16 @@ const Home = () => {
 
       {/* Banner Section with Animated Background */}
       <section
-        className="relative h-96 hero-bg bg-cover bg-center"
-        style={{ backgroundImage: `url(${textbg})` }}
+        className="relative hero-bg bg-cover bg-center"
+        style={{ 
+          backgroundImage: `url(${textbg})`,
+          height: '450px' // Set your custom height here (e.g., 500px)
+        }}
       >
         <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-white px-6">
-          <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-1s">Welcome to Animal Care System</h1>
+          <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-1s">
+            Welcome to Animal Care System
+          </h1>
           <p className="text-lg md:text-xl text-center mb-6 animate__animated animate__fadeIn animate__delay-1s">
             Helping Animals Find a Loving Home
           </p>
@@ -47,6 +52,7 @@ const Home = () => {
           </div>
         </div>
       </section>
+
       
       {/* Featured Sections */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 p-6">
