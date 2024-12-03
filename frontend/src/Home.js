@@ -36,10 +36,10 @@ const Home = () => {
             Welcome to Animal Care System
           </h1>
           <p className="text-lg md:text-xl text-center mb-6 animate__animated animate__fadeIn animate__delay-1s">
-            Helping Animals Find a Loving Home
+            Helping Animals Thrive, One Paw at a Time
           </p>
           <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__fadeIn animate__delay-1s">
-          Our mission is to provide safe, loving environments for every animal in need, offering expert care, support, and a chance for a better life.
+          We believe that every animal deserves love, care, and a forever home. Our team is dedicated to providing expert veterinary services, helping you find the perfect companion, and making sure that animals receive the care they need to thrive.
           </p>
           <div className="mt-6">
             <Link to="/animals">
