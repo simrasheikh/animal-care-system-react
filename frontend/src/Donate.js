@@ -82,7 +82,7 @@ const Donate = () => {
           <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
             Your generosity helps us provide essential care, treatments, and support for animals in need.             
           </p>
-          <p className="text-lg md:text-xl text-center mb-6 animate__animated animate__slideInUp">
+          <p className="text-lg md:text-xl text-center mb-8 animate__animated animate__slideInUp">
             Whether it's life-saving surgery, emergency care, or general wellness services, your donation makes a real difference.
           </p>
           <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
