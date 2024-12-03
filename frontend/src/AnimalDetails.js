@@ -9,16 +9,16 @@ const AnimalDetails = () => {
   const dummyAnimals = [
     { id: 1, name: 'Bella', species: 'Dog', age: 'Puppy', status: 'Available', imageName: 'bella.jpg', description: 'A playful puppy ready for adoption.' },
     { id: 2, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'milo.jpg', description: 'A calm and friendly cat looking for a home.' },
-    { id: 3, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg', description: 'A senior dog, adopted to a loving family.' },
+    { id: 3, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg', description: 'A senior dog, adopted to a loving family.' },
     { id: 4, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'lucy.jpg', description: 'A curious and independent cat.' },
     { id: 5, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'milo.jpg', description: 'A calm and friendly cat looking for a home.' },
-    { id: 6, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg', description: 'A senior dog, adopted to a loving family.' },
+    { id: 6, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg', description: 'A senior dog, adopted to a loving family.' },
     { id: 7, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'lucy.jpg', description: 'A curious and independent cat.' },
     { id: 8, name: 'Bella', species: 'Dog', age: 'Puppy', status: 'Available', imageName: 'bella.jpg', description: 'A playful puppy ready for adoption.' },
-    { id: 9, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg', description: 'A senior dog, adopted to a loving family.' },
+    { id: 9, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg', description: 'A senior dog, adopted to a loving family.' },
     { id: 10, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'lucy.jpg', description: 'A curious and independent cat.' },
     { id: 11, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'milo.jpg', description: 'A calm and friendly cat looking for a home.' },
-    { id: 12, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg', description: 'A senior dog, adopted to a loving family.' },
+    { id: 12, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg', description: 'A senior dog, adopted to a loving family.' },
   ];
 
   // Function to get the animal details by id from dummy data
