@@ -1,7 +1,7 @@
 // src/AdoptLanding.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import textbg from './assets/adoptlandingbg.png'; // The background image
+import textbg from './assets/adoptlandingbg.jpg'; // The background image
 
 const AdoptLanding = () => {
   return (
@@ -25,21 +25,27 @@ const AdoptLanding = () => {
 
       {/* Landing Page with Background */}
       <section
-        className="relative bg-cover bg-center h-96"
-        style={{
-          backgroundImage: `url(${textbg})`
+        className="relative hero-bg bg-cover bg-center"
+        style={{ 
+          backgroundImage: `url(${textbg})`,
+          height: '547px' // Set your custom height here
         }}
       >
-        <div className="absolute inset-0 bg-black bg-opacity-45 flex flex-col items-center justify-center text-white">
-          <h1 className="text-4xl font-bold text-center">Thank You for Wanting to Adopt!</h1>
-          <p className="text-lg mt-2 text-center">You're doing a great thing! Let's find your new best friend.</p>
-          <p className="text-center mt-4 text-lg">Select an animal below and fill out the form to adopt.</p>
-          <div className="mt-6">
+        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white px-6">
+        <h1 className="text-5xl font-extrabold text-center">Thank You for Wanting to Adopt!</h1>
+        <p className="text-lg mt-6 text-center">Every animal deserves a chance to be loved. By adopting, you're not just gaining a pet; you're making a lifelong friend.</p>
+        <p className="text-lg mt-2 text-center">Explore our adoptable animals and find your perfect companion today!</p>
+          <div className="mt-10">
             <Link to="/animals">
-              <button className="px-6 py-2 bg-blue-700 rounded-lg text-white hover:bg-blue-800 transition">
-                Browse Animals
-              </button>
-            </Link>
+            <button
+              className="px-8 py-3 rounded-lg text-white transition transform hover:scale-105"
+              style={{ backgroundColor: '#4992b8' }}  // Main color
+              onMouseEnter={(e) => e.target.style.backgroundColor = '#3e7a99'}  // Darker color on hover
+              onMouseLeave={(e) => e.target.style.backgroundColor = '#4992b8'}  // Revert back to main color
+            >
+              Browse Animals
+            </button>
+            </Link>            
           </div>
         </div>
       </section>
