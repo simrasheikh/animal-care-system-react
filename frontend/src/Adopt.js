@@ -163,87 +163,55 @@ const Adopt = () => {
         )}
 
         {/* Adoption Form */}
-        <form onSubmit={handleSubmit} className="max-w-xl mx-auto">
-          {/* Name Field */}
-          <div className="relative mb-6"> {/* Added margin-bottom here */}
+        <form onSubmit={handleSubmit} className="space-y-4 max-w-xl mx-auto">
+          <div>
             <input
-              id="adopterName"
               type="text"
               name="adopterName"
               value={adopterName}
               onChange={handleFormChange}
-              placeholder=" " // Placeholder is needed to trigger the floating label
-              className="w-full p-3 pt-4 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent peer"
+              placeholder="Your Name"
+              className="w-full p-3 border border-gray-300 rounded"
               required
             />
-            <label
-              htmlFor="adopterName"
-              className="absolute text-gray-500 left-3 top-1 transform -translate-y-1/2 transition-all duration-300 scale-75 origin-top-left peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-[-100%] peer-focus:text-red-700 peer-valid:translate-y-[-100%] peer-valid:scale-75"
-            >
-              Your Name
-            </label>
             {formErrors.adopterName && <p className="text-red-500 text-sm">{formErrors.adopterName}</p>}
           </div>
 
-          {/* Email Field */}
-          <div className="relative mb-6"> {/* Added margin-bottom here */}
+          <div>
             <input
-              id="adopterEmail"
               type="email"
               name="adopterEmail"
               value={adopterEmail}
               onChange={handleFormChange}
-              placeholder=" " // Placeholder is needed to trigger the floating label
-              className="w-full p-3 pt-4 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent peer"
+              placeholder="Your Email"
+              className="w-full p-3 border border-gray-300 rounded"
               required
             />
-            <label
-              htmlFor="adopterEmail"
-              className="absolute text-gray-500 left-3 top-1 transform -translate-y-1/2 transition-all duration-300 scale-75 origin-top-left peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-[-100%] peer-focus:text-red-700 peer-valid:translate-y-[-100%] peer-valid:scale-75"
-            >
-              Your Email
-            </label>
             {formErrors.adopterEmail && <p className="text-red-500 text-sm">{formErrors.adopterEmail}</p>}
           </div>
 
-          {/* Phone Field */}
-          <div className="relative mb-6"> {/* Added margin-bottom here */}
+          <div>
             <input
-              id="adopterPhone"
               type="phone"
               name="adopterPhone"
               value={adopterPhone}
               onChange={handleFormChange}
-              placeholder=" " // Placeholder is needed to trigger the floating label
-              className="w-full p-3 pt-4 pb-2 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent peer"
+              placeholder="Your Phone Number"
+              className="w-full p-3 border border-gray-300 rounded"
               required
             />
-            <label
-              htmlFor="adopterPhone"
-              className="absolute text-gray-500 left-3 top-1 transform -translate-y-1/2 transition-all duration-300 scale-75 origin-top-left peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-[-100%] peer-focus:text-red-700 peer-valid:translate-y-[-100%] peer-valid:scale-75"
-            >
-              Your Phone Number
-            </label>
             {formErrors.adopterPhone && <p className="text-red-500 text-sm">{formErrors.adopterPhone}</p>}
           </div>
 
-          {/* Address Field */}
-          <div className="relative mb-6"> {/* Added margin-bottom here */}
+          <div>
             <textarea
-              id="adopterAddress"
               name="adopterAddress"
               value={adopterAddress}
               onChange={handleFormChange}
-              placeholder=" " // Placeholder is needed to trigger the floating label
-              className="w-full p-3 pt-6 pb-3 border-2 border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent peer"
+              placeholder="Your Address"
+              className="w-full p-3 border border-gray-300 rounded"
               required
             />
-            <label
-              htmlFor="adopterAddress"
-              className="absolute text-gray-500 left-3 top-1 transform -translate-y-1/2 transition-all duration-300 scale-75 origin-top-left peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:translate-y-[-100%] peer-focus:text-red-700 peer-valid:translate-y-[-100%] peer-valid:scale-75"
-            >
-              Your Address
-            </label>
             {formErrors.adopterAddress && <p className="text-red-500 text-sm">{formErrors.adopterAddress}</p>}
           </div>
 
