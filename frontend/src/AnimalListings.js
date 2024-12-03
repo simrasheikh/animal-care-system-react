@@ -18,16 +18,16 @@ const AnimalListings = () => {
         const data = [
           { id: 1, name: 'Bella', species: 'Dog', age: 'Puppy', status: 'Available', imageName: 'bella.jpg' },
           { id: 2, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'milo.jpg' },
-          { id: 3, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg' },
+          { id: 3, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg' },
           { id: 4, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'lucy.jpg' },
           { id: 5, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'milo.jpg' },
-          { id: 6, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg' },
+          { id: 6, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg' },
           { id: 7, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'lucy.jpg' },
           { id: 8, name: 'Bella', species: 'Dog', age: 'Puppy', status: 'Available', imageName: 'bella.jpg' },
-          { id: 9, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg' },
+          { id: 9, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg' },
           { id: 10, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'lucy.jpg' },
           { id: 11, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'milo.jpg' },
-          { id: 12, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg' },
+          { id: 12, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg' },
         ];
         setAnimals(data);
       } catch (error) {
