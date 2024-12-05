@@ -10,17 +10,16 @@ const Home = () => {
       {/* Header */}
       <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#1a2b3b' }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
-            {/* Logo to the left */}
-            <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
-            Animal Care
+          <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
+          Animal Care
         </Link>
         <div className="space-x-4">
-          <Link to="/">Home</Link>
-          <Link to="/animals">Browse Animals</Link>
-          <Link to="/adopt">Adopt</Link>
-          <Link to="/donate">Donate</Link>
-          <Link to="/vet">Vet Services</Link>
-          <Link to="/login">Staff Login</Link>
+          <Link to="/" className="text-white hover:text-gray-300">Home</Link>
+          <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
+          <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>
+          <Link to="/donate" className="text-white hover:text-gray-300">Donate</Link>
+          <Link to="/vet" className="text-white hover:text-gray-300">Vet Services</Link>
+          <Link to="/login" className="text-white hover:text-gray-300">Staff Login</Link>
         </div>
       </nav>
 
