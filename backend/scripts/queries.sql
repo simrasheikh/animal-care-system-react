@@ -3,6 +3,7 @@ select*from animals;
 select*from adopters;
 
 select * from staff;
+commit;
 
 select*from vet;
 

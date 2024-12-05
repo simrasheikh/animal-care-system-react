@@ -14,3 +14,7 @@ async function listStaff() {
         }
     }
 }
+
+module.exports = {
+    listStaff,
+};

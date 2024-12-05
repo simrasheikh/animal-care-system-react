@@ -14,7 +14,11 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //routes
-app.use('/api/staff', staffRoutes);
+app.use("/", staffRoutes);
+
+// app.use("/", (req, res) => {
+//     res.json({ message: "App is running!" });
+// });
 
 const dotenv = require('dotenv');
 dotenv.config();
