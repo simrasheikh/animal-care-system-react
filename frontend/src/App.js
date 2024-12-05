@@ -8,7 +8,12 @@ import Adopt from './Adopt';
 import Donate from './Donate'; // Donate page
 import LoginSignup from './LoginSignup';
 import VetPage from './VetPage'; // Add this import for the VetPage
-
+import StaffDashboard from './StaffDashboard'; // Staff Dashboard Landing page
+import AnimalManagement from './AnimalManagement'; // Animal Management Page
+import AdoptionApplications from './AdoptionApplications'; // Adoption Applications Page
+import MedicalRecords from './MedicalRecords'; // Medical Records Page
+import AddAnimal from './AddAnimal';  // Import AddAnimal
+import AddMedicalRecord from './AddMedicalRecord';  // Import AddMedicalRecord page
 
 function App() {
   const [animals, setAnimals] = useState([]);
@@ -47,11 +52,21 @@ function App() {
         {/* Donate page */}
         <Route path="/donate" element={<Donate />} />
 
+        {/* Login/Signup page */}
         <Route path="/login" element={<LoginSignup />} />
 
         {/* Vet Page route */}
         <Route path="/vet" element={<VetPage />} />  {/* Added route for VetPage */}
 
+        {/* Staff Dashboard Landing */}
+        <Route path="/staff-dashboard" element={<StaffDashboard />} />
+
+        {/* Staff Dashboard sub-pages */}
+        <Route path="/staff-dashboard/animal-management" element={<AnimalManagement />} />
+        <Route path="/staff-dashboard/adoption-applications" element={<AdoptionApplications />} />
+        <Route path="/staff-dashboard/medical-records" element={<MedicalRecords />} />
+        <Route path="/staff-dashboard/animal-management/add" element={<AddAnimal />} />
+        <Route path="/staff-dashboard/medical-records/add" element={<AddMedicalRecord />} />
       </Routes>
     </BrowserRouter>
   );
