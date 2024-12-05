@@ -25,7 +25,7 @@ const AddMedicalRecord = () => {
     
     // Save the new medical record (for now, logging to console)
     // Later, this can be sent to the backend via an API call
-
+    
     // Redirect back to the Medical Records page
     navigate('/staff-dashboard/medical-records');
   };
