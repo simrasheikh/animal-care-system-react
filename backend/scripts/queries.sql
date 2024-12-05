@@ -2,7 +2,7 @@ select*from animals;
 
 select*from adopters;
 
-select*from staff;
+select * from staff;
 
 select*from vet;
 

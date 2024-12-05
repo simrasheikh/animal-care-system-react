@@ -5,7 +5,7 @@ INSERT INTO Adopters (name, address, phone_number, email)
 VALUES ('John Doe', '1234 Elm Street', '1234567890', 'john@example.com');
 
 INSERT INTO Staff (name, role, phone_number, email, shift_timing)
-VALUES ('Alice Smith', 'Vet', '0987654321', 'alice@example.com', '9 AM - 5 PM');
+VALUES ('Subata Naveen Khan', 'Admin', '03314991818', 's.khan_18119@khi.iba.edu.pk', '9 AM - 5 PM');
 
 INSERT INTO Vet (name, specialization, phone_number, email, available_hours)
 VALUES ('Dr. Brown', 'Surgery', '1112223333', 'dr.brown@example.com', '10 AM - 4 PM');
