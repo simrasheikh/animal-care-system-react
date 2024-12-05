@@ -6,14 +6,18 @@ const AnimalManagement = () => {
 
   // Fetch animals from the backend or use dummy data for now
   useEffect(() => {
-    // Dummy Data (replace with real API call when available)
-    setAnimals([
-      { id: 1, name: 'Bella', species: 'Dog', age: 'Puppy', status: 'Available' },
-      { id: 2, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Adopted' },
-      { id: 3, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available' },
-      { id: 4, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available' },
-      // Add more animals as needed...
-    ]);
+    fetch(`http://localhost:3001/animals`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data.data);
+        setAnimals(data.data);
+      })
+        .catch((error) => console.error('Error:', error));
   }, []);
 
   // Handle Edit and Delete actions (dummy logic)
