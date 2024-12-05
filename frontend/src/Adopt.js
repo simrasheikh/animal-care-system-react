@@ -10,6 +10,7 @@ const Adopt = () => {
   const [isLoading, setIsLoading] = useState(false);  // Loading state
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const [formErrors, setFormErrors] = useState({}); // To store form validation errors
   const { id } = useParams();  // Get animal id from URL
   const navigate = useNavigate();
   
@@ -18,25 +19,79 @@ const Adopt = () => {
   
   useEffect(() => {
     if (!isAuthenticated) {
-      // Redirect to login page if not authenticated
-      navigate('/login');
+      navigate('/login'); // Redirect if not authenticated
     } else {
-      // Fetch animal details if authenticated
       const fetchAnimalDetails = async () => {
         const response = await fetch(`http://localhost:3000/animals/${id}`);
         const animalData = await response.json();
         setAnimal(animalData);
       };
-      
+
       fetchAnimalDetails();
     }
   }, [isAuthenticated, id, navigate]);
 
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    switch (name) {
+      case 'adopterName':
+        setAdopterName(value);
+        break;
+      case 'adopterEmail':
+        setAdopterEmail(value);
+        break;
+      case 'adopterPhone':
+        setAdopterPhone(value);
+        break;
+      case 'adopterAddress':
+        setAdopterAddress(value);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const validateForm = () => {
+    let errors = {};
+    let isValid = true;
+
+    // Validate Adopter Name
+    if (!adopterName) {
+      errors.adopterName = 'Name is required';
+      isValid = false;
+    }
+
+    // Validate Adopter Email
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!adopterEmail || !emailRegex.test(adopterEmail)) {
+      errors.adopterEmail = 'Please enter a valid email address';
+      isValid = false;
+    }
+
+    // Validate Adopter Phone (only numbers, and minimum length)
+    const phoneRegex = /^[0-9]{10,15}$/;
+    if (!adopterPhone || !phoneRegex.test(adopterPhone)) {
+      errors.adopterPhone = 'Please enter a valid phone number (10-15 digits)';
+      isValid = false;
+    }
+
+    // Validate Adopter Address
+    if (!adopterAddress) {
+      errors.adopterAddress = 'Address is required';
+      isValid = false;
+    }
+
+    setFormErrors(errors);
+    return isValid;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true);
+    if (!validateForm()) {
+      return; // If validation fails, prevent form submission
+    }
 
-    // Prepare the application data
+    setIsLoading(true);
     const applicationData = {
       adopter_name: adopterName,
       adopter_email: adopterEmail,
@@ -72,13 +127,13 @@ const Adopt = () => {
   return (
     <div>
       {/* Header */}
-      <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#66443e' }}>
+      <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#1a2b3b' }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
-            {/* Logo to the left */}
-            <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
-            Animal Care
+          <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
+          Animal Care
         </Link>
         <div className="space-x-4">
+          <Link to="/" className="text-white hover:text-gray-300">Home</Link>
           <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>
           <Link to="/donate" className="text-white hover:text-gray-300">Donate</Link>
@@ -109,42 +164,58 @@ const Adopt = () => {
 
         {/* Adoption Form */}
         <form onSubmit={handleSubmit} className="space-y-4 max-w-xl mx-auto">
-          <input
-            type="text"
-            value={adopterName}
-            onChange={(e) => setAdopterName(e.target.value)}
-            placeholder="Your Name"
-            className="w-full p-3 border border-gray-300 rounded"
-            required
-          />
+          <div>
+            <input
+              type="text"
+              name="adopterName"
+              value={adopterName}
+              onChange={handleFormChange}
+              placeholder="Your Name"
+              className="w-full p-3 border border-gray-300 rounded"
+              required
+            />
+            {formErrors.adopterName && <p className="text-red-500 text-sm">{formErrors.adopterName}</p>}
+          </div>
 
-          <input
-            type="email"
-            value={adopterEmail}
-            onChange={(e) => setAdopterEmail(e.target.value)}
-            placeholder="Your Email"
-            className="w-full p-3 border border-gray-300 rounded"
-            required
-          />
+          <div>
+            <input
+              type="email"
+              name="adopterEmail"
+              value={adopterEmail}
+              onChange={handleFormChange}
+              placeholder="Your Email"
+              className="w-full p-3 border border-gray-300 rounded"
+              required
+            />
+            {formErrors.adopterEmail && <p className="text-red-500 text-sm">{formErrors.adopterEmail}</p>}
+          </div>
 
-          <input
-            type="phone"
-            value={adopterPhone}
-            onChange={(e) => setAdopterPhone(e.target.value)}
-            placeholder="Your Phone Number"
-            className="w-full p-3 border border-gray-300 rounded"
-            required
-          />
+          <div>
+            <input
+              type="phone"
+              name="adopterPhone"
+              value={adopterPhone}
+              onChange={handleFormChange}
+              placeholder="Your Phone Number"
+              className="w-full p-3 border border-gray-300 rounded"
+              required
+            />
+            {formErrors.adopterPhone && <p className="text-red-500 text-sm">{formErrors.adopterPhone}</p>}
+          </div>
 
-          <textarea
-            value={adopterAddress}
-            onChange={(e) => setAdopterAddress(e.target.value)}
-            placeholder="Your Address"
-            className="w-full p-3 border border-gray-300 rounded"
-            required
-          />
+          <div>
+            <textarea
+              name="adopterAddress"
+              value={adopterAddress}
+              onChange={handleFormChange}
+              placeholder="Your Address"
+              className="w-full p-3 border border-gray-300 rounded"
+              required
+            />
+            {formErrors.adopterAddress && <p className="text-red-500 text-sm">{formErrors.adopterAddress}</p>}
+          </div>
 
-          {/* Loading Spinner */}
+          {/* Submit Button */}
           {isLoading ? (
             <div className="text-center">
               <div className="spinner-border animate-spin w-12 h-12 border-4 border-t-4 border-gray-500 rounded-full"></div>

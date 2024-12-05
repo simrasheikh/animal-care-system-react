@@ -18,16 +18,16 @@ const AnimalListings = () => {
         const data = [
           { id: 1, name: 'Bella', species: 'Dog', age: 'Puppy', status: 'Available', imageName: 'bella.jpg' },
           { id: 2, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'milo.jpg' },
-          { id: 3, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg' },
+          { id: 3, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg' },
           { id: 4, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'lucy.jpg' },
           { id: 5, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'milo.jpg' },
-          { id: 6, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg' },
+          { id: 6, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg' },
           { id: 7, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'lucy.jpg' },
           { id: 8, name: 'Bella', species: 'Dog', age: 'Puppy', status: 'Available', imageName: 'bella.jpg' },
-          { id: 9, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg' },
+          { id: 9, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg' },
           { id: 10, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'lucy.jpg' },
           { id: 11, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Available', imageName: 'milo.jpg' },
-          { id: 12, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Adopted', imageName: 'charlie.jpg' },
+          { id: 12, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available', imageName: 'charlie.jpg' },
         ];
         setAnimals(data);
       } catch (error) {
@@ -62,13 +62,14 @@ const AnimalListings = () => {
   return (
     <div>
       {/* Header */}
-      <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#66443e' }}>
+      <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#1a2b3b' }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
             {/* Logo to the left */}
             <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
             Animal Care
         </Link>
         <div className="space-x-4">
+          <Link to="/" className="text-white hover:text-gray-300">Home</Link>
           <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>
           <Link to="/donate" className="text-white hover:text-gray-300">Donate</Link>
