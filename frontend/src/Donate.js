@@ -7,6 +7,9 @@ const Donate = () => {
   const [donorEmail, setDonorEmail] = useState('');
   const [donationAmount, setDonationAmount] = useState('');
   const [donationPurpose, setDonationPurpose] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
+  const [cvv, setCvv] = useState('');
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -41,6 +44,22 @@ const Donate = () => {
       isValid = false;
     }
 
+    // Validate Card Details
+    if (!cardNumber || cardNumber.length !== 16) {
+      errors.cardNumber = 'Please enter a valid 16-digit card number';
+      isValid = false;
+    }
+
+    if (!expiryDate) {
+      errors.expiryDate = 'Please select an expiry date';
+      isValid = false;
+    }
+
+    if (!cvv || cvv.length !== 3) {
+      errors.cvv = 'Please enter a valid 3-digit CVV';
+      isValid = false;
+    }
+
     setFormErrors(errors);
     return isValid;
   };
@@ -57,30 +76,39 @@ const Donate = () => {
       donor_email: donorEmail,
       donation_amount: donationAmount,
       donation_purpose: donationPurpose,
+      card_number: cardNumber,
+      expiry_date: expiryDate,
+      cvv: cvv,
     };
 
     try {
-      const response = await fetch('http://localhost:5000/donations', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(donationData),
-      });
+      // Simulate payment processing (fake API call)
+      await fakePaymentProcess();
 
-      if (response.ok) {
-        setSuccessMessage('Thank you for your donation!');
-        setErrorMessage('');
-      } else {
-        setErrorMessage('Something went wrong. Please try again.');
-        setSuccessMessage('');
-      }
+      // If payment is successful
+      setSuccessMessage('Payment Successful! Thank you for your donation.');
+      setErrorMessage('');
     } catch (error) {
-      setErrorMessage('Network error. Please try again later.');
+      // If payment fails
+      setErrorMessage('Payment Failed. Please try again later.');
       setSuccessMessage('');
     } finally {
       setIsLoading(false);
     }
+  };
+
+  // Fake payment process simulation
+  const fakePaymentProcess = () => {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const success = Math.random() > 0.2; // 80% success rate
+        if (success) {
+          resolve();
+        } else {
+          reject();
+        }
+      }, 2000);
+    });
   };
 
   return (
@@ -118,9 +146,6 @@ const Donate = () => {
           </p>
           <p className="text-lg md:text-xl text-center mb-8 animate__animated animate__slideInUp">
             Whether it's life-saving surgery, emergency care, or general wellness services, your donation makes a real difference.
-          </p>
-          <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
-            Fill out the form below to make your contribution and select how you'd like your donation to support our efforts.
           </p>
         </div>
       </section>
@@ -183,6 +208,46 @@ const Donate = () => {
               <option value="Shelter">Shelter</option>
             </select>
             {formErrors.donationPurpose && <p className="text-red-500 text-sm">{formErrors.donationPurpose}</p>}
+          </div>
+
+          {/* Card Details */}
+          <div>
+            <input
+              type="text"
+              value={cardNumber}
+              onChange={(e) => setCardNumber(e.target.value)}
+              placeholder="Card Number"
+              maxLength="16"
+              className="w-full p-3 border border-gray-300 rounded"
+              required
+            />
+            {formErrors.cardNumber && <p className="text-red-500 text-sm">{formErrors.cardNumber}</p>}
+          </div>
+
+          <div className="flex space-x-4">
+            <div className="w-1/2">
+              <input
+                type="month"
+                value={expiryDate}
+                onChange={(e) => setExpiryDate(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded"
+                required
+              />
+              {formErrors.expiryDate && <p className="text-red-500 text-sm">{formErrors.expiryDate}</p>}
+            </div>
+
+            <div className="w-1/2">
+              <input
+                type="number"
+                value={cvv}
+                onChange={(e) => setCvv(e.target.value)}
+                placeholder="CVV"
+                maxLength="3"
+                className="w-full p-3 border border-gray-300 rounded"
+                required
+              />
+              {formErrors.cvv && <p className="text-red-500 text-sm">{formErrors.cvv}</p>}
+            </div>
           </div>
 
           {/* Loading Spinner */}
