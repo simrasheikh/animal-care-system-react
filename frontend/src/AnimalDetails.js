@@ -72,77 +72,93 @@ const AnimalDetails = () => {
       <div className="container mx-auto p-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Left Column: Animal Profile */}
         <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg">
-          <div className="relative">
-            <img
-              src={require(`./assets/${animal.imageName}`)}  // Dynamically load image
-              alt={animal.name}
-              className="w-40 h-40 object-cover rounded-full border-4 border-teal-600"
-            />
-            <FaPaw className="absolute bottom-0 right-0 text-teal-600 text-3xl mb-2 mr-2" />
-          </div>
-          <h2 className="text-3xl font-bold mt-4 text-teal-800">{animal.name}</h2>
-
-          {/* Attribute Rectangles (Stacked Vertically) */}
-          <div className="flex flex-col justify-center mt-6 space-y-3">
-            <div className="flex items-center space-x-2 px-4 py-2 bg-teal-100 rounded-lg">
-              <FaDog className="text-teal-500" />
-              <span className="font-semibold">Species:</span> 
-              <span className="ml-2">{animal.species}</span>
-            </div>
-            <div className="flex items-center space-x-2 px-4 py-2 bg-teal-200 rounded-lg">
-              <FaWeightHanging className="text-teal-500" />
-              <span className="font-semibold">Weight:</span> 
-              <span className="ml-2">{animal.weight}</span>
-            </div>
-            <div className="flex items-center space-x-2 px-4 py-2 bg-teal-300 rounded-lg">
-              <FaCat className="text-teal-500" />
-              <span className="font-semibold">Breed:</span> 
-              <span className="ml-2">{animal.breed}</span> {/* Corrected to display breed */}
-            </div>
-            <div className="flex items-center space-x-2 px-4 py-2 bg-teal-200 rounded-lg">
-              {animal.gender === 'Female' ? (
-                <FaFemale className="text-teal-500" />
-              ) : (
-                <FaMale className="text-teal-500" />
-              )}
-              <span className="font-semibold">Gender:</span>
-              <span className="ml-2">{animal.gender}</span>
-            </div>
-            <div className="flex items-center space-x-2 px-4 py-2 bg-teal-100 rounded-lg">
-              <FaPaw className="text-teal-500" />
-              <span className="font-semibold">Age:</span>
-              <span className="ml-2">{animal.age}</span>
-            </div>
-          </div>
+        <div className="relative group">
+          {/* Hover Zoom Effect on Animal Image */}
+          <img
+            src={require(`./assets/${animal.imageName}`)}  // Dynamically load image
+            alt={animal.name}
+            className="w-40 h-40 object-cover rounded-full border-4 border-teal-600 transition-all transform group-hover:scale-110 duration-300"
+          />          
         </div>
 
-        {/* Middle Column: Description */}
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-2xl font-semibold text-teal-800">About {animal.name}</h3>
-          <p className="mt-4 text-gray-600">{animal.description}</p>
+        {/* Name and Paw Icon next to each other */}
+        <div className="flex items-center mt-4">
+          <h2 className="text-3xl font-bold text-teal-800">{animal.name}</h2>
+          <FaPaw className="text-teal-600 text-3xl ml-2" />
         </div>
 
-        {/* Right Column: Medical Records */}
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-            <h3 className="text-2xl font-semibold mb-4 text-teal-800">Medical Records</h3>
-            {medicalRecords.length > 0 ? (
-              <div>
-                {medicalRecords.map((record) => (
-                  <div key={record.record_id} className="mb-6">
-                    <p><strong>Treatment Date:</strong> {record.treatment_date}</p>
-                    <p><strong>Diagnosis:</strong> {record.diagnosis}</p>
-                    <p><strong>Treatment Details:</strong> {record.treatment_details}</p>
-                    <p><strong>Next Check-up:</strong> {record.next_checkup_date}</p>
-                    <p><strong>Vet:</strong> {record.vet_name}</p>
-                  </div>
-                ))}
-              </div>
+        {/* Attribute Rectangles (Two Columns, Closer Spacing) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+          {/* Weight */}
+          <div className="flex items-center space-x-2 px-3 py-2 bg-teal-100 rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-200">
+            <FaWeightHanging className="text-teal-500" />
+            <span className="font-semibold">Weight:</span> 
+            <span className="ml-2">{animal.weight}</span>
+          </div>
+
+          {/* Breed */}
+          <div className="flex items-center space-x-2 px-3 py-2 bg-teal-100 rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-200">
+            <FaCat className="text-teal-500" />
+            <span className="font-semibold">Breed:</span> 
+            <span className="ml-2">{animal.breed}</span>
+          </div>
+
+          {/* Gender */}
+          <div className="flex items-center space-x-2 px-3 py-2 bg-teal-100 rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-200">
+            {animal.gender === 'Female' ? (
+              <FaFemale className="text-teal-500" />
             ) : (
-              <p>No medical records available.</p>
+              <FaMale className="text-teal-500" />
             )}
+            <span className="font-semibold">Gender:</span>
+            <span className="ml-2">{animal.gender}</span>
           </div>
+
+          {/* Age */}
+          <div className="flex items-center space-x-2 px-3 py-2 bg-teal-100 rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-200">
+            <FaPaw className="text-teal-500" />
+            <span className="font-semibold">Age:</span>
+            <span className="ml-2">{animal.age}</span>
+          </div>
+        </div>
+        {/* Adopt Me Button - Placed Below the Attribute Rectangles */}
+        {animal && animal.status === 'Available' && (
+          <Link to={`/adopt/${animal.animal_id}`} state={{ animal }}>
+            <button className="px-8 py-3 bg-teal-600 text-white font-semibold rounded-lg mt-6 transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-700">
+              Adopt Me
+            </button>
+          </Link>
+        )}
+
       </div>
 
+      {/* Middle Column: Description */}
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+        <h3 className="text-2xl font-semibold text-teal-800">About {animal.name}</h3>
+        <p className="mt-4 text-gray-600">{animal.description}</p>
+      </div>
+
+      {/* Right Column: Medical Records */}
+      <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h3 className="text-2xl font-semibold mb-4 text-teal-800">Medical Records</h3>
+          {medicalRecords.length > 0 ? (
+            <div>
+              {medicalRecords.map((record) => (
+                <div key={record.record_id} className="mb-6">
+                  <p><strong>Treatment Date:</strong> {record.treatment_date}</p>
+                  <p><strong>Diagnosis:</strong> {record.diagnosis}</p>
+                  <p><strong>Treatment Details:</strong> {record.treatment_details}</p>
+                  <p><strong>Next Check-up:</strong> {record.next_checkup_date}</p>
+                  <p><strong>Vet:</strong> {record.vet_name}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>No medical records available.</p>
+          )}
+        </div>
+      </div>
+            
       {/* Footer */}
       <footer className="bg-black text-white p-4 text-center">
         <p>&copy; 2024 Animal Care System. All rights reserved.</p>
