@@ -8,10 +8,10 @@ const StaffDashboard = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#21422b' }}>
-        <Link to="/" className="flex items-center text-2xl font-bold text-white">
+        <Link to="/staff-dashboard" className="flex items-center text-2xl font-bold text-white">
             {/* Logo to the left */}
             <img src="/catlogo2.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
-            Animal Care
+            Dashboard
         </Link>
         <div className="space-x-4">
           <Link to="/staff-dashboard/animal-management" className="text-white hover:text-gray-300">Animal Management</Link>

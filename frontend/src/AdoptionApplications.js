@@ -113,12 +113,12 @@ const AdoptionApplications = () => {
     <div className="flex flex-col min-h-screen">
       {/* Header */}
       <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#21422b' }}>
-        <Link to="/" className="flex items-center text-2xl font-bold text-white">
+        <Link to="/staff-dashboard" className="flex items-center text-2xl font-bold text-white">
           <img src="/catlogo2.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
-          Animal Care
+          Dashboard
         </Link>
         <div className="space-x-4">
-          <Link to="/staff-dashboard" className="text-white hover:text-gray-300">Dashboard</Link>
+          <Link to="/staff-dashboard" className="text-white hover:text-gray-300">Dashboard Home</Link>
           <Link to="/staff-dashboard/animal-management" className="text-white hover:text-gray-300">Animal Management</Link>
           <Link to="/staff-dashboard/adoption-applications" className="text-white hover:text-gray-300">Adoption Applications</Link>
           <Link to="/staff-dashboard/medical-records" className="text-white hover:text-gray-300">Medical Records</Link>
