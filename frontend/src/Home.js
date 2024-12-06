@@ -45,15 +45,13 @@ const Home = () => {
           <div className="mt-6">            
           <Link to="/animals">
             <button
-              className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99] animate__animated animate__slideInUp"
-            >
+              className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99] animate__animated animate__slideInUp">
               Browse Animals
             </button>
           </Link>
           <Link to="/donate">
             <button
-              className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99] animate__animated animate__slideInUp ml-6"
-            >
+              className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99] animate__animated animate__slideInUp ml-6">
               Donate Now
             </button>
           </Link>          
@@ -63,8 +61,7 @@ const Home = () => {
       
       {/* Feature Cards Section */}
       <section className="feature-cards py-14 bg-gray-50">
-        <div className="container px-8 text-center">
-          <h2 className="text-4xl font-bold mb-8 text-[#325473]">What We Offer</h2>
+        <div className="container px-6 text-center">          
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {/* Adopt an Animal */}
             <div className="bg-gradient-to-r from-[#325473] to-[#1a2b3b] p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105">
