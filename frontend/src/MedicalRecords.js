@@ -157,6 +157,8 @@ const MedicalRecords = () => {
         </Link>
         <div className="space-x-4">
           <Link to="/staff-dashboard" className="text-white hover:text-gray-300">Dashboard</Link>
+          <Link to="/staff-dashboard/animal-management" className="text-white hover:text-gray-300">Animal Management</Link>
+          <Link to="/staff-dashboard/adoption-applications" className="text-white hover:text-gray-300">Adoption Applications</Link>
           <Link to="/staff-dashboard/medical-records" className="text-white hover:text-gray-300">Medical Records</Link>
           <Link to="/login" className="text-white hover:text-gray-300">Logout</Link>
         </div>
@@ -286,8 +288,10 @@ const MedicalRecords = () => {
         </div>
       )}
 
+      {/* Footer */}
       <footer className="bg-black text-white p-4 text-center mt-auto">
-        <p>&copy; 2024 Animal Care System</p>
+        <p>&copy; 2024 Animal Care System. All rights reserved.</p>
+        <p>Follow us on social media: Facebook | Twitter | Instagram</p>
       </footer>
     </div>
   );
