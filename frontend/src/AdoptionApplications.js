@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const AdoptionApplications = () => {
   const [applications, setApplications] = useState([]);
   const [filter, setFilter] = useState('All'); // Filter state
+  // Variables for summary
+  const totalApplications = applications.length;
+  const pendingApplications = applications.filter((app) => app.status === 'Pending').length;
+  const approvedApplications = applications.filter((app) => app.status === 'Approved').length;
 
   // Dummy data for adoption applications
   useEffect(() => {
@@ -123,26 +129,55 @@ const AdoptionApplications = () => {
       {/* Main Content */}
       <div className="container mx-auto p-6 flex-grow">
         <h2 className="text-3xl font-semibold text-center mb-6">Adoption Applications</h2>
-
-        {/* Summary Section */}
+        
+        {/* Summary Section with Circular Dials */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="bg-blue-100 text-blue-800 p-4 rounded shadow-md text-center">
-            <h4 className="text-lg font-semibold">Total Applications</h4>
-            <p className="text-2xl font-bold">{applications.length}</p>
-          </div>
-          <div className="bg-yellow-100 text-yellow-800 p-4 rounded shadow-md text-center">
-            <h4 className="text-lg font-semibold">Pending Applications</h4>
-            <p className="text-2xl font-bold">
-              {applications.filter((app) => app.status === 'Pending').length}
-            </p>
-          </div>
-          <div className="bg-green-100 text-green-800 p-4 rounded shadow-md text-center">
-            <h4 className="text-lg font-semibold">Approved Applications</h4>
-            <p className="text-2xl font-bold">
-              {applications.filter((app) => app.status === 'Approved').length}
-            </p>
-          </div>
-        </div>
+            <div className="flex flex-col items-center bg-blue-100 p-4 rounded shadow-md">
+                <div style={{ width: 100, height: 100 }}>
+                <CircularProgressbar
+                    value={totalApplications}
+                    maxValue={100} // Adjust as needed
+                    text={`${totalApplications}`}
+                    styles={buildStyles({
+                    textColor: '#2563eb',
+                    pathColor: '#2563eb',
+                    trailColor: '#dbeafe',
+                    })}
+                />
+                </div>
+                <p className="mt-4 text-lg font-semibold text-blue-800">Total Applications</p>
+            </div>
+            <div className="flex flex-col items-center bg-yellow-100 p-4 rounded shadow-md">
+                <div style={{ width: 100, height: 100 }}>
+                <CircularProgressbar
+                    value={pendingApplications}
+                    maxValue={totalApplications || 1} // Prevent division by 0
+                    text={`${pendingApplications}`}
+                    styles={buildStyles({
+                    textColor: '#ca8a04',
+                    pathColor: '#ca8a04',
+                    trailColor: '#fef08a',
+                    })}
+                />
+                </div>
+                <p className="mt-4 text-lg font-semibold text-yellow-800">Pending Applications</p>
+            </div>
+            <div className="flex flex-col items-center bg-green-100 p-4 rounded shadow-md">
+                <div style={{ width: 100, height: 100 }}>
+                <CircularProgressbar
+                    value={approvedApplications}
+                    maxValue={totalApplications || 1}
+                    text={`${approvedApplications}`}
+                    styles={buildStyles({
+                    textColor: '#15803d',
+                    pathColor: '#15803d',
+                    trailColor: '#bbf7d0',
+                    })}
+                />
+                </div>
+                <p className="mt-4 text-lg font-semibold text-green-800">Approved Applications</p>
+            </div>
+            </div>
 
         {/* Filter Section */}
         <div className="mb-4 flex justify-between items-center">
