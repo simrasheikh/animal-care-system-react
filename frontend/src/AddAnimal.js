@@ -21,11 +21,19 @@ const AddAnimal = () => {
   return (
     <div>
       {/* Header */}
-      <nav className="flex justify-between items-center p-4 bg-gray-800 text-white">
+      <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#21422b' }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
-          <img src="/catlogo.png" alt="Logo" className="w-8 h-8 mr-2" />
-          Animal Care System
+            {/* Logo to the left */}
+            <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
+            Animal Care
         </Link>
+        <div className="space-x-4">
+          <Link to="/staff-dashboard" className="text-white hover:text-gray-300">Dashboard</Link>
+          <Link to="/staff-dashboard/animal-management" className="text-white hover:text-gray-300">Animal Management</Link>
+          <Link to="/staff-dashboard/adoption-applications" className="text-white hover:text-gray-300">Adoption Applications</Link>
+          <Link to="/staff-dashboard/medical-records" className="text-white hover:text-gray-300">Medical Records</Link>
+          <Link to="/login" className="text-white hover:text-gray-300">Logout</Link>
+        </div>
       </nav>
 
       <div className="container mx-auto p-6">
