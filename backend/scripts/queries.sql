@@ -1,8 +1,9 @@
-select*from animals;
+select * from animals;
 
 select*from adopters;
 
-select*from staff;
+select * from staff;
+commit;
 
 select*from vet;
 

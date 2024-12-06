@@ -5,11 +5,9 @@ CREATE TABLE Animals (
     breed VARCHAR2(50),
     age NUMBER CHECK (age >= 0),
     status VARCHAR2(20) DEFAULT 'Available',
-    intake_date DATE NOT NULL,
-    description CLOB,
-    photo_url VARCHAR2(255),
-    health_status CLOB,
-    vaccination_status CLOB
+    intake_date DATE DEFAULT SYSDATE,
+    description VARCHAR2(255),
+    photo_url VARCHAR2(255)
 );
 
 CREATE TABLE Adopters (

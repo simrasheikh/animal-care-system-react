@@ -6,14 +6,18 @@ const AnimalManagement = () => {
 
   // Fetch animals from the backend or use dummy data for now
   useEffect(() => {
-    // Dummy Data (replace with real API call when available)
-    setAnimals([
-      { id: 1, name: 'Bella', species: 'Dog', age: 'Puppy', status: 'Available' },
-      { id: 2, name: 'Milo', species: 'Cat', age: 'Adult', status: 'Adopted' },
-      { id: 3, name: 'Charlie', species: 'Dog', age: 'Senior', status: 'Available' },
-      { id: 4, name: 'Lucy', species: 'Cat', age: 'Adult', status: 'Available' },
-      // Add more animals as needed...
-    ]);
+    fetch(`http://localhost:3001/animals`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setAnimals(data.data);
+        console.log(data)
+      })
+        .catch((error) => console.error('Error:', error));
   }, []);
 
   // Handle Edit and Delete actions (dummy logic)
@@ -72,11 +76,11 @@ const AnimalManagement = () => {
             </thead>
             <tbody>
               {animals.map((animal) => (
-                <tr key={animal.id} className="border-b">
-                  <td className="px-4 py-2">{animal.name}</td>
-                  <td className="px-4 py-2">{animal.species}</td>
-                  <td className="px-4 py-2">{animal.age}</td>
-                  <td className="px-4 py-2">{animal.status}</td>
+                <tr key={animal.ID} className="border-b">
+                  <td className="px-4 py-2">{animal.NAME}</td>
+                  <td className="px-4 py-2">{animal.SPECIES}</td>
+                  <td className="px-4 py-2">{animal.AGE}</td>
+                  <td className="px-4 py-2">{animal.STATUS}</td>
                   <td className="px-4 py-2">
                     {/* Edit and Delete Buttons */}
                     <button onClick={() => handleEdit(animal.id)} className="text-blue-500 mr-4">Edit</button>
