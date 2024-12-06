@@ -114,7 +114,7 @@ const AdoptionApplications = () => {
       {/* Header */}
       <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#21422b' }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
-          <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
+          <img src="/catlogo2.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
           Animal Care
         </Link>
         <div className="space-x-4">
@@ -129,7 +129,7 @@ const AdoptionApplications = () => {
       {/* Main Content */}
       <div className="container mx-auto p-6 flex-grow">
         <h2 className="text-3xl font-semibold text-center mb-6">Adoption Applications</h2>
-        
+
         {/* Summary Section with Circular Dials */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
             <div className="flex flex-col items-center bg-blue-100 p-4 rounded shadow-md">

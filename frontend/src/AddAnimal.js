@@ -44,7 +44,7 @@ const AddAnimal = () => {
       {/* Header */}
       <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#21422b' }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
-          <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
+          <img src="/catlogo2.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
           Animal Care
         </Link>
         <div className="space-x-4">
