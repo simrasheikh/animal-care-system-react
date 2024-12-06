@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import textbg from './assets/vetlandingbg.jpg'; // The background image
-
 import vet1Image from './assets/vet1.jpg';
 import vet2Image from './assets/vet2.jpg';
 import vet3Image from './assets/vet3.jpg';
