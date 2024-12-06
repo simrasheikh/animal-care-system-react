@@ -35,24 +35,38 @@ const AnimalManagement = () => {
   const handleSaveChanges = (e) => {
     e.preventDefault();
 
-    // Save changes to backend
+    // Send updated animal details to the backend
     fetch(`http://localhost:3001/animals/${currentAnimal.ID}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(currentAnimal),
+      body: JSON.stringify({
+        NAME: currentAnimal.NAME,
+        SPECIES: currentAnimal.SPECIES,
+        AGE: currentAnimal.AGE,
+        STATUS: currentAnimal.STATUS,
+      }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to save changes.');
+        }
+        return response.json();
+      })
       .then((updatedAnimal) => {
+        // Update the state with the new animal details
         setAnimals((prevAnimals) =>
           prevAnimals.map((animal) =>
             animal.ID === updatedAnimal.ID ? updatedAnimal : animal
           )
         );
-        setShowModal(false);
+        setShowModal(false); // Close the modal
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error('Error saving changes:', err);
+        alert('Failed to save changes. Please try again.');
+      });
   };
 
   const handleDelete = (animalId) => {
