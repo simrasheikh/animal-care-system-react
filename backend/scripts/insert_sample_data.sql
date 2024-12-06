@@ -1,5 +1,5 @@
-INSERT INTO Animals (name, species, breed, age, intake_date, description, health_status, vaccination_status)
-VALUES ('Max', 'Dog', 'Labrador', 5, SYSDATE, 'Friendly dog', 'Healthy', 'Up-to-date');
+INSERT INTO Animals (name, species, breed, age, intake_date, description)
+VALUES ('Max', 'Dog', 'Labrador', 5, SYSDATE, 'Friendly dog');
 
 INSERT INTO Adopters (name, address, phone_number, email)
 VALUES ('John Doe', '1234 Elm Street', '1234567890', 'john@example.com');
@@ -13,8 +13,8 @@ VALUES ('Dr. Brown', 'Surgery', '1112223333', 'dr.brown@example.com', '10 AM - 4
 INSERT INTO MedicalRecords (animal_id, treatment_date, diagnosis, treatment_details, vet_id, next_checkup_date)
 VALUES (1, SYSDATE, 'Minor Infection', 'Administered antibiotics', 1, SYSDATE + 30);
 
-INSERT INTO Animals (name, species, breed, age, intake_date, description, health_status, vaccination_status)
-VALUES ('Whiskers', 'Cat', 'Persian', 3, SYSDATE - 20, 'Calm and affectionate', 'Healthy', 'Partially vaccinated');
+INSERT INTO Animals (name, species, breed, age, intake_date, description)
+VALUES ('Whiskers', 'Cat', 'Persian', 3, SYSDATE - 20, 'Calm and affectionate');
 
 INSERT INTO Animals (name, species, breed, age, intake_date, description, health_status, vaccination_status)
 VALUES ('Buddy', 'Dog', 'Beagle', 4, SYSDATE - 15, 'Energetic and curious', 'Minor allergy', 'Up-to-date');

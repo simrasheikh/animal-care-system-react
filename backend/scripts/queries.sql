@@ -1,4 +1,4 @@
-select*from animals;
+select * from animals;
 
 select*from adopters;
 

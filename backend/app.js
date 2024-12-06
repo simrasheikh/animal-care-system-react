@@ -1,5 +1,6 @@
 // const routes
 const staffRoutes = require('./routes/staffRoutes');
+const animalRoutes = require('./routes/animalRoutes');
 
 // the rest idk
 const db = require('./config/db');
@@ -15,10 +16,11 @@ app.use(bodyParser.json());
 
 //routes
 app.use("/", staffRoutes);
+app.use("/", animalRoutes);
 
-// app.use("/", (req, res) => {
-//     res.json({ message: "App is running!" });
-// });
+app.use("/", (req, res) => {
+    res.json({ message: "App is running!" });
+});
 
 const dotenv = require('dotenv');
 dotenv.config();

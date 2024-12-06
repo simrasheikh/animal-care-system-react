@@ -14,8 +14,8 @@ const AnimalManagement = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data.data);
         setAnimals(data.data);
+        console.log(data)
       })
         .catch((error) => console.error('Error:', error));
   }, []);
@@ -75,11 +75,11 @@ const AnimalManagement = () => {
             </thead>
             <tbody>
               {animals.map((animal) => (
-                <tr key={animal.id} className="border-b">
-                  <td className="px-4 py-2">{animal.name}</td>
-                  <td className="px-4 py-2">{animal.species}</td>
-                  <td className="px-4 py-2">{animal.age}</td>
-                  <td className="px-4 py-2">{animal.status}</td>
+                <tr key={animal.ID} className="border-b">
+                  <td className="px-4 py-2">{animal.NAME}</td>
+                  <td className="px-4 py-2">{animal.SPECIES}</td>
+                  <td className="px-4 py-2">{animal.AGE}</td>
+                  <td className="px-4 py-2">{animal.STATUS}</td>
                   <td className="px-4 py-2">
                     {/* Edit and Delete Buttons */}
                     <button onClick={() => handleEdit(animal.id)} className="text-blue-500 mr-4">Edit</button>
