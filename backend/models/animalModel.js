@@ -96,9 +96,9 @@ async function editAnimal_m(id, animal) {
             set name = :name, 
             species = :species, 
             age = :age,
-            status = :status,
+            status = :status
             where animal_id = :animal_id`, {
-                id: id,
+                animal_id: id,
                 name: animal.NAME,
                 species: animal.SPECIES,
                 age: animal.AGE,

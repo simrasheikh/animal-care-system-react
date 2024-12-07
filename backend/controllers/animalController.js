@@ -40,7 +40,8 @@ async function addAnimal_c(req, res) {
 
 async function editAnimal_c(req, res) {
     try {
-        const success = await editAnimal_m(req.body);
+        const id = req.params.id;
+        const success = await editAnimal_m(id, req.body);
         if (success) {
             res.json({message: "Animal edited successfully"});
         } else {
