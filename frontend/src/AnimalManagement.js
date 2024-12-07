@@ -73,17 +73,39 @@ const AnimalManagement = () => {
       });
   };
 
-  const handleDelete = (animalId) => {
-    // Send delete request to the backend
-    fetch(`http://localhost:3001/animals/${animalId}`, {
-      method: 'DELETE',
+//   const handleDelete = (animalId) => {
+//   if (window.confirm("Are you sure you want to delete this animal?")) {
+//     fetch(`http://localhost:3001/animals/${animalId}`, {
+//       method: "DELETE",
+//     })
+//       .then((response) => {
+//         if (!response.ok) {
+//           throw new Error("Failed to delete animal.");
+//         }
+//         return response.json();
+//       })
+//       .then(() => {
+//         setAnimals((prevAnimals) =>
+//           prevAnimals.filter((animal) => animal.ID !== animalId)
+//         );
+//       })
+//       .catch((err) => {
+//         console.error("Error deleting animal:", err);
+//         alert("Failed to delete animal. Please try again.");
+//       });
+//   }
+// };
+const handleDelete = (animal) => {
+  // Send delete request to the backend
+  fetch(`http://localhost:3001/animals/${animal.ID}`, {
+    method: 'DELETE',
+  })
+    .then((response) => response.json())
+    .then(() => {
+      setAnimals((prevAnimals) => prevAnimals.filter((animal) => animal.ID !== animal.ID));
     })
-      .then((response) => response.json())
-      .then(() => {
-        setAnimals((prevAnimals) => prevAnimals.filter((animal) => animal.ID !== animalId));
-      })
-      .catch((err) => console.error(err));
-  };
+    .catch((err) => console.error(err));
+};
 
   const handleInputChange = (field, value) => {
     setCurrentAnimal({ ...currentAnimal, [field]: value });
