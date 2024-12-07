@@ -22,17 +22,6 @@ BEGIN
       EXECUTE IMMEDIATE 'DROP VIEW ' || vw.view_name;
    END LOOP;
 
-   -- Drop all sequences
-   FOR seq IN (SELECT sequence_name FROM user_sequences) LOOP
-      EXECUTE IMMEDIATE 'DROP SEQUENCE ' || seq.sequence_name;
-   END LOOP;
-
-   -- Drop all procedures, functions, and packages
-   FOR obj IN (SELECT object_name, object_type 
-               FROM user_objects 
-               WHERE object_type IN ('PROCEDURE', 'FUNCTION', 'PACKAGE')) LOOP
-      EXECUTE IMMEDIATE 'DROP ' || obj.object_type || ' ' || obj.object_name;
-   END LOOP;
 END;
 /
 
