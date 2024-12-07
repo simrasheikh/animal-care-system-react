@@ -17,8 +17,8 @@ CREATE TABLE Owners (
     name VARCHAR2(100) NOT NULL,
     address varchar2(255) NOT NULL,
     phone_number VARCHAR2(15) UNIQUE,
-    email VARCHAR2(100) UNIQUE
-    
+    email VARCHAR2(100) UNIQUE,
+    password VARCHAR2(100) NOT NULL
 );
 
 CREATE TABLE Adoptions (
