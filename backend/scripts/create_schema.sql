@@ -17,9 +17,8 @@ CREATE TABLE Owners (
     name VARCHAR2(100) NOT NULL,
     address varchar2(255) NOT NULL,
     phone_number VARCHAR2(15) UNIQUE,
-    email VARCHAR2(100) UNIQUE,
-    adoption_history varchar2(255),
-    adoption_status VARCHAR2(20) DEFAULT 'Pending'
+    email VARCHAR2(100) UNIQUE
+    
 );
 
 CREATE TABLE Adoptions (
