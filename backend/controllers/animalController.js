@@ -1,19 +1,19 @@
 const {
-    listAnimals,
+    getAnimals_m,
     getAnimalByID_m,
 } = require("../models/animalModel");
 const db = require("../config/db");
 
-async function getAnimals(req, res) {
+async function getAnimals_c(req, res) {
     try {
-        const animals = await listAnimals();
+        const animals = await getAnimals_m();
         res.json({data: animals});
     } catch (err) {
         res.status(500).json({message: "Error fetching animals", error: err});
     }
 }
 
-async function getAnimalByID(req, res) {
+async function getAnimalByID_c(req, res) {
     try {
         const id = req.params.id;
         const animal = await getAnimalByID_m(id);
@@ -24,6 +24,6 @@ async function getAnimalByID(req, res) {
 }
 
 module.exports = {
-    getAnimals,
-    getAnimalByID,
+    getAnimals_c,
+    getAnimalByID_c,
 };

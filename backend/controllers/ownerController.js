@@ -1,11 +1,11 @@
 const {
-    listOwners,
+    getOwners_m,
 } = require("../models/ownerModel");
 const db = require("../config/db");
 
-async function getOwners(req, res) {
+async function getOwners_c(req, res) {
     try {
-        const owners = await listOwners();
+        const owners = await getOwners_m();
         res.json({data: owners});
     } catch (err) {
         res.status(500).json({message: "Error fetching owners", error: err});
@@ -13,5 +13,5 @@ async function getOwners(req, res) {
 }
 
 module.exports = {
-    getOwners,
+    getOwners_c,
 };
