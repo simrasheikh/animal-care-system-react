@@ -1,6 +1,6 @@
 const oracledb = require("oracledb");
 
-async function listAnimals() {
+async function getAnimals_m() {
     let conn;
     try {
         conn = await oracledb.getConnection();
@@ -60,26 +60,6 @@ async function getAnimalByID_m(id) {
 }
 
 module.exports = {
-    listAnimals,
+    getAnimals_m,
     getAnimalByID_m,
 };
-
-
-// async function listAnimals() {
-//     let conn;
-//     try {
-//         conn = await oracledb.getConnection();
-//         const result = await conn.execute('select * from animals');
-//         return result.rows;
-//     } catch (err) {
-//         throw err;
-//     } finally {
-//         if (conn) {
-//             await conn.close();
-//         }
-//     }
-// }
-
-// module.exports = {
-//     listAnimals,
-// };

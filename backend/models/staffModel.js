@@ -1,6 +1,6 @@
 const oracledb = require("oracledb");
 
-async function listStaff() {
+async function getStaff_m() {
     let conn;
     try {
         conn = await oracledb.getConnection();
@@ -16,5 +16,5 @@ async function listStaff() {
 }
 
 module.exports = {
-    listStaff,
+    getStaff_m,
 };

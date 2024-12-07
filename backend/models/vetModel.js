@@ -1,24 +1,26 @@
-const oracledb = require("oracledb");
+const oracledb = require('oracledb');
 
-async function getOwners_m() {
+async function getVets_m() {
     let conn;
     try {
         conn = await oracledb.getConnection();
-        const result = await conn.execute('SELECT * FROM owners');
+        const result = await conn.execute('SELECT * FROM vets');
 
+        // Transform the data into JSON format
         const rows = result.rows;
         const columns = result.metaData.map(meta => meta.name);
 
-        const jsonResult = rows.map(rows => {
+        // Map rows to JSON objects
+        const jsonResult = rows.map(row => {
             let obj = {};
-            rows.forEach((values, index) => {
-                obj[columns[index]] = values;
+            row.forEach((value, index) => {
+                obj[columns[index]] = value;
             });
             return obj;
         });
 
         return jsonResult;
-        
+
     } catch (err) {
         throw err;
     } finally {
@@ -29,5 +31,5 @@ async function getOwners_m() {
 }
 
 module.exports = {
-    getOwners_m,
+    getVets_m,
 };
