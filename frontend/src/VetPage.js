@@ -41,6 +41,7 @@ const VetPage = () => {
     phone: '',
     vetId: '',
     appointmentTime: '',
+    appointmentDate: '', // Added appointment date field
   });
   const [isBooking, setIsBooking] = useState(false); // Simulating loading state
   const [successMessage, setSuccessMessage] = useState('');
@@ -93,6 +94,12 @@ const VetPage = () => {
       isValid = false;
     }
 
+    // Validate Appointment Date
+    if (!appointmentDetails.appointmentDate) {
+      errors.appointmentDate = 'Please select an appointment date';
+      isValid = false;
+    }
+
     setFormErrors(errors);
     return isValid;
   };
@@ -121,23 +128,36 @@ const VetPage = () => {
 
     // ========================= Backend Logic (Commented out for now) =========================
 
+    // Fetching vet data from backend (replace with actual API call when backend is ready)
     // try {
-    //   const response = await fetch('http://localhost:3001/book-appointment', {
+    //   const response = await fetch('http://localhost:3001/vets');
+    //   const data = await response.json();
+    //   setVetsData(data.vets); // Update state with actual vet data
+    // } catch (error) {
+    //   console.error('Error fetching vets:', error);
+    // }
+
+    // Sending appointment details to backend (replace with actual API call when backend is ready)
+    // try {
+    //   const response = await fetch('http://localhost:3001/appointments', {
     //     method: 'POST',
     //     headers: {
     //       'Content-Type': 'application/json',
     //     },
-    //     body: JSON.stringify(appointmentDetails),
+    //     body: JSON.stringify({
+    //       ...appointmentDetails,
+    //       appointmentDate: new Date(appointmentDetails.appointmentDate), // Convert date to proper format
+    //     }),
     //   });
 
-    //   const data = await response.json();
-    //   if (data.success) {
+    //   const result = await response.json();
+    //   if (result.success) {
     //     setSuccessMessage('Appointment successfully booked!');
-    //     setErrorMessage('');
     //   } else {
-    //     setErrorMessage(data.message || 'There was an error. Please try again.');
+    //     setErrorMessage('Failed to book appointment. Please try again.');
     //   }
     // } catch (error) {
+    //   console.error('Error booking appointment:', error);
     //   setErrorMessage('There was an error. Please try again.');
     //   setSuccessMessage('');
     // }
@@ -291,6 +311,19 @@ const VetPage = () => {
                 ))}
               </select>
               {formErrors.appointmentTime && <p className="text-red-500 text-sm">{formErrors.appointmentTime}</p>}
+            </div>
+
+            {/* New Date Field for Appointment Date */}
+            <div>
+              <input
+                type="date"
+                name="appointmentDate"
+                value={appointmentDetails.appointmentDate}
+                onChange={handleFormChange}
+                className="w-full p-3 mb-4 border border-gray-300 rounded"
+                required
+              />
+              {formErrors.appointmentDate && <p className="text-red-500 text-sm">{formErrors.appointmentDate}</p>}
             </div>
 
             {isBooking ? (
