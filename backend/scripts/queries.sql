@@ -1,24 +1,29 @@
 select * from animals;
 
-select*from adopters;
+SELECT * from available_animals;
+
+select * from owners;
+
+select * from adoptions;
 
 select * from staff;
+
 commit;
+-- 
+select * from vet;
 
-select*from vet;
-
-select*from medicalrecords;
+select * from medicalrecords;
 
 --List all animals that are available for adoption:
 SELECT animal_id, name, species, breed, age, health_status, vaccination_status
 FROM Animals
 WHERE status = 'Available';
 
- --Join the Adoptions, Adopters, and Animals tables to get details of adoptions:
+ --Join the Adoptions, Owners, and Animals tables to get details of adoptions:
 SELECT 
     a.adoption_id, 
     an.name AS animal_name, 
-    ad.name AS adopter_name, 
+    ad.name AS owner_name, 
     a.status, 
     a.adoption_date
 FROM 
@@ -26,7 +31,7 @@ FROM
 JOIN 
     Animals an ON a.animal_id = an.animal_id
 JOIN 
-    Adopters ad ON a.adopter_id = ad.adopter_id;
+    Owners ad ON a.owner_id = ad.owner_id;
 
 --Show the medical history of an animal by its ID:
 SELECT 
