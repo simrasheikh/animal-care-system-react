@@ -138,7 +138,7 @@ const Adopt = () => {
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>
           <Link to="/donate" className="text-white hover:text-gray-300">Donate</Link>
           <Link to="/vet" className="text-white hover:text-gray-300">Vet Services</Link>
-          <Link to="/login" className="text-white hover:text-gray-300">Staff Login</Link>
+          <Link to="/login" className="text-white hover:text-gray-300">Login</Link>
         </div>
       </nav>
 

@@ -3,6 +3,7 @@ const staffRoutes = require('./routes/staffRoutes');
 const animalRoutes = require('./routes/animalRoutes');
 const vetRoutes = require('./routes/vetRoutes');
 const ownerRoutes = require('./routes/ownerRoutes');
+const appointmentRoutes = require('./routes/appointmentRoutes');
 
 // the rest idk
 const db = require('./config/db');
@@ -21,6 +22,7 @@ app.use("/", staffRoutes);
 app.use("/", animalRoutes);
 app.use("/", vetRoutes);
 app.use("/", ownerRoutes);
+app.use("/", appointmentRoutes);
 
 app.use("/", (req, res) => {
     res.json({ message: "App is running!" });
