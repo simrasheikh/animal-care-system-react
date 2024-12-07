@@ -19,15 +19,35 @@ function App() {
   const [animals, setAnimals] = useState([]);
 
   // Function to fetch animals based on filters
-  const fetchAnimals = async (filters) => {
-    const params = new URLSearchParams(filters).toString();
-    const response = await fetch(`http://localhost:3002/animals?${params}`);
-    const data = await response.json();
-    setAnimals(data);
+  // const fetchAnimals = async (filters) => {
+  //   const params = new URLSearchParams(filters).toString();
+  //   const response = await fetch(`http://localhost:3002/animals?${params}`);
+  //   const data = await response.json();
+  //   setAnimals(data);
+  // };
+
+  // useEffect(() => {
+  //   fetchAnimals({ status: 'Available' }); // Default filter to fetch available animals
+  // }, []);
+  const fetchAnimals = async () => {
+    try {
+      fetch(`http://localhost:3001/animals`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setAnimals(data.data);
+        })
+    } catch (error) {
+      console.error('Error fetching animals:', error);
+    }
   };
 
   useEffect(() => {
-    fetchAnimals({ status: 'Available' }); // Default filter to fetch available animals
+    fetchAnimals();
   }, []);
 
   return (

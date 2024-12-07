@@ -10,21 +10,25 @@ const AnimalManagement = () => {
 
   // Fetch animals from the backend
   useEffect(() => {
-    fetch(`http://localhost:3001/animals`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setAnimals(data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        setLoading(false);
-      });
+    const fetchAnimals = async () => {
+      try {
+        fetch(`http://localhost:3001/animals`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setAnimals(data.data);
+            setLoading(false);
+          })
+      } catch (error) {
+        console.error('Error fetching animals:', error);
+      }
+    };
+
+    fetchAnimals();
   }, []);
 
   const handleEdit = (animal) => {
