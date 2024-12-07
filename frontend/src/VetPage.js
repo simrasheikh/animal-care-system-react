@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import textbg from './assets/vetlandingbg.jpg'; // The background image
 import vet1Image from './assets/vet1.jpg';
@@ -118,6 +118,31 @@ const VetPage = () => {
     } finally {
       setIsBooking(false);
     }
+
+    // ========================= Backend Logic (Commented out for now) =========================
+
+    // try {
+    //   const response = await fetch('http://localhost:3001/book-appointment', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(appointmentDetails),
+    //   });
+
+    //   const data = await response.json();
+    //   if (data.success) {
+    //     setSuccessMessage('Appointment successfully booked!');
+    //     setErrorMessage('');
+    //   } else {
+    //     setErrorMessage(data.message || 'There was an error. Please try again.');
+    //   }
+    // } catch (error) {
+    //   setErrorMessage('There was an error. Please try again.');
+    //   setSuccessMessage('');
+    // }
+
+    // ========================= End of Backend Logic =========================
   };
 
   return (
