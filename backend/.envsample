@@ -1,4 +1,0 @@
-DB_USER = "user_name"
-DB_PASSWORD = "passw"
-DB_CONNECTION_STRING = "localhost:1521/orcl"
-PORT = "3001"

@@ -2,26 +2,129 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const LoginSignup = () => {
-  const [isLogin, setIsLogin] = useState(true);  // Toggle between Login and Signup
+  const [isLogin, setIsLogin] = useState(true); // Toggle between Login and Signup
+  const [loginError, setLoginError] = useState("");
+  const [signupError, setSignupError] = useState("");
 
-  const handleLoginSubmit = (e) => {
-    e.preventDefault();
-    // Handle login logic here (e.g., call API to verify credentials)
+  // Email validation regex
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
   };
 
-  const handleSignupSubmit = (e) => {
+  // Password strength regex
+  const validatePassword = (password) => {
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return regex.test(password);
+  };
+
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    // Handle signup logic here (e.g., call API to register a new user)
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    if (!validateEmail(email)) {
+      setLoginError("Invalid email format.");
+      return;
+    }
+
+    if (password.length < 8) {
+      setLoginError("Password must be at least 8 characters long.");
+      return;
+    }
+
+    setLoginError("");
+
+    // Backend login logic (commented out for now)
+    /*
+    try {
+      const response = await fetch("http://localhost:3001/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Invalid credentials");
+      }
+
+      const data = await response.json();
+      console.log("Login successful:", data);
+      // Perform redirection or save token to localStorage/sessionStorage
+    } catch (error) {
+      console.error("Login failed:", error);
+      setLoginError("Invalid email or password.");
+    }
+    */
+  };
+
+  const handleSignupSubmit = async (e) => {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    const confirmPassword = e.target.confirmPassword.value;
+    const role = e.target.role.value;
+
+    if (!name.trim()) {
+      setSignupError("Name is required.");
+      return;
+    }
+
+    if (!validateEmail(email)) {
+      setSignupError("Invalid email format.");
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setSignupError(
+        "Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character."
+      );
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setSignupError("Passwords do not match.");
+      return;
+    }
+
+    if (!role) {
+      setSignupError("Please select a role.");
+      return;
+    }
+
+    setSignupError("");
+
+    // Backend signup logic (commented out for now)
+    /*
+    try {
+      const response = await fetch("http://localhost:3001/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password, role }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Signup failed");
+      }
+
+      const data = await response.json();
+      console.log("Signup successful:", data);
+      // Perform redirection or notify user of successful signup
+    } catch (error) {
+      console.error("Signup failed:", error);
+      setSignupError("Failed to create an account. Please try again.");
+    }
+    */
   };
 
   return (
     <div>
       {/* Header */}
-      <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#1a2b3b' }}>
+      <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: "#1a2b3b" }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
-            {/* Logo to the left */}
-            <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
-            Animal Care
+          <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
+          Animal Care
         </Link>
         <div className="space-x-4">
           <Link to="/" className="text-white hover:text-gray-300">Home</Link>
@@ -55,30 +158,22 @@ const LoginSignup = () => {
         {isLogin ? (
           <form onSubmit={handleLoginSubmit} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold text-center mb-4">Login</h2>
-
+            {loginError && <p className="text-red-500 text-sm mb-4">{loginError}</p>}
             <input
               type="email"
+              name="email"
               placeholder="Email"
               className="w-full p-3 mb-4 border border-gray-300 rounded"
               required
             />
             <input
               type="password"
+              name="password"
               placeholder="Password"
               className="w-full p-3 mb-4 border border-gray-300 rounded"
               required
             />
-
-            <div className="text-right mb-4">
-              <Link to="/forgot-password" className="text-sm text-blue-500 hover:underline">
-                Forgot Password?
-              </Link>
-            </div>
-
-            <button
-              type="submit"
-              className="w-full py-3 bg-red-700 text-white font-semibold rounded hover:bg-red-800"
-            >
+            <button type="submit" className="w-full py-3 bg-red-700 text-white font-semibold rounded hover:bg-red-800">
               Login
             </button>
           </form>
@@ -86,43 +181,41 @@ const LoginSignup = () => {
           /* Signup Form */
           <form onSubmit={handleSignupSubmit} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
             <h2 className="text-2xl font-semibold text-center mb-4">Signup</h2>
-
+            {signupError && <p className="text-red-500 text-sm mb-4">{signupError}</p>}
             <input
               type="text"
+              name="name"
               placeholder="Name"
               className="w-full p-3 mb-4 border border-gray-300 rounded"
               required
             />
             <input
               type="email"
+              name="email"
               placeholder="Email"
               className="w-full p-3 mb-4 border border-gray-300 rounded"
               required
             />
             <input
               type="password"
+              name="password"
               placeholder="Password"
               className="w-full p-3 mb-4 border border-gray-300 rounded"
               required
             />
             <input
               type="password"
+              name="confirmPassword"
               placeholder="Confirm Password"
               className="w-full p-3 mb-4 border border-gray-300 rounded"
               required
             />
-
-            {/* Role Dropdown */}
-            <select className="w-full p-3 mb-4 border border-gray-300 rounded" required>
+            <select name="role" className="w-full p-3 mb-4 border border-gray-300 rounded" required>
               <option value="">Select Role</option>
               <option value="adopter">Adopter</option>
               <option value="staff">Staff</option>
             </select>
-
-            <button
-              type="submit"
-              className="w-full py-3 bg-red-700 text-white font-semibold rounded hover:bg-red-800"
-            >
+            <button type="submit" className="w-full py-3 bg-red-700 text-white font-semibold rounded hover:bg-red-800">
               Signup
             </button>
           </form>

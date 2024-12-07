@@ -8,10 +8,10 @@ const StaffDashboard = () => {
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#21422b' }}>
-        <Link to="/" className="flex items-center text-2xl font-bold text-white">
+        <Link to="/staff-dashboard" className="flex items-center text-2xl font-bold text-white">
             {/* Logo to the left */}
-            <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
-            Animal Care
+            <img src="/catlogo2.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
+            Dashboard
         </Link>
         <div className="space-x-4">
           <Link to="/staff-dashboard/animal-management" className="text-white hover:text-gray-300">Animal Management</Link>
@@ -42,37 +42,58 @@ const StaffDashboard = () => {
         </div>
       </section>
 
-      <div className="container mx-auto p-8">        
-        {/* Dashboard Feature Links */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Animal Management */}
-          <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-all">
-            <h3 className="text-2xl font-semibold mb-4">Animal Management</h3>
-            <p className="text-lg mb-4">Manage animals in the system, including adding, editing, and deleting animal records.</p>
-            <Link to="/staff-dashboard/animal-management">
-              <button className="px-8 py-3 rounded-lg text-white bg-teal-700 transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-teal-800">Manage Animals</button>
-            </Link>
-          </div>
-
-          {/* Adoption Applications */}
-          <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-all">
-            <h3 className="text-2xl font-semibold mb-4">Adoption Applications</h3>
-            <p className="text-lg mb-4">View and process adoption applications, including approval and rejection of requests.</p>
-            <Link to="/staff-dashboard/adoption-applications">
-                <button className="px-8 py-3 rounded-lg text-white bg-teal-700 transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-teal-800">View Applications</button>
-            </Link>
-          </div>
-
-          {/* Medical Records */}
-          <div className="bg-white shadow-lg rounded-lg p-6 text-center hover:shadow-xl transition-all">
-            <h3 className="text-2xl font-semibold mb-4">Medical Records</h3>            
-            <p className="text-lg mb-4">Manage and view the medical records of the animals, including treatments and health status.</p>
-            <Link to="/staff-dashboard/medical-records">
-                <button className="px-8 py-3 rounded-lg text-white bg-teal-700 transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-teal-800">View Medical Records</button>
-            </Link>
-          </div>
+    {/* Dashboard Feature Links */}
+    <div className="container mx-auto p-8">
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Animal Management */}
+        <div className="bg-[#406e4d] p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105">
+        <div className="text-center mb-4 text-white flex justify-center items-center flex-col">
+            <FaPaw className="text-4xl mb-4" />
+            <h3 className="text-2xl font-semibold">Animal Management</h3>
         </div>
-      </div>
+        <p className="text-white mb-4">
+            Manage animals in the system, including adding, editing, and deleting animal records.
+        </p>
+        <Link to="/staff-dashboard/animal-management">
+            <button className="w-full py-3 rounded-lg bg-white text-teal-700 font-semibold hover:bg-[#284531] hover:text-white transition-colors">
+            Manage Animals
+            </button>
+        </Link>
+        </div>
+
+        {/* Adoption Applications */}
+        <div className="bg-[#57996b] p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105">
+        <div className="text-center mb-4 text-white flex justify-center items-center flex-col">
+            <FaWeightHanging className="text-4xl mb-4" />
+            <h3 className="text-2xl font-semibold">Adoption Applications</h3>
+        </div>
+        <p className="text-white mb-4">
+            View and process adoption applications, including approval and rejection of requests.
+        </p>
+        <Link to="/staff-dashboard/adoption-applications">
+            <button className="w-full py-3 rounded-lg bg-white text-teal-700 font-semibold hover:bg-[#284531] hover:text-white transition-colors">
+            View Applications
+            </button>
+        </Link>
+        </div>
+
+        {/* Medical Records */}
+        <div className="bg-[#406e4d] p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105">
+        <div className="text-center mb-4 text-white flex justify-center items-center flex-col">
+            <FaDog className="text-4xl mb-4" />
+            <h3 className="text-2xl font-semibold">Medical Records</h3>
+        </div>
+        <p className="text-white mb-4">
+            Manage and view the medical records of the animals, including treatments and health status.
+        </p>
+        <Link to="/staff-dashboard/medical-records">
+            <button className="w-full py-3 rounded-lg bg-white text-teal-700 font-semibold hover:bg-[#284531] hover:text-white transition-colors">
+            View Medical Records
+            </button>
+        </Link>
+        </div>
+    </div>
+    </div>
 
       {/* Footer */}
       <footer className="bg-black text-white p-4 text-center">
