@@ -3,24 +3,20 @@ import { Link } from 'react-router-dom';
 
 const AnimalListings = () => {
   const [animals, setAnimals] = useState([]);
-  // const [loading, setLoading] = useState(true);
-  const [filters, setFilters] = useState({ species: '', age: '', status: '' });
+  const [filters, setFilters] = useState({ species: '', minAge: '', maxAge: '', status: '' });
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
-        fetch(`http://localhost:3001/animals`, {
+        const response = await fetch(`http://localhost:3001/animals`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            setAnimals(data.data);
-            // setLoading(false);
-          })
+        });
+        const data = await response.json();
+        setAnimals(data.data);
       } catch (error) {
         console.error('Error fetching animals:', error);
       }
@@ -41,14 +37,19 @@ const AnimalListings = () => {
     setSearchTerm(e.target.value);
   };
 
+  // Filter animals by name, species, status, and age range
   const filteredAnimals = animals.filter((animal) => {
     const matchesSpecies = filters.species ? animal.SPECIES.includes(filters.species) : true;
-    const matchesAge = filters.age ? animal.AGE === filters.age : true;
     const matchesStatus = filters.status ? animal.STATUS === filters.status : true;
-    // const matchesSearchTerm = animal.name.toLowerCase().includes(searchTerm.toLowerCase());
+    
+    // Age filter by range
+    const matchesAge =
+      (filters.minAge ? animal.AGE >= filters.minAge : true) &&
+      (filters.maxAge ? animal.AGE <= filters.maxAge : true);
+    
+    const matchesSearchTerm = animal.NAME.toLowerCase().includes(searchTerm.toLowerCase());
 
-    return matchesSpecies && matchesAge && matchesStatus;
-    //  && matchesSearchTerm;
+    return matchesSpecies && matchesStatus && matchesAge && matchesSearchTerm;
   });
 
   return (
@@ -56,9 +57,8 @@ const AnimalListings = () => {
       {/* Header */}
       <nav className="flex justify-between items-center p-4 text-white" style={{ backgroundColor: '#1a2b3b' }}>
         <Link to="/" className="flex items-center text-2xl font-bold text-white">
-            {/* Logo to the left */}
-            <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" /> 
-            Animal Care
+          <img src="/catlogo.png" alt="Cat Logo" className="w-8 h-8 mr-2" />
+          Animal Care
         </Link>
         <div className="space-x-4">
           <Link to="/" className="text-white hover:text-gray-300">Home</Link>
@@ -90,17 +90,22 @@ const AnimalListings = () => {
             <option value="Dog">Dog</option>
             <option value="Cat">Cat</option>
           </select>
-          <select
-            name="age"
+          <input
+            type="number"
+            name="minAge"
             className="p-2 border rounded"
-            value={filters.age}
+            placeholder="Min Age"
+            value={filters.minAge}
             onChange={handleFilterChange}
-          >
-            <option value="">Select Age</option>
-            <option value="Puppy">Puppy</option>
-            <option value="Adult">Adult</option>
-            <option value="Senior">Senior</option>
-          </select>
+          />
+          <input
+            type="number"
+            name="maxAge"
+            className="p-2 border rounded"
+            placeholder="Max Age"
+            value={filters.maxAge}
+            onChange={handleFilterChange}
+          />
           <select
             name="status"
             className="p-2 border rounded"
