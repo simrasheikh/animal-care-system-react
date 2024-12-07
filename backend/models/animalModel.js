@@ -1,3 +1,4 @@
+const { oracle } = require("node-oracledb");
 const oracledb = require("oracledb");
 
 async function getAnimals_m() {
@@ -86,8 +87,38 @@ async function addAnimal_m(animal) {
     }
 }
 
+async function editAnimal_m(id, animal) {
+    let conn;
+    try {
+        conn = await oracledb.getConnection();
+        const result = await conn.execute(
+            `update animals 
+            set name = :name, 
+            species = :species, 
+            age = :age,
+            status = :status,
+            where animal_id = :animal_id`, {
+                id: id,
+                name: animal.NAME,
+                species: animal.SPECIES,
+                age: animal.AGE,
+                status: animal.STATUS,
+    }, {autoCommit: true});
+
+        return result.rowsAffected > 0;
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) {
+            await conn.close();
+        }
+    }
+}
+
 module.exports = {
     getAnimals_m,
     getAnimalByID_m,
     addAnimal_m,
+    editAnimal_m,
+    // deleteAnimal_m,
 };

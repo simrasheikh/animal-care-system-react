@@ -2,6 +2,7 @@ const {
     getAnimals_m,
     getAnimalByID_m,
     addAnimal_m,
+    editAnimal_m,
 } = require("../models/animalModel");
 const db = require("../config/db");
 
@@ -37,8 +38,22 @@ async function addAnimal_c(req, res) {
     }
 }
 
+async function editAnimal_c(req, res) {
+    try {
+        const success = await editAnimal_m(req.body);
+        if (success) {
+            res.json({message: "Animal edited successfully"});
+        } else {
+            res.status(500).json({message: "Error editing animal"});
+        }
+    } catch (error) {
+        res.status(500).json({message: "Error editing animal", error});
+    }
+}
+
 module.exports = {
     getAnimals_c,
     getAnimalByID_c,
     addAnimal_c,
+    editAnimal_c,
 };
