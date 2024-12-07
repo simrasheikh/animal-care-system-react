@@ -132,7 +132,7 @@ const LoginSignup = () => {
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>
           <Link to="/donate" className="text-white hover:text-gray-300">Donate</Link>
           <Link to="/vet" className="text-white hover:text-gray-300">Vet Services</Link>
-          <Link to="/login" className="text-white hover:text-gray-300">Staff Login</Link>
+          <Link to="/login" className="text-white hover:text-gray-300">Login</Link>
         </div>
       </nav>
 
@@ -209,12 +209,7 @@ const LoginSignup = () => {
               placeholder="Confirm Password"
               className="w-full p-3 mb-4 border border-gray-300 rounded"
               required
-            />
-            <select name="role" className="w-full p-3 mb-4 border border-gray-300 rounded" required>
-              <option value="">Select Role</option>
-              <option value="adopter">Adopter</option>
-              <option value="staff">Staff</option>
-            </select>
+            />            
             <button type="submit" className="w-full py-3 bg-red-700 text-white font-semibold rounded hover:bg-red-800">
               Signup
             </button>
