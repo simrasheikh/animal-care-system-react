@@ -13,28 +13,60 @@ const AddAnimal = () => {
 
   // Form validation
   const validateForm = () => {
-    if (!name || !species || !breed || !age || !description || !imageUrl) {
-      alert('All fields are required!');
-      return false;
-    }
-    if (isNaN(age) || age <= 0) {
-      alert('Age must be a positive number!');
-      return false;
-    }
-    if (!imageUrl.startsWith('http://') && !imageUrl.startsWith('https://')) {
-      alert('Image URL must be a valid URL!');
-      return false;
-    }
+    // if (!name || !species || !breed || !age || !description || !imageUrl) {
+    //   alert('All fields are required!');
+    //   return false;
+    // }
+    // if (isNaN(age) || age <= 0) {
+    //   alert('Age must be a positive number!');
+    //   return false;
+    // }
+    // if (!imageUrl.startsWith('http://') && !imageUrl.startsWith('https://')) {
+    //   alert('Image URL must be a valid URL!');
+    //   return false;
+    // }
     return true;
   };
 
   // Handle form submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (validateForm()) {
       // Here, you can call your backend to add the animal to the database
-      console.log({ name, species, breed, age, description, imageUrl });
+      // console.log({ name, species, breed, age, description, imageUrl });
       // Redirect back to the animal management page after submission
+      try {
+        // Make a POST request to the backend
+        const response = await fetch("http://localhost:3001/animals", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json", // Set content type to JSON
+            },
+            body: JSON.stringify({
+                NAME: name,
+                SPECIES: species,
+                BREED: breed,
+                AGE: parseInt(age), // Convert age to a number
+                DESCRIPTION: description,
+                PHOTO_URL: imageUrl, // Match the backend field name
+            }),
+        });
+
+        if (!response.ok) {
+            // If the response is not ok, throw an error
+            const errorData = await response.json();
+            throw new Error(errorData.message || "Failed to add animal.");
+        }
+
+        const data = await response.json(); // Parse the JSON response
+        console.log("Animal added successfully:", data);
+
+        // Redirect to the animal management page
+        navigate("/staff-dashboard/animal-management");
+    } catch (error) {
+        console.error("Error adding animal:", error);
+        alert(error.message); // Display an error message to the user
+    }
       navigate('/staff-dashboard/animal-management');
     }
   };
