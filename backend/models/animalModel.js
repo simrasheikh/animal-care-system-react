@@ -115,10 +115,28 @@ async function editAnimal_m(id, animal) {
     }
 }
 
+async function deleteAnimal_m(id) {
+    let conn;
+    try {
+        conn = await oracledb.getConnection();
+        const result = await conn.execute(
+            `delete from animals where animal_id = :animal_id`, {animal_id: id}, {autoCommit: true}
+        );
+
+        return result.rowsAffected > 0;
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) {
+            await conn.close();
+        }
+    }
+}
+
 module.exports = {
     getAnimals_m,
     getAnimalByID_m,
     addAnimal_m,
     editAnimal_m,
-    // deleteAnimal_m,
+    deleteAnimal_m,
 };

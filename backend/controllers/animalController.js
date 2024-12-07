@@ -3,6 +3,7 @@ const {
     getAnimalByID_m,
     addAnimal_m,
     editAnimal_m,
+    deleteAnimal_m,
 } = require("../models/animalModel");
 const db = require("../config/db");
 
@@ -52,9 +53,24 @@ async function editAnimal_c(req, res) {
     }
 }
 
+async function deleteAnimal_c(req, res) {
+    try {
+        const id = req.params.id;
+        const success = await deleteAnimal_m(id);
+        if (success) {
+            res.json({message: "Animal deleted successfully"});
+        } else {
+            res.status(500).json({message: "Error deleting animal"});
+        }
+    } catch (error) {
+        res.status(500).json({message: "Error deleting animal", error});
+    }
+}
+
 module.exports = {
     getAnimals_c,
     getAnimalByID_c,
     addAnimal_c,
     editAnimal_c,
+    deleteAnimal_c,
 };
