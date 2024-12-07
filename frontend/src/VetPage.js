@@ -1,39 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import textbg from './assets/vetlandingbg.jpg'; // The background image
-import vet1Image from './assets/vet1.jpg';
-import vet2Image from './assets/vet2.jpg';
-import vet3Image from './assets/vet3.jpg';
-
-// Dummy data for vets (using imported images)
-const vetsData = [
-  {
-    id: 1,
-    name: 'Dr. Alice Green',
-    specialty: 'General Medicine',
-    profilePicture: vet1Image,
-    availableTimes: ['Mon - 10:00 AM - 2:00 PM', 'Wed - 9:00 AM - 1:00 PM'],
-    contact: 'alicegreen@vetclinic.com',
-  },
-  {
-    id: 2,
-    name: 'Dr. Bob Brown',
-    specialty: 'Surgery',
-    profilePicture: vet2Image,
-    availableTimes: ['Tue - 11:00 AM - 3:00 PM', 'Thu - 9:00 AM - 12:00 PM'],
-    contact: 'bobbrown@vetclinic.com',
-  },
-  {
-    id: 3,
-    name: 'Dr. Matt Damon',
-    specialty: 'General Veterinary Care',
-    profilePicture: vet3Image,
-    availableTimes: ['Fri - 11:00 AM - 3:00 PM', 'Sat - 9:00 AM - 12:00 PM'],
-    contact: 'mattdamon@vetclinic.com',
-  },
-];
+import vetImage from './assets/vet.jpeg';
 
 const VetPage = () => {
+  const [vetsData, setVetsData] = useState([]); // Initialize as empty array
   const [selectedVet, setSelectedVet] = useState(null);
   const [appointmentDetails, setAppointmentDetails] = useState({
     name: '',
@@ -47,12 +18,31 @@ const VetPage = () => {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [formErrors, setFormErrors] = useState({}); // For validation errors
+  const [isLoading, setIsLoading] = useState(true); // To track loading state
+
+  // Fetch vet data from the backend
+  useEffect(() => {
+    const fetchVets = async () => {
+      try {
+        const response = await fetch('http://localhost:3001/vets'); // Backend API call
+        const data = await response.json();
+        setVetsData(data.vets || []); // In case vets is undefined, default to empty array
+      } catch (error) {
+        console.error('Error fetching vets:', error);
+        setErrorMessage('Failed to load vet data');
+      } finally {
+        setIsLoading(false); // Stop loading once the API call finishes
+      }
+    };
+
+    fetchVets();
+  }, []);
 
   const handleVetClick = (vet) => {
     setSelectedVet(vet);
     setAppointmentDetails({
       ...appointmentDetails,
-      vetId: vet.id,
+      vetId: vet.VET_ID, // Update vet ID from selected vet
     });
   };
 
@@ -109,61 +99,52 @@ const VetPage = () => {
     if (!validateForm()) {
       return; // Prevent submission if validation fails
     }
-
+  
     setIsBooking(true);
-
-    // Simulate booking request
+  
+    // Prepare the data to be sent to the backend
+    const appointmentData = {
+      name: appointmentDetails.name,
+      email: appointmentDetails.email,
+      phone: appointmentDetails.phone,
+      vetId: selectedVet.VET_ID, // Pass vetId from selected vet
+      appointmentTime: appointmentDetails.appointmentTime, // Send appointment time as string
+      appointmentDate: appointmentDetails.appointmentDate, // Send date as string
+      notes: appointmentDetails.notes || "", // Optional notes field
+    };
+  
+    console.log('Sending appointment data to backend:', appointmentData); // Log the data being sent
+  
     try {
-      // Simulating a backend request with a timeout
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      setSuccessMessage('Appointment successfully booked!');
-      setErrorMessage('');
+      const response = await fetch('http://localhost:3001/appointments', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(appointmentData),
+      });
+  
+      const result = await response.json();
+      console.log('Received response from backend:', result); // Log the backend response
+  
+      if (result.success) {
+        setSuccessMessage('Appointment successfully booked!');
+      } else {
+        setErrorMessage('Failed to book appointment. Please try again.');
+      }
     } catch (error) {
+      console.error('Error booking appointment:', error);
       setErrorMessage('There was an error. Please try again.');
       setSuccessMessage('');
     } finally {
       setIsBooking(false);
     }
-
-    // ========================= Backend Logic (Commented out for now) =========================
-
-    // Fetching vet data from backend (replace with actual API call when backend is ready)
-    // try {
-    //   const response = await fetch('http://localhost:3001/vets');
-    //   const data = await response.json();
-    //   setVetsData(data.vets); // Update state with actual vet data
-    // } catch (error) {
-    //   console.error('Error fetching vets:', error);
-    // }
-
-    // Sending appointment details to backend (replace with actual API call when backend is ready)
-    // try {
-    //   const response = await fetch('http://localhost:3001/appointments', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       ...appointmentDetails,
-    //       appointmentDate: new Date(appointmentDetails.appointmentDate), // Convert date to proper format
-    //     }),
-    //   });
-
-    //   const result = await response.json();
-    //   if (result.success) {
-    //     setSuccessMessage('Appointment successfully booked!');
-    //   } else {
-    //     setErrorMessage('Failed to book appointment. Please try again.');
-    //   }
-    // } catch (error) {
-    //   console.error('Error booking appointment:', error);
-    //   setErrorMessage('There was an error. Please try again.');
-    //   setSuccessMessage('');
-    // }
-
-    // ========================= End of Backend Logic =========================
   };
+  
+
+  if (isLoading) {
+    return <div>Loading vet data...</div>; // Loading message while vetsData is being fetched
+  }
 
   return (
     <div>
@@ -209,21 +190,25 @@ const VetPage = () => {
         <h2 className="text-2xl font-bold text-center mt-3">Explore Our Veterinarians and Find the Perfect Match for Your Pet</h2>
         <p className="text-lg mt-1 text-center mb-8">Click on your chosen profile and fill the appointment form!</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {vetsData.map((vet) => (
-            <div
-              key={vet.id}
-              className="bg-white p-4 rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-all duration-300"
-              onClick={() => handleVetClick(vet)}
-            >
-              <img
-                src={vet.profilePicture}
-                alt={vet.name}
-                className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
-              />
-              <h3 className="text-xl font-semibold text-center text-gray-800">{vet.name}</h3>
-              <p className="text-center text-gray-500">{vet.specialty}</p>
-            </div>
-          ))}
+          {vetsData.length > 0 ? (
+            vetsData.map((vet) => (
+              <div
+                key={vet.VET_ID}
+                className="bg-white p-4 rounded-lg shadow-lg cursor-pointer hover:shadow-xl transition-all duration-300"
+                onClick={() => handleVetClick(vet)}
+              >
+                <img
+                  src={vetImage} // Use the right image based on vet ID
+                  alt={vet.NAME}
+                  className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
+                />
+                <h3 className="text-xl font-semibold text-center text-gray-800">{vet.NAME}</h3>
+                <p className="text-center text-gray-500">{vet.SPECIALIZATION}</p>
+              </div>
+            ))
+          ) : (
+            <p className="text-center text-gray-500">No vets found</p>
+          )}
         </div>
       </section>
 
@@ -231,7 +216,7 @@ const VetPage = () => {
       {selectedVet && (
         <section className="container mx-auto p-6 bg-white rounded-lg shadow-lg mt-6">
           <h3 className="text-2xl font-bold text-center text-teal-800 mb-6">
-            Book an Appointment with {selectedVet.name}
+            Book an Appointment with {selectedVet.NAME}
           </h3>
 
           {/* Success/Error Messages */}
@@ -240,18 +225,18 @@ const VetPage = () => {
 
           <div className="text-center mb-6">
             <img
-              src={selectedVet.profilePicture}
-              alt={selectedVet.name}
+              src={vetImage} // Use the correct image based on vet ID
+              alt={selectedVet.NAME}
               className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
             />
-            <p className="text-lg">{selectedVet.specialty}</p>
+            <p className="text-lg">{selectedVet.SPECIALIZATION}</p>
             <p className="text-gray-600">Available times:</p>
             <ul className="list-disc list-inside text-gray-600">
-              {selectedVet.availableTimes.map((time, index) => (
+              {selectedVet.AVAILABLE_TIMES && selectedVet.AVAILABLE_TIMES.map((time, index) => (
                 <li key={index}>{time}</li>
               ))}
             </ul>
-            <p className="text-gray-600">Contact: {selectedVet.contact}</p>
+            <p className="text-gray-600">Contact: {selectedVet.PHONE_NUMBER}</p>
           </div>
 
           {/* Appointment Booking Form */}
@@ -304,7 +289,7 @@ const VetPage = () => {
                 required
               >
                 <option value="">Select Available Time</option>
-                {selectedVet.availableTimes.map((time, index) => (
+                {selectedVet.AVAILABLE_TIMES && selectedVet.AVAILABLE_TIMES.map((time, index) => (
                   <option key={index} value={time}>
                     {time}
                   </option>
