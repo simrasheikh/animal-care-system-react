@@ -6,7 +6,8 @@ import AnimalDetails from './AnimalDetails'; // Animal details page
 import AdoptLanding from './AdoptLanding'; // New AdoptLanding page
 import Adopt from './Adopt'; 
 import Donate from './Donate'; // Donate page
-import LoginSignup from './LoginSignup';
+import UserLoginSignup from './UserLoginSignup'; //User login/signup page
+import AdminLogin from './AdminLogin'; //admin login page
 import VetPage from './VetPage'; // Add this import for the VetPage
 import StaffDashboard from './StaffDashboard'; // Staff Dashboard Landing page
 import AnimalManagement from './AnimalManagement'; // Animal Management Page
@@ -72,8 +73,11 @@ function App() {
         {/* Donate page */}
         <Route path="/donate" element={<Donate />} />
 
-        {/* Login/Signup page */}
-        <Route path="/login" element={<LoginSignup />} />
+        {/* User Login/Signup page */}
+        <Route path="/login" element={<UserLoginSignup />} />
+
+        {/* Admin Login */}
+        <Route path="/adminlogin" element={<AdminLogin />} />
 
         {/* Vet Page route */}
         <Route path="/vet" element={<VetPage />} />  {/* Added route for VetPage */}
