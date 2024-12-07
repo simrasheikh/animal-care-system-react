@@ -19,14 +19,14 @@ INSERT INTO Animals (name, species, breed, age, gender, weight, intake_date, des
 VALUES ('Buddy', 'Dog', 'Beagle', 4, 'Male', 18.49, SYSDATE - 15, 'Energetic and curious', 
 'https://drive.google.com/file/d/1asttSsOVLnN8y4FUrHfsFbjnhap0lznJ/view?usp=sharing');
 
-INSERT INTO OWNERS (name, address, phone_number, email)
-VALUES ('John Doe', '1234 Elm Street', '1234567890', 'john@example.com');
+INSERT INTO OWNERS (name, phone_number, email, password)
+VALUES ('John Doe', '1234567890', 'john@example.com' , 'johndoepassword');
 
-INSERT INTO owners (name, address, phone_number, email)
-VALUES ('Bob Johnson', '789 Pine Road', '1112223333', 'bob@example.com');
+INSERT INTO OWNERS (name, phone_number, email, password)
+VALUES ('Bob Johnson', '1112223333', 'bob@example.com' , 'bobjohnsonpassword123');
 
-INSERT INTO owners (name, address, phone_number, email)
-VALUES ('Jane Smith', '456 Oak Avenue', '0987654321', 'jane@example.com');
+INSERT INTO OWNERS (name, phone_number, email, password)
+VALUES ('Jane Smith', '0987654321', 'jane@example.com', 'janesmithpassword123');
 
 INSERT INTO Vets (name, specialization, phone_number, email, available_times)
 VALUES ('Dr. Brown', 'Surgery', '1112223333', 'dr.brown@example.com', 'Mon 10:00 AM - 2:00 PM, Wed 9:00 AM - 1:00 PM');
