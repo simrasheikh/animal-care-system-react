@@ -59,7 +59,35 @@ async function getAnimalByID_m(id) {
     }
 }
 
+async function addAnimal_m(animal) {
+    let conn;
+    try {
+        conn = await oracledb.getConnection();
+        const result = await conn.execute(
+            `insert into animals (name, species, breed, age, gender, weight, description, photo_url) values (:name, :species, :breed, :age, :gender, :weight, :description, :photo_url)`, {
+                name: animal.NAME,
+                species: animal.SPECIES,
+                breed: animal.BREED,
+                age: animal.AGE,
+                gender: animal.GENDER || null,
+                weight: animal.WEIGHT || null,
+                description: animal.DESCRIPTION,
+                photo_url: animal.PHOTO_URL
+            }, {autoCommit: true}
+        );
+
+        return result.rowsAffected > 0;
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) {
+            await conn.close();
+        }
+    }
+}
+
 module.exports = {
     getAnimals_m,
     getAnimalByID_m,
+    addAnimal_m,
 };
