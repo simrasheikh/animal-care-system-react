@@ -1,5 +1,5 @@
 select * from animals;
-
+truncate table animals;
 SELECT * from available_animals;
 
 select * from owners;
