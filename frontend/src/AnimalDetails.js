@@ -30,9 +30,20 @@ const AnimalDetails = () => {
     // Add more medical records as needed...
   ];
 
+    // const foundAnimal = dummyAnimals.find(animal => animal.id === parseInt(id));
+    // setAnimal(foundAnimal);
+    // const [animal, setAnimal] = useState([]);
+    
   const fetchAnimalDetails = () => {
-    const foundAnimal = dummyAnimals.find(animal => animal.id === parseInt(id));
-    setAnimal(foundAnimal);
+    // try {
+      fetch (`http://localhost:3001/animals/${id}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setAnimal(data.data);
+        });
+    // } catch (error) {
+    //   console.error('Error fetching animal details:', error);
+    // }
   };
 
   const fetchMedicalRecords = () => {
@@ -75,15 +86,15 @@ const AnimalDetails = () => {
         <div className="relative group">
           {/* Hover Zoom Effect on Animal Image */}
           <img
-            src={require(`./assets/${animal.imageName}`)}  // Dynamically load image
-            alt={animal.name}
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPUPPObe8bkov6CluwLDx5FNgla0wkgvJxAgPhrGxg_ZcXu36M1nBLZDnHfRyltQNjZVw4VROMhokT0D4mTrQ57g"  // Dynamically load image
+            alt={animal.NAME}
             className="w-40 h-40 object-cover rounded-full border-4 border-teal-600 transition-all transform group-hover:scale-110 duration-300"
           />          
         </div>
 
         {/* Name and Paw Icon next to each other */}
         <div className="flex items-center mt-4">
-          <h2 className="text-3xl font-bold text-teal-800">{animal.name}</h2>
+          <h2 className="text-3xl font-bold text-teal-800">{animal.NAME}</h2>
           <FaPaw className="text-teal-600 text-3xl ml-2" />
         </div>
 
@@ -93,36 +104,36 @@ const AnimalDetails = () => {
           <div className="flex items-center space-x-2 px-3 py-2 bg-teal-100 rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-200">
             <FaWeightHanging className="text-teal-500" />
             <span className="font-semibold">Weight:</span> 
-            <span className="ml-2">{animal.weight}</span>
+            <span className="ml-2">{animal.WEIGHT}</span>
           </div>
 
           {/* Breed */}
           <div className="flex items-center space-x-2 px-3 py-2 bg-teal-100 rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-200">
             <FaCat className="text-teal-500" />
             <span className="font-semibold">Breed:</span> 
-            <span className="ml-2">{animal.breed}</span>
+            <span className="ml-2">{animal.BREED}</span>
           </div>
 
           {/* Gender */}
           <div className="flex items-center space-x-2 px-3 py-2 bg-teal-100 rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-200">
-            {animal.gender === 'Female' ? (
+            {animal.GENDER === 'Female' ? (
               <FaFemale className="text-teal-500" />
             ) : (
               <FaMale className="text-teal-500" />
             )}
             <span className="font-semibold">Gender:</span>
-            <span className="ml-2">{animal.gender}</span>
+            <span className="ml-2">{animal.GENDER}</span>
           </div>
 
           {/* Age */}
           <div className="flex items-center space-x-2 px-3 py-2 bg-teal-100 rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-200">
             <FaPaw className="text-teal-500" />
             <span className="font-semibold">Age:</span>
-            <span className="ml-2">{animal.age}</span>
+            <span className="ml-2">{animal.AGE}</span>
           </div>
         </div>
         {/* Adopt Me Button - Placed Below the Attribute Rectangles */}
-        {animal && animal.status === 'Available' && (
+        {animal && animal.STATUS === 'Available' && (
           <Link to={`/adopt/${animal.animal_id}`} state={{ animal }}>
             <button className="px-8 py-3 bg-teal-600 text-white font-semibold rounded-lg mt-6 transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-700">
               Adopt Me
@@ -134,8 +145,8 @@ const AnimalDetails = () => {
 
       {/* Middle Column: Description */}
       <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h3 className="text-2xl font-semibold text-teal-800">About {animal.name}</h3>
-        <p className="mt-4 text-gray-600">{animal.description}</p>
+        <h3 className="text-2xl font-semibold text-teal-800">About {animal.NAME}</h3>
+        <p className="mt-4 text-gray-600">{animal.DESCRIPTION}</p>
       </div>
 
       {/* Right Column: Medical Records */}
