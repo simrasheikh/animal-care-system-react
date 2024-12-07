@@ -26,9 +26,7 @@ CREATE TABLE Adoptions (
     animal_id NUMBER NOT NULL,
     owner_id NUMBER NOT NULL,
     adoption_date DATE DEFAULT SYSDATE,
-    status VARCHAR2(20) DEFAULT 'Pending',
-    approval_date DATE,
-    rejection_reason varchar2(255),
+    status VARCHAR2(20) DEFAULT 'Pending',    
     CONSTRAINT fk_animal FOREIGN KEY (animal_id) REFERENCES Animals (animal_id) ON DELETE CASCADE,
     CONSTRAINT fk_owner FOREIGN KEY (owner_id) REFERENCES Owners (owner_id) ON DELETE CASCADE
 );
