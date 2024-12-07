@@ -13,18 +13,18 @@ const AddAnimal = () => {
 
   // Form validation
   const validateForm = () => {
-    // if (!name || !species || !breed || !age || !description || !imageUrl) {
-    //   alert('All fields are required!');
-    //   return false;
-    // }
-    // if (isNaN(age) || age <= 0) {
-    //   alert('Age must be a positive number!');
-    //   return false;
-    // }
-    // if (!imageUrl.startsWith('http://') && !imageUrl.startsWith('https://')) {
-    //   alert('Image URL must be a valid URL!');
-    //   return false;
-    // }
+    if (!name || !species || !breed || !age || !description || !imageUrl) {
+      alert('All fields are required!');
+      return false;
+    }
+    if (isNaN(age) || age <= 0) {
+      alert('Age must be a positive number!');
+      return false;
+    }
+    if (!imageUrl.startsWith('http://') && !imageUrl.startsWith('https://')) {
+      alert('Image URL must be a valid URL!');
+      return false;
+    }
     return true;
   };
 

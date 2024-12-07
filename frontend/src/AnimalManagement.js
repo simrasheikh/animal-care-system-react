@@ -36,11 +36,11 @@ const AnimalManagement = () => {
     setShowModal(true);
   };
 
-  const handleSaveChanges = (e) => {
+  const handleSaveChanges = async (e) => {
     e.preventDefault();
 
     // Send updated animal details to the backend
-    fetch(`http://localhost:3001/animals/${currentAnimal.ID}`, {
+    const response = await fetch(`http://localhost:3001/animals/${currentAnimal.ID}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
