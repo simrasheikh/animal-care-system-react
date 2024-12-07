@@ -10,7 +10,7 @@ select * from staff;
 
 commit;
 -- 
-select * from vet;
+select * from vets;
 
 select * from medicalrecords;
 
