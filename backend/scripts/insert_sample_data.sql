@@ -28,18 +28,14 @@ VALUES ('Bob Johnson', '789 Pine Road', '1112223333', 'bob@example.com');
 INSERT INTO owners (name, address, phone_number, email)
 VALUES ('Jane Smith', '456 Oak Avenue', '0987654321', 'jane@example.com');
 
-INSERT INTO Vets (name, specialization, phone_number, email)
-VALUES ('Dr. Brown', 'Surgery', '1112223333', 'dr.brown@example.com');
+INSERT INTO Vets (name, specialization, phone_number, email, available_times)
+VALUES ('Dr. Brown', 'Surgery', '1112223333', 'dr.brown@example.com', 'Mon 10:00 AM - 2:00 PM, Wed 9:00 AM - 1:00 PM');
 
-INSERT INTO Vets (name, specialization, phone_number, email)
-VALUES ('Dr. Sarah Lee', 'Surgery', '5556667777', 'sarah.lee@example.com');
+INSERT INTO Vets (name, specialization, phone_number, email, available_times)
+VALUES ('Dr. Sarah Lee', 'Surgery', '5556667777', 'sarah.lee@example.com', 'Tue 11:00 AM - 3:00 PM, Thu 9:00 AM - 12:00 PM');
 
-INSERT INTO Vets (name, specialization, phone_number, email)
-VALUES ('Dr. Kevin Smith', 'Vaccination', '8889990000', 'kevin.smith@example.com');
-
-UPDATE Vets SET available_times = 'Mon 10:00 AM - 2:00 PM, Wed 9:00 AM - 1:00 PM' WHERE vet_id = 1;
-UPDATE Vets SET available_times = 'Tue 11:00 AM - 3:00 PM, Thu 9:00 AM - 12:00 PM' WHERE vet_id = 2;
-UPDATE Vets SET available_times = 'Fri 11:00 AM - 3:00 PM, Sat 9:00 AM - 12:00 PM' WHERE vet_id = 3;
+INSERT INTO Vets (name, specialization, phone_number, email, available_times)
+VALUES ('Dr. Kevin Smith', 'Vaccination', '8889990000', 'kevin.smith@example.com', 'Fri 11:00 AM - 3:00 PM, Sat 9:00 AM - 12:00 PM');
 
 INSERT INTO Vets (name, specialization, phone_number, email, available_times)
 VALUES ('Dr. John Peter', 'Vaccination', '9990000111', 'john.peter@example.com', 'Mon 10:00 AM - 2:00 PM, Wed 9:00 AM - 1:00 PM');
