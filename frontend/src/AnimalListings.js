@@ -3,19 +3,24 @@ import { Link } from 'react-router-dom';
 
 const AnimalListings = () => {
   const [animals, setAnimals] = useState([]);
+  // const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ species: '', age: '', status: '' });
   const [searchTerm, setSearchTerm] = useState('');
 
-  // Dummy animal data for testing
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
-        // Replace this part with your actual API call when your backend is ready
-        // const response = await fetch('http://localhost:5001/animals');
-        // const data = await response.json();
-
-        
-        setAnimals(data);
+        fetch(`http://localhost:3001/animals`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            setAnimals(data.data);
+            // setLoading(false);
+          })
       } catch (error) {
         console.error('Error fetching animals:', error);
       }
@@ -37,12 +42,13 @@ const AnimalListings = () => {
   };
 
   const filteredAnimals = animals.filter((animal) => {
-    const matchesSpecies = filters.species ? animal.species.includes(filters.species) : true;
-    const matchesAge = filters.age ? animal.age === filters.age : true;
-    const matchesStatus = filters.status ? animal.status === filters.status : true;
-    const matchesSearchTerm = animal.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSpecies = filters.species ? animal.SPECIES.includes(filters.species) : true;
+    const matchesAge = filters.age ? animal.AGE === filters.age : true;
+    const matchesStatus = filters.status ? animal.STATUS === filters.status : true;
+    // const matchesSearchTerm = animal.name.toLowerCase().includes(searchTerm.toLowerCase());
 
-    return matchesSpecies && matchesAge && matchesStatus && matchesSearchTerm;
+    return matchesSpecies && matchesAge && matchesStatus;
+    //  && matchesSearchTerm;
   });
 
   return (
@@ -111,18 +117,18 @@ const AnimalListings = () => {
       {/* Animal Cards */}
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
         {filteredAnimals.map((animal) => (
-          <div key={animal.id} className="bg-white p-4 rounded-lg shadow-lg">
+          <div key={animal.ID} className="bg-white p-4 rounded-lg shadow-lg">
             {/* Dynamically load image based on imageName */}
-            <Link to={`/animals/${animal.id}`} className="block">
+            <Link to={`/animals/${animal.ID}`} className="block">
               <img
-                src={require(`./assets/${animal.imageName}`)}  // This will reference images in the src/assets folder
-                alt={animal.name}
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPUPPObe8bkov6CluwLDx5FNgla0wkgvJxAgPhrGxg_ZcXu36M1nBLZDnHfRyltQNjZVw4VROMhokT0D4mTrQ57g"  // This will reference images in the src/assets folder
+                alt={animal.NAME}
                 className="w-full h-48 object-cover rounded-t-lg"
               />
-              <h3 className="text-2xl font-semibold mt-4">{animal.name}</h3>
-              <p className="text-sm text-gray-500">{animal.species}</p>
-              <p className="text-sm text-gray-500">Age: {animal.age}</p>
-              <p className="text-sm text-gray-500">Status: {animal.status}</p>
+              <h3 className="text-2xl font-semibold mt-4">{animal.NAME}</h3>
+              <p className="text-sm text-gray-500">{animal.SPECIES}</p>
+              <p className="text-sm text-gray-500">Age: {animal.AGE}</p>
+              <p className="text-sm text-gray-500">Status: {animal.STATUS}</p>
             </Link>
           </div>
         ))}
