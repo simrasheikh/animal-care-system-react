@@ -133,8 +133,8 @@ const Adopt = () => {
           Animal Care
         </Link>
         <div className="space-x-4">
-        <Link to="/" className="text-white hover:text-gray-300">Home</Link>
-            <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
+          <Link to="/" className="text-white hover:text-gray-300">Home</Link>
+          <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>          
           <Link to="/vet" className="text-white hover:text-gray-300">Vet Services</Link>
           <Link to="/login" className="text-white hover:text-gray-300">User Login</Link>
@@ -221,7 +221,7 @@ const Adopt = () => {
               <div className="spinner-border animate-spin w-12 h-12 border-4 border-t-4 border-gray-500 rounded-full"></div>
             </div>
           ) : (
-            <button type="submit" className="w-full py-3 bg-red-700 text-white font-semibold rounded hover:bg-red-800">
+            <button type="submit" className="w-full py-3 bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] text-white font-semibold rounded hover:bg-[#3e7a99]">
               Submit Application
             </button>
           )}
