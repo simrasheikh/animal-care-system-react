@@ -72,11 +72,11 @@ commit;
 -- INSERT INTO vets (name, image_url, phone_number, email)
 -- VALUES ('Dr. John Peter', '9990000111', 'john.peter@example.com');
 
--- INSERT INTO vets (name, image_url, phone_number, email)
--- VALUES ('Dr. Jane Bolt', '0000111222', 'jane.bolt@example.com');
+INSERT INTO vets (name, image_url, phone_number, email)
+VALUES ('Dr. Jane Bolt', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733655012/charlie_zswu1n.jpg', '0000111222', 'jane.bolt@example.com');
 
--- INSERT INTO vets (name, image_url, phone_number, email)
--- VALUES ('Dr. John Doe', '1234567890', 'johndoe@example.com');
+INSERT INTO vets (name, image_url, phone_number, email)
+VALUES ('Dr. John Doe', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733655012/charlie_zswu1n.jpg', '1234567890', 'johndoe@example.com');
 
 commit;
 

@@ -1,18 +1,32 @@
-// models/vetModel.js
-const db = require('../config/db');
+const oracledb = require('../config/db');
 
 async function getAllVets_m() {
-  const result = await db.query('SELECT * FROM Vets');
+  let conn;
+  try {
+    conn = await oracledb.getConnection();
+    const result = await conn.execute('SELECT * FROM Vets');
 
-  // Map over the result rows and create a proper object
-  return result.rows.map(vet => ({
-    VET_ID: vet[0],  // VET_ID is the first column in the result
-    NAME: vet[1],  // NAME is the second column
-    SPECIALIZATION: vet[2],  // SPECIALIZATION is the third column
-    PHONE_NUMBER: vet[3],  // PHONE_NUMBER is the fourth column
-    EMAIL: vet[4],  // EMAIL is the fifth column
-    AVAILABLE_TIMES: vet[5].split(', ')  // AVAILABLE_TIMES is stored as a string, so split it into an array
-  }));
+    // Transform the data into JSON format
+    const rows = result.rows;
+    const columns = result.metaData.map(meta => meta.name);
+
+    // Map rows to JSON objects
+    const jsonResult = rows.map(row => {
+      let obj = {};
+      row.forEach((value, index) => {
+        obj[columns[index]] = value;
+      });
+      return obj;
+    });
+    console.log(jsonResult);
+    return jsonResult;
+  } catch (err) {
+    throw err;
+  } finally {
+    if (conn) {
+      await conn.close();
+    }
+  }
 }
 
 async function getVetById_m(id) {

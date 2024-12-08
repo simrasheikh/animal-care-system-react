@@ -12,25 +12,42 @@ const StaffManagement = () => {
   // Commented out the data fetching from the backend for now
   useEffect(() => {
     const fetchStaff = async () => {
+      // try {
+      //   const response = await fetch(`http://localhost:3001/staff`, {
+      //     method: 'GET',
+      //     headers: {
+      //       'Content-Type': 'application/json',
+      //     },
+      //   });
+      //   const data = await response.json();
+
+      //   // Make sure the response is an array
+      //   const staffData = Array.isArray(data) ? data : []; // Ensure it's always an array
+
+      //   setStaffMembers(staffData); // Set the fetched staff data
+      //   console.log('Staff members:', staffData);
+      //   setLoading(false);
+      // } catch (error) {
+      //   console.error('Error fetching staff members:', error);
+      // }
       try {
-        const response = await fetch(`http://localhost:3001/staff`, {
+        fetch('http://localhost:3001/staff', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-        });
-        const data = await response.json();
-
-        // Make sure the response is an array
-        const staffData = Array.isArray(data) ? data : []; // Ensure it's always an array
-
-        setStaffMembers(staffData); // Set the fetched staff data
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching staff members:', error);
-      }
-    };
-
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            // setStaffMembers(data);
+            // setLoading(false);
+          })
+        } catch (error) {
+          console.error('Error fetching staff members:', error);
+        }
+      }; 
+      
     fetchStaff();
   }, []);
 
@@ -175,10 +192,10 @@ const StaffManagement = () => {
                 {filteredStaff.map((staff) => (
                   <tr key={staff.STAFF_ID} className="border-b hover:bg-gray-100 transition">
                     <td className="px-4 py-2">{staff.STAFF_ID}</td>
-                    <td className="px-4 py-2">{staff.name}</td>
-                    <td className="px-4 py-2">{staff.phone_number}</td>
-                    <td className="px-4 py-2">{staff.email}</td>
-                    <td className="px-4 py-2">{staff.password}</td>
+                    <td className="px-4 py-2">{staff.NAME}</td>
+                    <td className="px-4 py-2">{staff.PHONE_NUMBER}</td>
+                    <td className="px-4 py-2">{staff.EMAIL}</td>
+                    <td className="px-4 py-2">{staff.PASSWORD}</td>
                     <td className="px-4 py-2 flex space-x-2">
                       <button
                         onClick={() => handleEdit(staff)}
