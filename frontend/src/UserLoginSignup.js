@@ -135,13 +135,13 @@ const LoginSignup = () => {
         {/* Tabs */}
         <div className="flex justify-center mb-6">
           <button
-            className={`px-6 py-2 ${isLogin ? "bg-red-700 text-white" : "bg-gray-300 text-black"} rounded-l-lg hover:bg-red-800`}
+            className={`px-6 py-2 ${isLogin ? "bg-[#4992b8] text-white" : "bg-gray-300 text-black"} rounded-l-lg hover:bg-[#3e7a99]`}
             onClick={() => setIsLogin(true)}
           >
             Login
           </button>
           <button
-            className={`px-6 py-2 ${!isLogin ? "bg-red-700 text-white" : "bg-gray-300 text-black"} rounded-r-lg hover:bg-red-800`}
+            className={`px-6 py-2 ${!isLogin ? "bg-[#4992b8] text-white" : "bg-gray-300 text-black"} rounded-r-lg hover:bg-[#3e7a99]`}
             onClick={() => setIsLogin(false)}
           >
             Signup
@@ -167,7 +167,7 @@ const LoginSignup = () => {
               className="w-full p-3 mb-4 border border-gray-300 rounded"
               required
             />
-            <button type="submit" className="w-full py-3 bg-red-700 text-white font-semibold rounded hover:bg-red-800">
+            <button type="submit" className="w-full py-3 bg-[#4992b8] text-white font-semibold rounded hover:bg-[#3e7a99]">
               Login
             </button>
           </form>
@@ -204,7 +204,7 @@ const LoginSignup = () => {
               className="w-full p-3 mb-4 border border-gray-300 rounded"
               required
             />            
-            <button type="submit" className="w-full py-3 bg-red-700 text-white font-semibold rounded hover:bg-red-800">
+            <button type="submit" className="w-full py-3 bg-[#4992b8] text-white font-semibold rounded hover:bg-[#3e7a99]">
               Signup
             </button>
           </form>
