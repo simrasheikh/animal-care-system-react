@@ -1,4 +1,4 @@
-const oracledb = require('../config/db');
+const oracledb = require('oracledb');
 
 async function getAllVets_m() {
   let conn;

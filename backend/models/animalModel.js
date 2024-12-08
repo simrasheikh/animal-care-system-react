@@ -1,5 +1,5 @@
 const { oracle } = require("node-oracledb");
-const oracledb = require("../config/db");
+const oracledb = require("oracledb");
 
 async function getAnimalsUser_m() {
     let conn;
