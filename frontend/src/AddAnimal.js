@@ -9,11 +9,13 @@ const AddAnimal = () => {
   const [age, setAge] = useState('');
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [gender, setGender] = useState('');
+  const [weight, setWeight] = useState('');
   const navigate = useNavigate();
 
   // Form validation
   const validateForm = () => {
-    if (!name || !species || !breed || !age || !description || !imageUrl) {
+    if (!name || !species || !breed || !age || !description || !imageUrl || !gender || !weight) {
       alert('All fields are required!');
       return false;
     }
@@ -25,6 +27,14 @@ const AddAnimal = () => {
       alert('Image URL must be a valid URL!');
       return false;
     }
+    if (isNaN(weight) || weight <= 0) {
+      alert('Weight must be a positive number!');
+      return false;
+    }
+    if (gender !== 'Male' && gender !== 'Female') {
+      alert('Gender must be Male or Female!');
+      return false;
+    }
     return true;
   };
 
@@ -33,29 +43,32 @@ const AddAnimal = () => {
     e.preventDefault();
     if (validateForm()) {
       // Here, you can call your backend to add the animal to the database
-      // console.log({ name, species, breed, age, description, imageUrl });
+      // console.log({ name, species, breed, age, description, imageUrl, gender, weight });
+
       // Redirect back to the animal management page after submission
       try {
         // Make a POST request to the backend
         const response = await fetch("http://localhost:3001/animals", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json", // Set content type to JSON
-            },
-            body: JSON.stringify({
-                NAME: name,
-                SPECIES: species,
-                BREED: breed,
-                AGE: parseInt(age), // Convert age to a number
-                DESCRIPTION: description,
-                PHOTO_URL: imageUrl, // Match the backend field name
-            }),
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json", // Set content type to JSON
+          },
+          body: JSON.stringify({
+            NAME: name,
+            SPECIES: species,
+            BREED: breed,
+            AGE: parseInt(age), // Convert age to a number
+            DESCRIPTION: description,
+            PHOTO_URL: imageUrl, // Match the backend field name
+            GENDER: gender, // New field for gender
+            WEIGHT: parseFloat(weight), // New field for weight
+          }),
         });
 
         if (!response.ok) {
-            // If the response is not ok, throw an error
-            const errorData = await response.json();
-            throw new Error(errorData.message || "Failed to add animal.");
+          // If the response is not ok, throw an error
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Failed to add animal.");
         }
 
         const data = await response.json(); // Parse the JSON response
@@ -63,10 +76,10 @@ const AddAnimal = () => {
 
         // Redirect to the animal management page
         navigate("/staff-dashboard/animal-management");
-    } catch (error) {
+      } catch (error) {
         console.error("Error adding animal:", error);
         alert(error.message); // Display an error message to the user
-    }
+      }
       navigate('/staff-dashboard/animal-management');
     }
   };
@@ -134,6 +147,30 @@ const AddAnimal = () => {
             />
           </div>
           <div>
+            <select
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className="w-full p-3 border border-gray-300 rounded"
+              required
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div>
+            <input
+              type="number"
+              value={weight}
+              onChange={(e) => setWeight(e.target.value)}
+              placeholder="Weight"
+              className="w-full p-3 border border-gray-300 rounded"
+              required
+              min="0.1"
+              step="0.01"  // This allows decimals like 34.1, 34.01, etc.
+            />
+          </div>
+          <div>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -152,7 +189,7 @@ const AddAnimal = () => {
               className="w-full p-3 border border-gray-300 rounded"
               required
             />
-          </div>
+          </div>          
           <button type="submit" className="w-full py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700">
             Add Animal
           </button>
