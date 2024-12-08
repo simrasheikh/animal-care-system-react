@@ -87,18 +87,25 @@ const AnimalDetails = () => {
         </div>
 
         {/* Right Column: Description and Adopt Button */}
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h3 className="text-2xl font-semibold text-teal-800">About {animal.NAME}</h3>
-          <p className="mt-4 text-gray-600">{animal.DESCRIPTION || 'No description available.'}</p>
+        <div className="bg-white p-6 rounded-lg shadow-lg relative">
+          {/* Thought Bubble for Description */}
+          <div className="absolute top-0 left-[-30px] w-0 h-0 border-l-16 border-l-transparent border-r-16 border-r-transparent border-t-16 border-t-teal-600"></div>
+          <div className="bg-teal-600 text-white p-6 rounded-lg relative z-10 shadow-xl">
+            <h3 className="text-2xl font-semibold">About {animal.NAME}</h3>
+            <p className="mt-4 text-gray-200">{animal.DESCRIPTION || 'No description available.'}</p>
+          </div>
 
           {/* Adopt Button */}
-          {animal.STATUS === 'Available' && (
-            <Link to={`/adopt/${animal.animal_id}`} state={{ animal }}>
-              <button className="px-8 py-3 bg-teal-600 text-white font-semibold rounded-lg mt-6 transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-700 w-full">
-                Adopt Me
-              </button>
-            </Link>
-          )}
+{animal.STATUS === 'Available' && (
+  <div className="flex justify-center mt-6">
+    <Link to={`/adopt/${animal.animal_id}`} state={{ animal }}>
+      <button className="px-6 py-3 bg-teal-600 text-white font-semibold rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-700">
+        Adopt Me
+      </button>
+    </Link>
+  </div>
+)}
+
         </div>
       </div>
 
