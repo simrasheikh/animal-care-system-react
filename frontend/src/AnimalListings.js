@@ -16,7 +16,7 @@ const AnimalListings = () => {
           },
         });
         const data = await response.json();
-        setAnimals(data.data);
+        setAnimals(data.data);  // Make sure this matches the structure of your response
       } catch (error) {
         console.error('Error fetching animals:', error);
       }
@@ -123,10 +123,10 @@ const AnimalListings = () => {
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
         {filteredAnimals.map((animal) => (
           <div key={animal.ID} className="bg-white p-4 rounded-lg shadow-lg">
-            {/* Dynamically load image based on imageName */}
             <Link to={`/animals/${animal.ID}`} className="block">
+              {/* Dynamically load image based on photo_url */}
               <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPUPPObe8bkov6CluwLDx5FNgla0wkgvJxAgPhrGxg_ZcXu36M1nBLZDnHfRyltQNjZVw4VROMhokT0D4mTrQ57g"  // This will reference images in the src/assets folder
+                src={animal.PHOTO_URL}  // Replace with the dynamic photo_url
                 alt={animal.NAME}
                 className="w-full h-48 object-cover rounded-t-lg"
               />

@@ -13,6 +13,11 @@ const express = require('express');
 
 const app = express();
 
+//uploading thing
+const uploadRoutes = require('./routes/uploadRoute');
+app.use('/api', uploadRoutes);  // Add this line to your express app
+
+
 //middleware
 app.use(cors());
 app.use(bodyParser.json());
