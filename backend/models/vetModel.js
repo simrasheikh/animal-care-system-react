@@ -3,7 +3,6 @@ const db = require('../config/db');
 
 async function getAllVets_m() {
   const result = await db.query('SELECT * FROM Vets');
-  console.log(result.rows); // Log the raw results
 
   // Map over the result rows and create a proper object
   return result.rows.map(vet => ({
@@ -18,7 +17,6 @@ async function getAllVets_m() {
 
 async function getVetById_m(id) {
   const result = await db.query('SELECT * FROM Vets WHERE VET_ID = :id', [id]);
-  console.log(result.rows); // Log the raw result
 
   if (result.rows.length === 0) {
     return null;

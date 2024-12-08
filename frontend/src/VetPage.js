@@ -112,9 +112,7 @@ const VetPage = () => {
       appointmentDate: appointmentDetails.appointmentDate, // Send date as string
       notes: appointmentDetails.notes || "", // Optional notes field
     };
-  
-    console.log('Sending appointment data to backend:', appointmentData); // Log the data being sent
-  
+    
     try {
       const response = await fetch('http://localhost:3001/appointments', {
         method: 'POST',
@@ -125,7 +123,6 @@ const VetPage = () => {
       });
   
       const result = await response.json();
-      console.log('Received response from backend:', result); // Log the backend response
   
       if (result.success) {
         setSuccessMessage('Appointment successfully booked!');
