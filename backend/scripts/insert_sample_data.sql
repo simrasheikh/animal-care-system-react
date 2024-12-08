@@ -4,9 +4,6 @@ VALUES ('Subata Naveen Khan', 'Admin', '03314991818', 's.khan_18119@animalcare.c
 INSERT INTO Staff (name, role, phone_number, email, password)
 VALUES ('Simra Sheikh', 'Admin', '03175776779', 's.sheikh.27135@animalcare.com', 'simracare123');
 
-INSERT INTO Staff (name, role, phone_number, email, password)
-VALUES ('Emma Davis', 'Admin', '2223334444', 'emma@example.com', '123');
-
 INSERT INTO Animals (name, species, breed, age, gender, weight, intake_date, description, PHOTO_URL)
 VALUES ('Max', 'Dog', 'Labrador', 5, 'Male', 32.29, SYSDATE, 'Friendly dog', 
 'https://drive.google.com/file/d/1Y-w41o2_hTdqP9iC4YUQXop1zCm8jiq5/view?usp=sharing');
