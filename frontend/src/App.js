@@ -11,9 +11,11 @@ import AdminLogin from './AdminLogin'; //admin login page
 import VetPage from './VetPage'; // Add this import for the VetPage
 import StaffDashboard from './StaffDashboard'; // Staff Dashboard Landing page
 import AnimalManagement from './AnimalManagement'; // Animal Management Page
+import StaffManagement from './StaffManagement'; // Staff Management Page
 import AdoptionApplications from './AdoptionApplications'; // Adoption Applications Page
 import MedicalRecords from './MedicalRecords'; // Medical Records Page
 import AddAnimal from './AddAnimal';  // Import AddAnimal
+import AddStaff from './AddStaff';  // Import AddStaff
 import AddMedicalRecord from './AddMedicalRecord';  // Import AddMedicalRecord page
 import Test from './Test';
 
@@ -94,6 +96,8 @@ function App() {
         <Route path="/staff-dashboard/adoption-applications" element={<AdoptionApplications />} />
         <Route path="/staff-dashboard/medical-records" element={<MedicalRecords />} />
         <Route path="/staff-dashboard/animal-management/add" element={<AddAnimal />} />
+        <Route path="/staff-dashboard/staff-management" element={<StaffManagement />} />
+        <Route path="/staff-dashboard/staff-management/add-staff" element={<AddStaff />} />
         <Route path="/staff-dashboard/medical-records/add" element={<AddMedicalRecord />} />
       </Routes>
     </BrowserRouter>
