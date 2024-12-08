@@ -49,10 +49,10 @@ const Home = () => {
               Browse Animals
             </button>
           </Link>
-          <Link to="/donate">
+          <Link to="/vet">
             <button
               className="px-8 py-3 rounded-lg text-white bg-[#4992b8] transition-all transform hover:scale-105 hover:translate-y-[-2px] hover:bg-[#3e7a99] animate__animated animate__slideInUp ml-6">
-              Donate Now
+              Browse Vets
             </button>
           </Link>          
           </div>
