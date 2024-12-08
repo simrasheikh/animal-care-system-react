@@ -46,7 +46,7 @@ const Adopt = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3001/api/adopt", {
+      const response = await fetch("http://localhost:3001/adopt", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -108,7 +108,7 @@ const Adopt = () => {
             alt={animal.NAME}
             className="w-40 h-40 object-cover rounded-full border-4 border-teal-600 mb-4"
           />
-          <h2 className="text-3xl font-bold text-teal-800">{animal.NAME}</h2>
+          <h2 className="text-3xl font-bold text-teal-800">{animal.ANIMAL_NAME}</h2>
           <div className="flex items-center mt-2">
             <FaPaw className="text-teal-600 text-2xl mr-2" />
             <span className="text-lg text-gray-600">{animal.SPECIES}</span>

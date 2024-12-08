@@ -1,5 +1,6 @@
 const {
     getAnimals_m,
+    getAnimalsUser_m,
     getAnimalByID_m,
     addAnimal_m,
     editAnimal_m,
@@ -10,6 +11,15 @@ const db = require("../config/db");
 async function getAnimals_c(req, res) {
     try {
         const animals = await getAnimals_m();
+        res.json({data: animals});
+    } catch (err) {
+        res.status(500).json({message: "Error fetching animals", error: err});
+    }
+}
+
+async function getAnimalsUser_c(req, res) {
+    try {
+        const animals = await getAnimalsUser_m();
         res.json({data: animals});
     } catch (err) {
         res.status(500).json({message: "Error fetching animals", error: err});
@@ -27,6 +37,7 @@ async function getAnimalByID_c(req, res) {
 }
 
 async function addAnimal_c(req, res) {
+    console.log(req.body);
     try {
         const success = await addAnimal_m(req.body);
         if (success) {
@@ -69,6 +80,7 @@ async function deleteAnimal_c(req, res) {
 
 module.exports = {
     getAnimals_c,
+    getAnimalsUser_c,
     getAnimalByID_c,
     addAnimal_c,
     editAnimal_c,

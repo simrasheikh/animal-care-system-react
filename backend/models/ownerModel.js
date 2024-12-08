@@ -33,12 +33,10 @@ async function signup_m(details) {
     let conn;
     try {
         conn = await oracledb.getConnection();
-        console.log(details.name);
-        console.log(details.email);
-        console.log(details.password);
-        const result = await conn.execute('INSERT INTO owners (name, email, password) VALUES (:name, :email, :password)', {name: details.name, email: details.email, password: details.password}, autoCommit=true);
+        const result = await conn.execute('INSERT INTO owners (owner_name, username, email, password) VALUES (:owner_name, :username, :email, :password)', {owner_name: details.name, username: details.username, email: details.email, password: details.password}, autoCommit=true);
         return result;
     } catch (err) {
+        console.log('Error in signup_m:', err);  // Debugging line
         throw err;
     } finally {
         if (conn) {

@@ -51,15 +51,16 @@ async function approveApplication_m(app_id) {
     }
 }
 
-async function getOwnerByUsername(username) {
+async function validateOwnerDetails_c(username, password) {
     let conn;
     try {
         conn = await oracledb.getConnection();
         const result = await conn.execute(
-            `SELECT * FROM owners WHERE username = :username`,
-            { username: username }
+            `SELECT * FROM owners WHERE username = :username AND password = :password`,
+            { username: username, password: password }
         );
-        return result.rows.length > 0 ? result.rows[0] : null;
+        console.log('result:', result.rows[0][0]);
+        return result.rows[0][0];
     } catch (err) {
         throw err;
     } finally {
@@ -69,12 +70,14 @@ async function getOwnerByUsername(username) {
 
 async function submitAdoptionApplication_m(owner_id, animal_id) {
     let conn;
+    console.log('owner_id:', owner_id);
+    console.log('animal_id:', animal_id);
     try {
         conn = await oracledb.getConnection();
         const result = await conn.execute(
-            `INSERT INTO adoptionapplications (animal_id, owner_id, status) 
-             VALUES (:animal_id, :owner_id, 'Pending')`, 
-            { animal_id, owner_id },
+            `INSERT INTO adoption_applications (animal_id, owner_id) 
+             VALUES (:animal_id, :owner_id)`, 
+            { animal_id: animal_id, owner_id: owner_id },
             { autoCommit: true }
         );
 
@@ -98,5 +101,5 @@ module.exports = {
     getAllApps_m,
     approveApplication_m,
     submitAdoptionApplication_m,
-    getOwnerByUsername,
+    validateOwnerDetails_c,
 };

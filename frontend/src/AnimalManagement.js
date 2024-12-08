@@ -46,7 +46,7 @@ const AnimalManagement = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        NAME: currentAnimal.NAME,
+        ANIMAL_NAME: currentAnimal.ANIMAL_NAME,
         SPECIES: currentAnimal.SPECIES,
         AGE: currentAnimal.AGE,
         STATUS: currentAnimal.STATUS,
@@ -169,11 +169,11 @@ const AnimalManagement = () => {
                     <td className="px-4 py-2">
                       <img
                         src={animal.PHOTO_URL}
-                        alt={animal.NAME}
+                        alt={animal.ANIMAL_NAME}
                         className="w-10 h-10 object-cover rounded"
                       />
                     </td>
-                    <td className="px-4 py-2">{animal.NAME}</td>
+                    <td className="px-4 py-2">{animal.ANIMAL_NAME}</td>
                     <td className="px-4 py-2">{animal.SPECIES}</td>
                     <td className="px-4 py-2">{animal.AGE}</td>
                     <td className="px-4 py-2">{animal.BREED}</td>
@@ -212,8 +212,8 @@ const AnimalManagement = () => {
             <form onSubmit={handleSaveChanges} className="space-y-4">
               <input
                 type="text"
-                value={currentAnimal.NAME}
-                onChange={(e) => handleInputChange('NAME', e.target.value)}
+                value={currentAnimal.ANIMAL_NAME}
+                onChange={(e) => handleInputChange('ANIMAL_NAME', e.target.value)}
                 placeholder="Name"
                 className="w-full p-3 border rounded"
               />

@@ -1,6 +1,36 @@
 const { oracle } = require("node-oracledb");
 const oracledb = require("oracledb");
 
+async function getAnimalsUser_m() {
+    let conn;
+    try {
+        conn = await oracledb.getConnection();
+        const result = await conn.execute('SELECT * FROM available_animals');
+
+        // Transform the data into JSON format
+        const rows = result.rows;
+        const columns = result.metaData.map(meta => meta.name);
+
+        // Map rows to JSON objects
+        const jsonResult = rows.map(row => {
+            let obj = {};
+            row.forEach((value, index) => {
+                obj[columns[index]] = value;
+            });
+            return obj;
+        });
+
+        return jsonResult;
+
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) {
+            await conn.close();
+        }
+    }
+}
+
 async function getAnimals_m() {
     let conn;
     try {
@@ -65,8 +95,8 @@ async function addAnimal_m(animal) {
     try {
         conn = await oracledb.getConnection();
         const result = await conn.execute(
-            `insert into animals (name, species, breed, age, gender, weight, description, photo_url) values (:name, :species, :breed, :age, :gender, :weight, :description, :photo_url)`, {
-                name: animal.NAME,
+            `insert into animals (animal_name, species, breed, age, gender, weight, description, photo_url) values (:animal_name, :species, :breed, :age, :gender, :weight, :description, :photo_url)`, {
+                animal_name: animal.NAME,
                 species: animal.SPECIES,
                 breed: animal.BREED,
                 age: animal.AGE,
@@ -93,7 +123,7 @@ async function editAnimal_m(id, animal) {
         conn = await oracledb.getConnection();
         const result = await conn.execute(
             `update animals 
-            set name = :name, 
+            set animal_name = :animal_name, 
             species = :species, 
             breed = :breed,            
             age = :age,
@@ -103,7 +133,7 @@ async function editAnimal_m(id, animal) {
             photo_url = :photo_url
             where animal_id = :animal_id`, {
                 animal_id: id,
-                name: animal.NAME,
+                animal_name: animal.ANIMAL_NAME,
                 species: animal.SPECIES,
                 breed: animal.BREED,
                 age: animal.AGE,
@@ -115,6 +145,7 @@ async function editAnimal_m(id, animal) {
 
         return result.rowsAffected > 0;
     } catch (err) {
+        console.log(err);
         throw err;
     } finally {
         if (conn) {
@@ -143,6 +174,7 @@ async function deleteAnimal_m(id) {
 
 module.exports = {
     getAnimals_m,
+    getAnimalsUser_m,
     getAnimalByID_m,
     addAnimal_m,
     editAnimal_m,

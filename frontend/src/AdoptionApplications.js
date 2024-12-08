@@ -45,7 +45,7 @@ const AdoptionApplications = () => {
 
   // Handle approval of adoption application
   const handleApprove = (application) => {
-    console.log('Approved application:', application.ADOPTION_ID);
+    // console.log('Approved application:', application.ADOPTION_ID);
     const updatedApplications = applications.map((app) =>
       app.ADOPTION_ID === application.ADOPTION_ID ? { ...app, STATUS: 'Approved' } : app
     );

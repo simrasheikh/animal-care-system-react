@@ -9,7 +9,7 @@ const AnimalListings = () => {
   useEffect(() => {
     const fetchAnimals = async () => {
       try {
-        const response = await fetch(`http://localhost:3001/animals`, {
+        const response = await fetch(`http://localhost:3001/animalsuser`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -47,7 +47,7 @@ const AnimalListings = () => {
       (filters.minAge ? animal.AGE >= filters.minAge : true) &&
       (filters.maxAge ? animal.AGE <= filters.maxAge : true);
     
-    const matchesSearchTerm = animal.NAME.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearchTerm = animal.ANIMAL_NAME.toLowerCase().includes(searchTerm.toLowerCase());
 
     return matchesSpecies && matchesStatus && matchesAge && matchesSearchTerm;
   });
@@ -127,10 +127,10 @@ const AnimalListings = () => {
               {/* Dynamically load image based on photo_url */}
               <img
                 src={animal.PHOTO_URL}  // Replace with the dynamic photo_url
-                alt={animal.NAME}
+                alt={animal.ANIMAL_NAME}
                 className="w-full h-48 object-cover rounded-t-lg"
               />
-              <h3 className="text-2xl font-semibold mt-4">{animal.NAME}</h3>
+              <h3 className="text-2xl font-semibold mt-4">{animal.ANIMAL_NAME}</h3>
               <p className="text-sm text-gray-500">{animal.SPECIES}</p>
               <p className="text-sm text-gray-500">Age: {animal.AGE}</p>
               <p className="text-sm text-gray-500">Status: {animal.STATUS}</p>

@@ -20,9 +20,12 @@ const LoginSignup = () => {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
+    const username = e.target.username.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
+    console.log("input details: ", { name, username, email, password });
+
 
     if (!name.trim()) {
       setSignupError("Name is required.");
@@ -48,13 +51,11 @@ const LoginSignup = () => {
 
     setSignupError("");
 
-    // Backend signup logic (commented out for now)
-    /*
     try {
       const response = await fetch("http://localhost:3001/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, username, email, password }),
       });
 
       if (!response.ok) {
@@ -68,7 +69,6 @@ const LoginSignup = () => {
       console.error("Signup failed:", error);
       setSignupError("Failed to create an account. Please try again.");
     }
-    */
   };
 
   return (
