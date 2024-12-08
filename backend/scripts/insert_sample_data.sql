@@ -1,11 +1,11 @@
 INSERT INTO Staff (name, role, phone_number, email, password)
-VALUES ('Subata Naveen Khan', 'Admin', '03314991818', 's.khan_18119@khi.iba.edu.pk', '123');
+VALUES ('Subata Naveen Khan', 'Admin', '03314991818', 's.khan_18119@khi.iba.edu.pk', 'pa55word123');
 
 INSERT INTO Staff (name, role, phone_number, email, password)
-VALUES ('Simra Sheikh', 'Admin', '7778889999', 'tom@example.com', '123');
+VALUES ('Simra Sheikh', 'Admin', '7778889999', 'tom@example.com', 'pa55word123');
 
 INSERT INTO Staff (name, role, phone_number, email, password)
-VALUES ('Emma Davis', 'Admin', '2223334444', 'emma@example.com', '123');
+VALUES ('Emma Davis', 'Admin', '2223334444', 'emma@example.com', 'pa55word123');
 
 INSERT INTO Animals (name, species, breed, age, gender, weight, intake_date, description, PHOTO_URL)
 VALUES ('Max', 'Dog', 'Labrador', 5, 'Male', 32.29, SYSDATE, 'Friendly dog', 

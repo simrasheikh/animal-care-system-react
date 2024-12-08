@@ -7,7 +7,7 @@ select * from owners;
 select * from adoptions;
 
 select * from staff;
-
+truncate table staff;
 commit;
 -- 
 select * from vets;
