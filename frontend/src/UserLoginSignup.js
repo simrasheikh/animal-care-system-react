@@ -20,12 +20,12 @@ const LoginSignup = () => {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     const name = e.target.name.value;
-    const username = e.target.username.value;
+    const username = e.target.username.value;  // Added username input
+    const phoneNumber = e.target.phoneNumber.value;  // Added phone number input
     const email = e.target.email.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
-    console.log("input details: ", { name, username, email, password });
-
+    console.log("input details: ", { name, username, phoneNumber, email, password });
 
     if (!name.trim()) {
       setSignupError("Name is required.");
@@ -55,7 +55,7 @@ const LoginSignup = () => {
       const response = await fetch("http://localhost:3001/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, username, email, password }),
+        body: JSON.stringify({ name, username, phone_number: phoneNumber, email, password }),
       });
 
       if (!response.ok) {
@@ -114,6 +114,20 @@ const LoginSignup = () => {
             type="text"
             name="name"
             placeholder="Name"
+            className="w-full p-3 mb-4 border border-gray-300 rounded"
+            required
+          />
+          <input
+            type="text"
+            name="username"
+            placeholder="Username"
+            className="w-full p-3 mb-4 border border-gray-300 rounded"
+            required
+          />
+          <input
+            type="text"
+            name="phoneNumber"
+            placeholder="Phone Number"
             className="w-full p-3 mb-4 border border-gray-300 rounded"
             required
           />
