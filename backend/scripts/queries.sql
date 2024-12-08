@@ -11,7 +11,7 @@ truncate table staff;
 commit;
 -- 
 select * from vets;
-
+insert into owners (name, email, password) values ('John Doe', 'idk', 'password');
 select * from medicalrecords;
 
 --List all animals that are available for adoption:

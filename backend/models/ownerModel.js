@@ -1,3 +1,4 @@
+const { auto } = require("async");
 const oracledb = require("oracledb");
 
 async function getOwners_m() {
@@ -32,7 +33,10 @@ async function signup_m(details) {
     let conn;
     try {
         conn = await oracledb.getConnection();
-        const result = await conn.execute('INSERT INTO owners (name, email, password) VALUES (:name, :email, :password)', {name: details.name, email: details.email, password: details.password});
+        console.log(details.name);
+        console.log(details.email);
+        console.log(details.password);
+        const result = await conn.execute('INSERT INTO owners (name, email, password) VALUES (:name, :email, :password)', {name: details.name, email: details.email, password: details.password}, autoCommit=true);
         return result;
     } catch (err) {
         throw err;

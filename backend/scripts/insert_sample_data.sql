@@ -1,5 +1,5 @@
 INSERT INTO Staff (name, role, phone_number, email, password)
-VALUES ('Subata Naveen Khan', 'Admin', '03314991818', 's.khan_18119@animalcare.com', 'subatacare123');
+VALUES ('Subata Naveen Khan', 'Admin', '03314991818', 's.khan_18119@khi.iba.edu.pk', 'subatacare123');
 
 INSERT INTO Staff (name, role, phone_number, email, password)
 VALUES ('Simra Sheikh', 'Admin', '03175776779', 's.sheikh.27135@animalcare.com', 'simracare123');
