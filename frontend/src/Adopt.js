@@ -8,7 +8,6 @@ const Adopt = () => {
   const [formData, setFormData] = useState({
     name: "",
     username: "",
-    email: "",
     phone_number: "",
     agreement: false,
   });
@@ -169,19 +168,6 @@ const Adopt = () => {
             </div>
 
             <div className="mt-4">
-              <label htmlFor="email" className="block text-sm font-semibold">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full p-3 mt-2 border border-gray-300 rounded"
-                required
-              />
-            </div>
-
-            <div className="mt-4">
               <label htmlFor="phone_number" className="block text-sm font-semibold">Phone Number:</label>
               <input
                 type="text"
@@ -216,6 +202,11 @@ const Adopt = () => {
               Submit Adoption Application
             </button>
           </form>
+
+          {/* Additional link to the login page */}
+          <div className="mt-6 text-center">
+            <p className="text-sm text-gray-600">Don't have a username? <Link to="/login" className="text-teal-600">Signup here</Link></p>
+          </div>
         </div>
       </div>
 
