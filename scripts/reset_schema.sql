@@ -1,5 +1,6 @@
 -- check everything
 select * from user_triggers;
+select * from user_procedures;
 select * from user_views;
 select * from user_tables;
 select * from user_objects;
@@ -21,6 +22,11 @@ BEGIN
    FOR vw IN (SELECT view_name FROM user_views) LOOP
       EXECUTE IMMEDIATE 'DROP VIEW ' || vw.view_name;
    END LOOP;
+
+   -- Drop all procedures
+   for prd in (select object_name from user_procedures) loop
+      execute immediate 'drop procedure ' || prd.object_name;
+   end loop;
 
 END;
 /
