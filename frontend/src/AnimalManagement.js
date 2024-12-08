@@ -53,6 +53,7 @@ const AnimalManagement = () => {
         BREED: currentAnimal.BREED, // Update breed
         GENDER: currentAnimal.GENDER, // Update gender
         WEIGHT: currentAnimal.WEIGHT, // Update weight
+        PHOTO_URL: currentAnimal.PHOTO_URL,
         DESCRIPTION: currentAnimal.DESCRIPTION, // Update description
       }),
     })
@@ -146,6 +147,7 @@ const AnimalManagement = () => {
             <table className="min-w-full table-auto">
               <thead>
                 <tr className="border-b">
+                  <th className="px-4 py-2 text-left">Animal ID</th>
                   <th className="px-4 py-2 text-left">Animal Name</th>
                   <th className="px-4 py-2 text-left">Species</th>
                   <th className="px-4 py-2 text-left">Age</th>
@@ -153,6 +155,7 @@ const AnimalManagement = () => {
                   <th className="px-4 py-2 text-left">Gender</th>
                   <th className="px-4 py-2 text-left">Weight</th>
                   <th className="px-4 py-2 text-left">Description</th>
+                  <th className="px-4 py-2 text-left">Intake Date</th>
                   <th className="px-4 py-2 text-left">Status</th>
                   <th className="px-4 py-2 text-left">Actions</th>
                 </tr>
@@ -160,6 +163,7 @@ const AnimalManagement = () => {
               <tbody>
                 {animals.map((animal) => (
                   <tr key={animal.ID} className="border-b hover:bg-gray-100 transition">
+                    <td className="px-4 py-2">{animal.ANIMAL_ID}</td>
                     <td className="px-4 py-2">{animal.NAME}</td>
                     <td className="px-4 py-2">{animal.SPECIES}</td>
                     <td className="px-4 py-2">{animal.AGE}</td>
@@ -167,6 +171,7 @@ const AnimalManagement = () => {
                     <td className="px-4 py-2">{animal.GENDER}</td> {/* Display gender */}
                     <td className="px-4 py-2">{animal.WEIGHT}</td> {/* Display weight */}
                     <td className="px-4 py-2">{animal.DESCRIPTION}</td> {/* Display description */}
+                    <td className="px-4 py-2">{animal.INTAKE_DATE}</td>
                     <td className="px-4 py-2">{animal.STATUS}</td>
                     <td className="px-4 py-2 flex space-x-2">
                       <button
@@ -237,6 +242,13 @@ const AnimalManagement = () => {
                 value={currentAnimal.WEIGHT}
                 onChange={(e) => handleInputChange('WEIGHT', e.target.value)}
                 placeholder="Weight"
+                className="w-full p-3 border rounded"
+              />
+              <input
+                type="text"
+                value={currentAnimal.PHOTO_URL}
+                onChange={(e) => handleInputChange('PHOTO_URL', e.target.value)}
+                placeholder="Image URL"
                 className="w-full p-3 border rounded"
               />
               <textarea
