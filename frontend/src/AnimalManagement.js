@@ -38,7 +38,7 @@ const AnimalManagement = () => {
 
   const handleSaveChanges = async (e) => {
     e.preventDefault();
-  
+
     // Send updated animal details to the backend
     const response = await fetch(`http://localhost:3001/animals/${currentAnimal.ANIMAL_ID}`, {
       method: 'PUT',
@@ -77,7 +77,7 @@ const AnimalManagement = () => {
         alert('Failed to save changes. Please try again.');
       });
   };
-  
+
   const handleDelete = (animal) => {
     // Send delete request to the backend
     fetch(`http://localhost:3001/animals/${animal.ANIMAL_ID}`, {
@@ -90,7 +90,7 @@ const AnimalManagement = () => {
       })
       .catch((err) => console.error(err));
   };
-  
+
   const handleInputChange = (field, value) => {
     setCurrentAnimal({ ...currentAnimal, [field]: value });
   };
@@ -149,6 +149,7 @@ const AnimalManagement = () => {
               <thead>
                 <tr className="border-b">
                   <th className="px-4 py-2 text-left">Animal ID</th>
+                  <th className="px-4 py-2 text-left">Image</th>
                   <th className="px-4 py-2 text-left">Animal Name</th>
                   <th className="px-4 py-2 text-left">Species</th>
                   <th className="px-4 py-2 text-left">Age</th>
@@ -157,23 +158,30 @@ const AnimalManagement = () => {
                   <th className="px-4 py-2 text-left">Weight</th>
                   <th className="px-4 py-2 text-left">Description</th>
                   <th className="px-4 py-2 text-left">Intake Date</th>
-                  <th className="px-4 py-2 text-left">Status</th>
+                  <th className="px-4 py-2 text-left">Status</th>                  
                   <th className="px-4 py-2 text-left">Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {animals.map((animal) => (
-                  <tr key={animal.ID} className="border-b hover:bg-gray-100 transition">
+                  <tr key={animal.ANIMAL_ID} className="border-b hover:bg-gray-100 transition">
                     <td className="px-4 py-2">{animal.ANIMAL_ID}</td>
+                    <td className="px-4 py-2">
+                      <img
+                        src={animal.PHOTO_URL}
+                        alt={animal.NAME}
+                        className="w-10 h-10 object-cover rounded"
+                      />
+                    </td>
                     <td className="px-4 py-2">{animal.NAME}</td>
                     <td className="px-4 py-2">{animal.SPECIES}</td>
                     <td className="px-4 py-2">{animal.AGE}</td>
-                    <td className="px-4 py-2">{animal.BREED}</td> {/* Display breed */}
-                    <td className="px-4 py-2">{animal.GENDER}</td> {/* Display gender */}
-                    <td className="px-4 py-2">{animal.WEIGHT}</td> {/* Display weight */}
-                    <td className="px-4 py-2">{animal.DESCRIPTION}</td> {/* Display description */}
+                    <td className="px-4 py-2">{animal.BREED}</td>
+                    <td className="px-4 py-2">{animal.GENDER}</td>
+                    <td className="px-4 py-2">{animal.WEIGHT}</td>
+                    <td className="px-4 py-2">{animal.DESCRIPTION}</td>
                     <td className="px-4 py-2">{animal.INTAKE_DATE}</td>
-                    <td className="px-4 py-2">{animal.STATUS}</td>
+                    <td className="px-4 py-2">{animal.STATUS}</td>                    
                     <td className="px-4 py-2 flex space-x-2">
                       <button
                         onClick={() => handleEdit(animal)}
