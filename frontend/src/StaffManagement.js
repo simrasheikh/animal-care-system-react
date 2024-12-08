@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const StaffManagement = () => {
-  const [staffMembers, setStaffMembers] = useState([]);
+  const [staffMembers, setStaffMembers] = useState([]); // Initialize as an empty array
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [currentStaff, setCurrentStaff] = useState(null);
@@ -20,14 +20,11 @@ const StaffManagement = () => {
           },
         });
         const data = await response.json();
-        
-        // const dummyData = [
-        //   { STAFF_ID: 1, name: 'John Doe', phone_number: '123-456-7890', email: 'john.doe@example.com', password: 'john123' },
-        //   { STAFF_ID: 2, name: 'Jane Smith', phone_number: '987-654-3210', email: 'jane.smith@example.com', password: 'john123' },
-        //   { STAFF_ID: 3, name: 'Alice Brown', phone_number: '555-123-4567', email: 'alice.brown@example.com', password: 'john123' },
-        //   { STAFF_ID: 4, name: 'Bob White', phone_number: '555-987-6543', email: 'bob.white@example.com', password: 'john123' }
-        // ];
-        setStaffMembers(data); // Set the dummy data
+
+        // Make sure the response is an array
+        const staffData = Array.isArray(data) ? data : []; // Ensure it's always an array
+
+        setStaffMembers(staffData); // Set the fetched staff data
         setLoading(false);
       } catch (error) {
         console.error('Error fetching staff members:', error);
@@ -76,14 +73,6 @@ const StaffManagement = () => {
         console.error('Error saving changes:', err);
         alert('Failed to save changes. Please try again.');
       });
-
-    // For now, we'll update the dummy data directly:
-  //   setStaffMembers((prevStaffMembers) =>
-  //     prevStaffMembers.map((staff) =>
-  //       staff.STAFF_ID === currentStaff.STAFF_ID ? currentStaff : staff
-  //     )
-  //   );
-  //   setShowModal(false); // Close the modal
   };
 
   const handleDelete = (staff) => {
