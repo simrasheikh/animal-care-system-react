@@ -36,9 +36,10 @@ const AdminLogin = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
       });
-
+      console.log(response);
       const data = await response.json();
-      if (response.ok && data.success) {
+      console.log(data);
+      if (response.ok && data.message === "Staff validated successfully") {
         setErrorMessage("");
         navigate("/staff-dashboard"); // Redirect to staff dashboard
       } else {
