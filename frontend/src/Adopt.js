@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { FaPaw, FaWeightHanging, FaDog, FaCat, FaMale, FaFemale } from 'react-icons/fa';
+import { FaPaw, FaWeightHanging, FaCat, FaMale, FaFemale } from 'react-icons/fa';
 
 const Adopt = () => {
   const { id } = useParams(); // Get animal ID from the URL
@@ -94,7 +94,7 @@ const Adopt = () => {
           <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>
           <Link to="/vet" className="text-white hover:text-gray-300">Vet Services</Link>
-          <Link to="/login" className="text-white hover:text-gray-300">User Login</Link>
+          <Link to="/login" className="text-white hover:text-gray-300">User Signup</Link>
           <Link to="/adminlogin" className="text-white hover:text-gray-300">Staff Login</Link>
         </div>
       </nav>

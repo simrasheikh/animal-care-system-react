@@ -18,7 +18,7 @@ const AdoptLanding = () => {
           <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>          
           <Link to="/vet" className="text-white hover:text-gray-300">Vet Services</Link>
-          <Link to="/login" className="text-white hover:text-gray-300">User Login</Link>
+          <Link to="/login" className="text-white hover:text-gray-300">User Signup</Link>
           <Link to="/adminlogin" className="text-white hover:text-gray-300">Staff Login</Link>
         </div>
       </nav>
