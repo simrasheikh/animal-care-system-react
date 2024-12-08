@@ -17,7 +17,13 @@ async function getOwners_c(req, res) {
 async function signup_c(req, res) {
     // const {name, email, password} = req.body;
     try {
-        const result = await signup_m(req.body);
+        const {
+            owner_name,
+            username,
+            email,
+            password
+        } = req.body;
+        const result = await signup_m(owner_name, username, email, password);
         res.json({message: "Signup successful", data: result});
     } catch (err) {
         res.status(500).json({message: "Signup failed", error: err});

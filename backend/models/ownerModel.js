@@ -29,11 +29,18 @@ async function getOwners_m() {
     }
 }
 
-async function signup_m(details) {
+async function signup_m(owner_name, username, email, password) {
     let conn;
+    console.log('details:', owner_name, username, email, password);  // Debugging line
     try {
         conn = await oracledb.getConnection();
-        const result = await conn.execute('INSERT INTO owners (owner_name, username, email, password) VALUES (:owner_name, :username, :email, :password)', {owner_name: details.name, username: details.username, email: details.email, password: details.password}, autoCommit=true);
+        const result = await conn.execute('INSERT INTO owners (owner_name, username, email, password) VALUES (:owner_name, :username, :email, :password)', {
+            owner_name: owner_name, 
+            username: username, 
+            // phone_number: details.phone_number || null, 
+            email: email, 
+            password: password
+        }, autoCommit=true);
         return result;
     } catch (err) {
         console.log('Error in signup_m:', err);  // Debugging line
