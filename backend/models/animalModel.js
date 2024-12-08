@@ -95,14 +95,20 @@ async function editAnimal_m(id, animal) {
             `update animals 
             set name = :name, 
             species = :species, 
+            breed = :breed,            
             age = :age,
-            status = :status
+            gender = :gender,
+            weight = :weight,            
+            description = :description
             where animal_id = :animal_id`, {
                 animal_id: id,
                 name: animal.NAME,
                 species: animal.SPECIES,
+                breed: animal.BREED,
                 age: animal.AGE,
-                status: animal.STATUS,
+                gender: animal.GENDER,
+                weight: animal.WEIGHT,                
+                description: animal.DESCRIPTION,
     }, {autoCommit: true});
 
         return result.rowsAffected > 0;
