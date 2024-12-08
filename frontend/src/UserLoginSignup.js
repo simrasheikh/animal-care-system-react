@@ -55,7 +55,7 @@ const LoginSignup = () => {
       const response = await fetch("http://localhost:3001/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, username, phone_number: phoneNumber, email, password }),
+        body: JSON.stringify({ owner_name: name, username, phone_number: phoneNumber, email, password }),
       });
 
       if (!response.ok) {

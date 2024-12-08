@@ -3,6 +3,9 @@ truncate table animals;
 SELECT * from available_animals;
 
 select * from owners;
+desc owners;
+insert into owners (owner_name, username, phone_number, email, password) 
+values ('subata', 'subarapsterc', '03314991818', 'subarapster.c@gmail.com', 'hehe123');
 
 select * from adoption_application_details;
 
