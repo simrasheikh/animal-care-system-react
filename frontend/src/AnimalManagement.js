@@ -38,7 +38,7 @@ const AnimalManagement = () => {
 
   const handleSaveChanges = async (e) => {
     e.preventDefault();
-
+  
     // Send updated animal details to the backend
     const response = await fetch(`http://localhost:3001/animals/${currentAnimal.ANIMAL_ID}`, {
       method: 'PUT',
@@ -67,7 +67,7 @@ const AnimalManagement = () => {
         // Update the state with the new animal details
         setAnimals((prevAnimals) =>
           prevAnimals.map((animal) =>
-            animal.ID === updatedAnimal.ID ? updatedAnimal : animal
+            animal.ANIMAL_ID === updatedAnimal.ANIMAL_ID ? updatedAnimal : animal
           )
         );
         setShowModal(false); // Close the modal
@@ -77,7 +77,7 @@ const AnimalManagement = () => {
         alert('Failed to save changes. Please try again.');
       });
   };
-
+  
   const handleDelete = (animal) => {
     // Send delete request to the backend
     fetch(`http://localhost:3001/animals/${animal.ANIMAL_ID}`, {
@@ -85,11 +85,12 @@ const AnimalManagement = () => {
     })
       .then((response) => response.json())
       .then(() => {
-        setAnimals((prevAnimals) => prevAnimals.filter((animal) => animal.ID !== animal.ID));
+        // Immediately remove the deleted animal from the state
+        setAnimals((prevAnimals) => prevAnimals.filter((item) => item.ANIMAL_ID !== animal.ANIMAL_ID));
       })
       .catch((err) => console.error(err));
   };
-
+  
   const handleInputChange = (field, value) => {
     setCurrentAnimal({ ...currentAnimal, [field]: value });
   };
