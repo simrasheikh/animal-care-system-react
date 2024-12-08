@@ -15,6 +15,7 @@ import AdoptionApplications from './AdoptionApplications'; // Adoption Applicati
 import MedicalRecords from './MedicalRecords'; // Medical Records Page
 import AddAnimal from './AddAnimal';  // Import AddAnimal
 import AddMedicalRecord from './AddMedicalRecord';  // Import AddMedicalRecord page
+import Test from './Test';
 
 function App() {
   const [animals, setAnimals] = useState([]);
@@ -54,6 +55,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* test page */}
+        <Route path="/test" element={<Test />} /> 
+
         {/* Home page */}
         <Route path="/" element={<Home />} />
 
