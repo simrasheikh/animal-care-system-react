@@ -18,7 +18,6 @@ async function getAllVets_m() {
       });
       return obj;
     });
-    console.log(jsonResult);
     return jsonResult;
   } catch (err) {
     throw err;
