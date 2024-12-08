@@ -50,6 +50,10 @@ const AnimalManagement = () => {
         SPECIES: currentAnimal.SPECIES,
         AGE: currentAnimal.AGE,
         STATUS: currentAnimal.STATUS,
+        BREED: currentAnimal.BREED, // Update breed
+        GENDER: currentAnimal.GENDER, // Update gender
+        WEIGHT: currentAnimal.WEIGHT, // Update weight
+        DESCRIPTION: currentAnimal.DESCRIPTION, // Update description
       }),
     })
       .then((response) => {
@@ -73,39 +77,17 @@ const AnimalManagement = () => {
       });
   };
 
-//   const handleDelete = (animalId) => {
-//   if (window.confirm("Are you sure you want to delete this animal?")) {
-//     fetch(`http://localhost:3001/animals/${animalId}`, {
-//       method: "DELETE",
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error("Failed to delete animal.");
-//         }
-//         return response.json();
-//       })
-//       .then(() => {
-//         setAnimals((prevAnimals) =>
-//           prevAnimals.filter((animal) => animal.ID !== animalId)
-//         );
-//       })
-//       .catch((err) => {
-//         console.error("Error deleting animal:", err);
-//         alert("Failed to delete animal. Please try again.");
-//       });
-//   }
-// };
-const handleDelete = (animal) => {
-  // Send delete request to the backend
-  fetch(`http://localhost:3001/animals/${animal.ID}`, {
-    method: 'DELETE',
-  })
-    .then((response) => response.json())
-    .then(() => {
-      setAnimals((prevAnimals) => prevAnimals.filter((animal) => animal.ID !== animal.ID));
+  const handleDelete = (animal) => {
+    // Send delete request to the backend
+    fetch(`http://localhost:3001/animals/${animal.ID}`, {
+      method: 'DELETE',
     })
-    .catch((err) => console.error(err));
-};
+      .then((response) => response.json())
+      .then(() => {
+        setAnimals((prevAnimals) => prevAnimals.filter((animal) => animal.ID !== animal.ID));
+      })
+      .catch((err) => console.error(err));
+  };
 
   const handleInputChange = (field, value) => {
     setCurrentAnimal({ ...currentAnimal, [field]: value });
@@ -167,6 +149,10 @@ const handleDelete = (animal) => {
                   <th className="px-4 py-2 text-left">Animal Name</th>
                   <th className="px-4 py-2 text-left">Species</th>
                   <th className="px-4 py-2 text-left">Age</th>
+                  <th className="px-4 py-2 text-left">Breed</th>
+                  <th className="px-4 py-2 text-left">Gender</th>
+                  <th className="px-4 py-2 text-left">Weight</th>
+                  <th className="px-4 py-2 text-left">Description</th>
                   <th className="px-4 py-2 text-left">Status</th>
                   <th className="px-4 py-2 text-left">Actions</th>
                 </tr>
@@ -177,6 +163,10 @@ const handleDelete = (animal) => {
                     <td className="px-4 py-2">{animal.NAME}</td>
                     <td className="px-4 py-2">{animal.SPECIES}</td>
                     <td className="px-4 py-2">{animal.AGE}</td>
+                    <td className="px-4 py-2">{animal.BREED}</td> {/* Display breed */}
+                    <td className="px-4 py-2">{animal.GENDER}</td> {/* Display gender */}
+                    <td className="px-4 py-2">{animal.WEIGHT}</td> {/* Display weight */}
+                    <td className="px-4 py-2">{animal.DESCRIPTION}</td> {/* Display description */}
                     <td className="px-4 py-2">{animal.STATUS}</td>
                     <td className="px-4 py-2 flex space-x-2">
                       <button
@@ -186,7 +176,7 @@ const handleDelete = (animal) => {
                         <i className="fas fa-edit"></i> Edit
                       </button>
                       <button
-                        onClick={() => handleDelete(animal.ID)}
+                        onClick={() => handleDelete(animal)}
                         className="text-red-500 hover:text-red-700"
                       >
                         <i className="fas fa-trash"></i> Delete
@@ -227,14 +217,35 @@ const handleDelete = (animal) => {
                 placeholder="Age"
                 className="w-full p-3 border rounded"
               />
+              <input
+                type="text"
+                value={currentAnimal.BREED}
+                onChange={(e) => handleInputChange('BREED', e.target.value)}
+                placeholder="Breed"
+                className="w-full p-3 border rounded"
+              />
               <select
-                value={currentAnimal.STATUS}
-                onChange={(e) => handleInputChange('STATUS', e.target.value)}
+                value={currentAnimal.GENDER}
+                onChange={(e) => handleInputChange('GENDER', e.target.value)}
                 className="w-full p-3 border rounded"
               >
-                <option value="Available">Available</option>
-                <option value="Adopted">Adopted</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
               </select>
+              <input
+                type="number"
+                value={currentAnimal.WEIGHT}
+                onChange={(e) => handleInputChange('WEIGHT', e.target.value)}
+                placeholder="Weight"
+                className="w-full p-3 border rounded"
+              />
+              <textarea
+                value={currentAnimal.DESCRIPTION}
+                onChange={(e) => handleInputChange('DESCRIPTION', e.target.value)}
+                placeholder="Description"
+                className="w-full p-3 border rounded"
+                rows="4"
+              ></textarea>
               <div className="flex justify-between">
                 <button
                   type="button"
