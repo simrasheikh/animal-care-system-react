@@ -64,7 +64,6 @@ const LoginSignup = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     const confirmPassword = e.target.confirmPassword.value;
-    const role = e.target.role.value;
 
     if (!name.trim()) {
       setSignupError("Name is required.");
@@ -88,11 +87,6 @@ const LoginSignup = () => {
       return;
     }
 
-    if (!role) {
-      setSignupError("Please select a role.");
-      return;
-    }
-
     setSignupError("");
 
     // Backend signup logic (commented out for now)
@@ -101,7 +95,7 @@ const LoginSignup = () => {
       const response = await fetch("http://localhost:3001/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password, role }),
+        body: JSON.stringify({ name, email, password }),
       });
 
       if (!response.ok) {
