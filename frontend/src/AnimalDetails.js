@@ -96,16 +96,15 @@ const AnimalDetails = () => {
           </div>
 
           {/* Adopt Button */}
-{animal.STATUS === 'Available' && (
-  <div className="flex justify-center mt-6">
-    <Link to={`/adopt/${animal.animal_id}`} state={{ animal }}>
-      <button className="px-6 py-3 bg-teal-600 text-white font-semibold rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-700">
-        Adopt Me
-      </button>
-    </Link>
-  </div>
-)}
-
+          {animal.STATUS === 'Available' && (
+            <div className="flex justify-center mt-6">
+              <Link to={`/adopt/${animal.animal_id}`} state={{ animal }}>
+                <button className="px-6 py-3 bg-teal-600 text-white font-semibold rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-700">
+                  Adopt Me
+                </button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 
