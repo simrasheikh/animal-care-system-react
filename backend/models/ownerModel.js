@@ -28,6 +28,22 @@ async function getOwners_m() {
     }
 }
 
+async function signup_m(details) {
+    let conn;
+    try {
+        conn = await oracledb.getConnection();
+        const result = await conn.execute('INSERT INTO owners (name, email, password) VALUES (:name, :email, :password)', {name: details.name, email: details.email, password: details.password});
+        return result;
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) {
+            await conn.close();
+        }
+    }
+}
+
 module.exports = {
     getOwners_m,
+    signup_m,
 };
