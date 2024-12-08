@@ -66,7 +66,7 @@ const AdminLogin = () => {
       >
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-white">
           <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-1s">
-            Staff Login
+            Access Your Dashboard
           </h1>
           <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
             Please login with your credentials to access the staff dashboard.
