@@ -40,7 +40,7 @@ const AnimalManagement = () => {
     e.preventDefault();
 
     // Send updated animal details to the backend
-    const response = await fetch(`http://localhost:3001/animals/${currentAnimal.ID}`, {
+    const response = await fetch(`http://localhost:3001/animals/${currentAnimal.ANIMAL_ID}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
