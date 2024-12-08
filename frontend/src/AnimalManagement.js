@@ -79,7 +79,7 @@ const AnimalManagement = () => {
 
   const handleDelete = (animal) => {
     // Send delete request to the backend
-    fetch(`http://localhost:3001/animals/${animal.ID}`, {
+    fetch(`http://localhost:3001/animals/${animal.ANIMAL_ID}`, {
       method: 'DELETE',
     })
       .then((response) => response.json())
