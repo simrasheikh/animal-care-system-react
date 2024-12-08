@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import textbg from './assets/signupbg.jpg';
 
 const LoginSignup = () => {
-  const [isLogin, setIsLogin] = useState(true); // Toggle between Login and Signup
-  const [loginError, setLoginError] = useState("");
   const [signupError, setSignupError] = useState("");
 
   // Email validation regex
@@ -12,50 +11,10 @@ const LoginSignup = () => {
     return regex.test(email);
   };
 
-  // Password strength regex
+  // Password strength regex (now only requires 1 uppercase and 1 number)
   const validatePassword = (password) => {
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
     return regex.test(password);
-  };
-
-  const handleLoginSubmit = async (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-
-    if (!validateEmail(email)) {
-      setLoginError("Invalid email format.");
-      return;
-    }
-
-    if (password.length < 8) {
-      setLoginError("Password must be at least 8 characters long.");
-      return;
-    }
-
-    setLoginError("");
-
-    // Backend login logic (commented out for now)
-    /*
-    try {
-      const response = await fetch("http://localhost:3001/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Invalid credentials");
-      }
-
-      const data = await response.json();
-      console.log("Login successful:", data);
-      // Perform redirection or save token to localStorage/sessionStorage
-    } catch (error) {
-      console.error("Login failed:", error);
-      setLoginError("Invalid email or password.");
-    }
-    */
   };
 
   const handleSignupSubmit = async (e) => {
@@ -77,7 +36,7 @@ const LoginSignup = () => {
 
     if (!validatePassword(password)) {
       setSignupError(
-        "Password must be at least 8 characters long and include uppercase, lowercase, a number, and a special character."
+        "Password must be at least 8 characters long and include at least one uppercase letter and one number."
       );
       return;
     }
@@ -125,90 +84,64 @@ const LoginSignup = () => {
           <Link to="/animals" className="text-white hover:text-gray-300">Browse Animals</Link>
           <Link to="/adopt" className="text-white hover:text-gray-300">Adopt</Link>          
           <Link to="/vet" className="text-white hover:text-gray-300">Vet Services</Link>
-          <Link to="/login" className="text-white hover:text-gray-300">User Login</Link>
+          <Link to="/login" className="text-white hover:text-gray-300">User Signup</Link>
           <Link to="/adminlogin" className="text-white hover:text-gray-300">Staff Login</Link>
         </div>
       </nav>
 
+      {/* Banner Section */}
+      <section
+        className="relative bg-cover bg-center"
+        style={{ backgroundImage: `url(${textbg})`, height: '180px' }} // Adjust the height value here
+      >
+        <div className="absolute inset-0 bg-black bg-opacity-55 flex flex-col items-center justify-center text-white">
+          <h1 className="text-5xl md:text-6xl font-extrabold text-center mb-4 animate__animated animate__fadeIn animate__delay-1s">
+            Join the Animal Care Community Today!
+          </h1>
+          <p className="text-lg md:text-xl text-center mb-1 animate__animated animate__slideInUp">
+            Sign up now to help find loving homes for animals in need.
+          </p>
+        </div>
+      </section>
+
       {/* Main Content */}
       <div className="container mx-auto p-6">
-        {/* Tabs */}
-        <div className="flex justify-center mb-6">
-          <button
-            className={`px-6 py-2 ${isLogin ? "bg-[#4992b8] text-white" : "bg-gray-300 text-black"} rounded-l-lg hover:bg-[#3e7a99]`}
-            onClick={() => setIsLogin(true)}
-          >
-            Login
-          </button>
-          <button
-            className={`px-6 py-2 ${!isLogin ? "bg-[#4992b8] text-white" : "bg-gray-300 text-black"} rounded-r-lg hover:bg-[#3e7a99]`}
-            onClick={() => setIsLogin(false)}
-          >
+        {/* Signup Form */}
+        <form onSubmit={handleSignupSubmit} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-semibold text-center mb-4">Signup</h2>
+          {signupError && <p className="text-red-500 text-sm mb-4">{signupError}</p>}
+          <input
+            type="text"
+            name="name"
+            placeholder="Name"
+            className="w-full p-3 mb-4 border border-gray-300 rounded"
+            required
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="w-full p-3 mb-4 border border-gray-300 rounded"
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="w-full p-3 mb-4 border border-gray-300 rounded"
+            required
+          />
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="Confirm Password"
+            className="w-full p-3 mb-4 border border-gray-300 rounded"
+            required
+          />
+          <button type="submit" className="w-full py-3 rounded-lg bg-[#4992b8] text-white font-semibold rounded hover:bg-[#3e7a99]">
             Signup
           </button>
-        </div>
-
-        {/* Login Form */}
-        {isLogin ? (
-          <form onSubmit={handleLoginSubmit} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-semibold text-center mb-4">Login</h2>
-            {loginError && <p className="text-red-500 text-sm mb-4">{loginError}</p>}
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              className="w-full p-3 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              className="w-full p-3 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <button type="submit" className="w-full py-3 bg-[#4992b8] text-white font-semibold rounded hover:bg-[#3e7a99]">
-              Login
-            </button>
-          </form>
-        ) : (
-          /* Signup Form */
-          <form onSubmit={handleSignupSubmit} className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
-            <h2 className="text-2xl font-semibold text-center mb-4">Signup</h2>
-            {signupError && <p className="text-red-500 text-sm mb-4">{signupError}</p>}
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              className="w-full p-3 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              className="w-full p-3 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              className="w-full p-3 mb-4 border border-gray-300 rounded"
-              required
-            />
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              className="w-full p-3 mb-4 border border-gray-300 rounded"
-              required
-            />            
-            <button type="submit" className="w-full py-3 bg-[#4992b8] text-white font-semibold rounded hover:bg-[#3e7a99]">
-              Signup
-            </button>
-          </form>
-        )}
+        </form>
       </div>
 
       {/* Footer */}
