@@ -4,7 +4,9 @@ SELECT * from available_animals;
 
 select * from owners;
 
-select * from adoptions;
+select * from adoption_application_details;
+
+update adoption_applications set status = 'Approved' where owner_id = 1;
 
 select * from staff;
 truncate table staff;

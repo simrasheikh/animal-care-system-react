@@ -1,4 +1,43 @@
-const { submitAdoptionApplication_m, getOwnerByUsername_m } = require("../models/adoptionApplicationModel");
+const { 
+    getAllApps_m,
+    approveApplication_m,
+    submitAdoptionApplication_m, 
+    getOwnerByUsername_m 
+} = require("../models/adoptionApplicationModel");
+
+async function getAllApps_c(req, res) {
+    try {
+        const adoptionApplications = await getAllApps_m();
+
+        if (adoptionApplications) {
+            res.status(200).json(adoptionApplications);
+        } else {
+            res.status(404).json({ message: "No adoption applications found" });
+        }
+
+    } catch (error) {
+        res.status(500).json({ message: "Error fetching adoption applications", error });
+    }
+}
+
+async function approveApplication_c(req, res) {
+    const { app_id } = req.body;  // Expect app_id from the form
+    console.log(req.body);
+
+    try {
+        // Approve the adoption application
+        const approval = await approveApplication_m(req.body.ADOPTION_ID);
+
+        if (approval) {
+            res.status(200).json({ message: "Adoption application approved" });
+        } else {
+            res.status(500).json({ message: "Error approving adoption application" });
+        }
+
+    } catch (error) {
+        res.status(500).json({ message: "Error processing the adoption application", error });
+    }
+}
 
 async function submitAdoptionApplication(req, res) {
     const { username, animal_id } = req.body;  // Expect username and animal_id from the form
@@ -28,5 +67,7 @@ async function submitAdoptionApplication(req, res) {
 }
 
 module.exports = {
+    getAllApps_c,
+    approveApplication_c,
     submitAdoptionApplication,
 };

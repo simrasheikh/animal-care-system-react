@@ -8,20 +8,20 @@ const AdoptionApplications = () => {
   const [filter, setFilter] = useState('All'); // Filter state
   // Variables for summary
   const totalApplications = applications.length;
-  const pendingApplications = applications.filter((app) => app.status === 'Pending').length;
-  const approvedApplications = applications.filter((app) => app.status === 'Approved').length;
+  const pendingApplications = applications.filter((app) => app.STATUS === 'Pending').length;
+  const approvedApplications = applications.filter((app) => app.STATUS === 'Approved').length;
 
   // Dummy data for adoption applications
   useEffect(() => {
-    setApplications([
-      { id: 1, animalName: 'Bella', adopterName: 'John Doe', status: 'Pending' },
-      { id: 2, animalName: 'Milo', adopterName: 'Jane Smith', status: 'Approved' },
-      { id: 3, animalName: 'Charlie', adopterName: 'Tom Johnson', status: 'Pending' },
-      { id: 4, animalName: 'Lucy', adopterName: 'Emily Davis', status: 'Rejected' },
-    ]);
+    // setApplications([
+    //   { id: 1, animalName: 'Bella', adopterName: 'John Doe', status: 'Pending' },
+    //   { id: 2, animalName: 'Milo', adopterName: 'Jane Smith', status: 'Approved' },
+    //   { id: 3, animalName: 'Charlie', adopterName: 'Tom Johnson', status: 'Pending' },
+    //   { id: 4, animalName: 'Lucy', adopterName: 'Emily Davis', status: 'Rejected' },
+    // ]);
 
     // Backend data fetching (commented out for now)
-    /*
+    
     fetch('http://localhost:3001/adoption-applications', {
       method: 'GET',
       headers: {
@@ -40,23 +40,26 @@ const AdoptionApplications = () => {
       .catch((error) => {
         console.error('Error fetching applications:', error);
       });
-    */
+    
   }, []);
 
   // Handle approval of adoption application
-  const handleApprove = (applicationId) => {
+  const handleApprove = (application) => {
+    console.log('Approved application:', application.ADOPTION_ID);
     const updatedApplications = applications.map((app) =>
-      app.id === applicationId ? { ...app, status: 'Approved' } : app
+      app.ADOPTION_ID === application.ADOPTION_ID ? { ...app, STATUS: 'Approved' } : app
     );
     setApplications(updatedApplications);
 
     // Backend call to approve application (commented out for now)
-    /*
-    fetch(`http://localhost:3001/adoption-applications/${applicationId}/approve`, {
+    fetch(`http://localhost:3001/adoption-applications/${application.ADOPTION_ID}/approve`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ 
+        ADOPTION_ID: application.ADOPTION_ID,
+        STATUS: 'Approved' }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -70,19 +73,18 @@ const AdoptionApplications = () => {
       .catch((error) => {
         console.error('Error approving application:', error);
       });
-    */
   };
 
   // Handle rejection of adoption application
-  const handleReject = (applicationId) => {
+  const handleReject = (application) => {
     const updatedApplications = applications.map((app) =>
-      app.id === applicationId ? { ...app, status: 'Rejected' } : app
+      app.ADOPTION_ID === application.ADOPTION_ID ? { ...app, STATUS: 'Rejected' } : app
     );
     setApplications(updatedApplications);
 
     // Backend call to reject application (commented out for now)
     /*
-    fetch(`http://localhost:3001/adoption-applications/${applicationId}/reject`, {
+    fetch(`http://localhost:3001/adoption-applications/${application.ADOPTION_ID}/reject`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -209,40 +211,40 @@ const AdoptionApplications = () => {
             </thead>
             <tbody>
               {filteredApplications.map((application) => (
-                <tr key={application.id} className="border-b hover:bg-gray-100">
-                  <td className="px-4 py-2">{application.animalName}</td>
-                  <td className="px-4 py-2">{application.adopterName}</td>
+                <tr key={application.ADOPTION_ID} className="border-b hover:bg-gray-100">
+                  <td className="px-4 py-2">{application.ANIMAL_NAME}</td>
+                  <td className="px-4 py-2">{application.OWNER_NAME}</td>
                   <td className="px-4 py-2">
                     <span
                       className={`px-2 py-1 rounded text-white ${
-                        application.status === 'Pending'
+                        application.STATUS === 'Pending'
                           ? 'bg-yellow-500'
-                          : application.status === 'Approved'
+                          : application.STATUS === 'Approved'
                           ? 'bg-green-500'
                           : 'bg-red-500'
                       }`}
                     >
-                      {application.status}
+                      {application.STATUS}
                     </span>
                   </td>
                   <td className="px-4 py-2 flex space-x-2">
-                    {application.status === 'Pending' && (
+                    {application.STATUS === 'Pending' && (
                       <>
                         <button
-                          onClick={() => handleApprove(application.id)}
+                          onClick={() => handleApprove(application)}
                           className="text-green-500 hover:text-green-700"
                         >
                           <i className="fas fa-check"></i>
                         </button>
                         <button
-                          onClick={() => handleReject(application.id)}
+                          onClick={() => handleReject(application)}
                           className="text-red-500 hover:text-red-700"
                         >
                           <i className="fas fa-times"></i>
                         </button>
                       </>
                     )}
-                    {application.status !== 'Pending' && (
+                    {application.STATUS !== 'Pending' && (
                       <span className="text-gray-500">No actions available</span>
                     )}
                   </td>
