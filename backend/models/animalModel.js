@@ -99,7 +99,8 @@ async function editAnimal_m(id, animal) {
             age = :age,
             gender = :gender,
             weight = :weight,            
-            description = :description
+            description = :description,
+            photo_url = :photo_url
             where animal_id = :animal_id`, {
                 animal_id: id,
                 name: animal.NAME,
@@ -109,6 +110,7 @@ async function editAnimal_m(id, animal) {
                 gender: animal.GENDER,
                 weight: animal.WEIGHT,                
                 description: animal.DESCRIPTION,
+                photo_url: animal.PHOTO_URL,
     }, {autoCommit: true});
 
         return result.rowsAffected > 0;
