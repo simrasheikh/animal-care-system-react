@@ -8,6 +8,7 @@ const Adopt = () => {
   const [formData, setFormData] = useState({
     name: "",
     username: "",
+    password: "", // Add password field
     phone_number: "",
     agreement: false,
   });
@@ -34,6 +35,11 @@ const Adopt = () => {
       return;
     }
 
+    if (!formData.password) {
+      setErrorMessage("Password is required");
+      return;
+    }
+
     if (!formData.agreement) {
       setErrorMessage("You must agree to the adoption terms");
       return;
@@ -45,6 +51,7 @@ const Adopt = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           username: formData.username,
+          password: formData.password, // Send password to the backend
           animal_id: id,  // Ensure animal_id is correct
         }),
       });
@@ -161,6 +168,19 @@ const Adopt = () => {
                 id="username"
                 name="username"
                 value={formData.username}
+                onChange={handleChange}
+                className="w-full p-3 mt-2 border border-gray-300 rounded"
+                required
+              />
+            </div>
+
+            <div className="mt-4">
+              <label htmlFor="password" className="block text-sm font-semibold">Password:</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                value={formData.password}
                 onChange={handleChange}
                 className="w-full p-3 mt-2 border border-gray-300 rounded"
                 required
