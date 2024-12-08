@@ -6,6 +6,7 @@ const Test = () => {
     day: '',
     time: '',
   });
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Handle input changes
   const handleChange = (e) => {
@@ -16,20 +17,39 @@ const Test = () => {
     });
   };
 
-  // Generate time options (e.g., "09:00", "09:30", "10:00", "10:30", etc.)
+  // Generate time options from 9 AM to 4 PM (9:00 to 4:00)
   const generateTimeOptions = () => {
     const options = [];
-    for (let hour = 0; hour < 24; hour++) {
+    for (let hour = 9; hour <= 16; hour++) {
       const hourFormatted = hour < 10 ? `0${hour}` : hour;
       options.push(`${hourFormatted}:00`);
-      options.push(`${hourFormatted}:30`);
+      if (hour !== 16) {  // Skip adding 16:30
+        options.push(`${hourFormatted}:30`);
+      }
     }
     return options;
+  };
+
+  // Handle day selection to ensure Monday to Friday only
+  const handleDayChange = (e) => {
+    const selectedDay = new Date(e.target.value);
+    const dayOfWeek = selectedDay.getDay(); // 0 = Sunday, 6 = Saturday
+
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+      setErrorMessage("Please select a weekday (Monday to Friday).");
+    } else {
+      setErrorMessage('');
+      setFormData({ ...formData, day: e.target.value });
+    }
   };
 
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!formData.name || !formData.day || !formData.time) {
+      setErrorMessage("All fields are required.");
+      return;
+    }
     console.log('Form data:', formData);
   };
 
@@ -51,7 +71,7 @@ const Test = () => {
           />
         </div>
 
-        {/* Day Selection */}
+        {/* Day Selection (Monday to Friday only) */}
         <div>
           <label htmlFor="day" className="block text-sm font-semibold">Select Day:</label>
           <input
@@ -59,10 +79,12 @@ const Test = () => {
             id="day"
             name="day"
             value={formData.day}
-            onChange={handleChange}
+            onChange={handleDayChange} // Custom handler
+            min="2024-01-01" // Can adjust this to the current date if needed
             className="w-full p-3 mt-2 border border-gray-300 rounded"
             required
           />
+          {errorMessage && <p className="text-red-500 text-sm mt-2">{errorMessage}</p>}
         </div>
 
         {/* Time Selection */}
