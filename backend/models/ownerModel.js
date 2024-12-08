@@ -47,7 +47,33 @@ async function signup_m(details) {
     }
 }
 
+async function getOwnerByUsername_m(username) {
+    let conn;
+    try {
+        conn = await oracledb.getConnection();
+        const result = await conn.execute(
+            `SELECT * FROM owners WHERE username = :username`,
+            { username }
+        );
+
+        if (result.rows.length > 0) {
+            console.log('Owner found:', result.rows[0]);  // Debugging line
+            return result.rows[0];  // Return the first matching owner
+        } else {
+            console.log('Owner not found for username:', username);  // Debugging line
+            return null;  // No owner found
+        }
+    } catch (err) {
+        console.error('Error in getOwnerByUsername_m:', err);  // Debugging line
+        throw err;
+    } finally {
+        if (conn) await conn.close();
+    }
+}
+
+
 module.exports = {
     getOwners_m,
     signup_m,
+    getOwnerByUsername_m,
 };
