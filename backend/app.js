@@ -27,9 +27,9 @@ app.use(bodyParser.json());
 app.use("/", staffRoutes);
 app.use("/", animalRoutes);
 app.use("/", vetRoutes);
-app.use("/api", ownerRoutes);
+app.use("/", ownerRoutes);
 app.use("/", appointmentRoutes);
-app.use("/api", adoptionApplicationRoutes);
+app.use("/", adoptionApplicationRoutes);
 
 app.use("/", (req, res) => {
     res.json({ message: "App is running!" });

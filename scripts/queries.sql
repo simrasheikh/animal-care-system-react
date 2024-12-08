@@ -4,7 +4,7 @@ SELECT * from available_animals;
 
 select * from owners;
 
-select * from adoption_applications;
+select * from adoption_application_details;
 
 update adoption_applications set status = 'Approved' where owner_id = 1;
 
