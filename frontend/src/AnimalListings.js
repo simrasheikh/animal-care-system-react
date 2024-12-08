@@ -123,7 +123,7 @@ const AnimalListings = () => {
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
         {filteredAnimals.map((animal) => (
           <div key={animal.ID} className="bg-white p-4 rounded-lg shadow-lg">
-            <Link to={`/animals/${animal.ID}`} className="block">
+            <Link to={`/animals/${animal.ANIMAL_ID}`} className="block">
               {/* Dynamically load image based on photo_url */}
               <img
                 src={animal.PHOTO_URL}  // Replace with the dynamic photo_url
