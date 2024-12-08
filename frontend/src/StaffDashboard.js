@@ -17,7 +17,7 @@ const StaffDashboard = () => {
           <Link to="/staff-dashboard/animal-management" className="text-white hover:text-gray-300">Animal Management</Link>
           <Link to="/staff-dashboard/adoption-applications" className="text-white hover:text-gray-300">Adoption Applications</Link>
           <Link to="/staff-dashboard/medical-records" className="text-white hover:text-gray-300">Medical Records</Link>
-          <Link to="/login" className="text-white hover:text-gray-300">Logout</Link>
+          <Link to="/adminlogin" className="text-white hover:text-gray-300">Logout</Link>
         </div>
       </nav>
 
