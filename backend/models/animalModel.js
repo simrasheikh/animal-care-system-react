@@ -102,7 +102,7 @@ async function addAnimal_m(animal) {
                 age: animal.AGE,
                 gender: animal.GENDER || null,
                 weight: animal.WEIGHT || null,
-                description: animal.DESCRIPTION,
+                description: animal.DESCRIPTION || null,
                 photo_url: animal.PHOTO_URL
             }, {autoCommit: true}
         );

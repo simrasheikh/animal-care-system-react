@@ -13,23 +13,21 @@ const StaffManagement = () => {
   useEffect(() => {
     const fetchStaff = async () => {
       try {
-        // Commented out backend fetch
-        // const response = await fetch(`http://localhost:3001/staff`, {
-        //   method: 'GET',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        // });
-        // const data = await response.json();
+        const response = await fetch(`http://localhost:3001/staff`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const data = await response.json();
         
-        // Using dummy data for now
-        const dummyData = [
-          { STAFF_ID: 1, name: 'John Doe', phone_number: '123-456-7890', email: 'john.doe@example.com', password: 'john123' },
-          { STAFF_ID: 2, name: 'Jane Smith', phone_number: '987-654-3210', email: 'jane.smith@example.com', password: 'john123' },
-          { STAFF_ID: 3, name: 'Alice Brown', phone_number: '555-123-4567', email: 'alice.brown@example.com', password: 'john123' },
-          { STAFF_ID: 4, name: 'Bob White', phone_number: '555-987-6543', email: 'bob.white@example.com', password: 'john123' }
-        ];
-        setStaffMembers(dummyData); // Set the dummy data
+        // const dummyData = [
+        //   { STAFF_ID: 1, name: 'John Doe', phone_number: '123-456-7890', email: 'john.doe@example.com', password: 'john123' },
+        //   { STAFF_ID: 2, name: 'Jane Smith', phone_number: '987-654-3210', email: 'jane.smith@example.com', password: 'john123' },
+        //   { STAFF_ID: 3, name: 'Alice Brown', phone_number: '555-123-4567', email: 'alice.brown@example.com', password: 'john123' },
+        //   { STAFF_ID: 4, name: 'Bob White', phone_number: '555-987-6543', email: 'bob.white@example.com', password: 'john123' }
+        // ];
+        setStaffMembers(data); // Set the dummy data
         setLoading(false);
       } catch (error) {
         console.error('Error fetching staff members:', error);
@@ -48,60 +46,60 @@ const StaffManagement = () => {
     e.preventDefault();
 
     // Commented out the backend update
-    // const response = await fetch(`http://localhost:3001/staff/${currentStaff.STAFF_ID}`, {
-    //   method: 'PUT',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     name: currentStaff.name,
-    //     phone_number: currentStaff.phone_number,
-    //     email: currentStaff.email,
-    //     password: currentStaff.password,
-    //   }),
-    // })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw new Error('Failed to save changes.');
-    //     }
-    //     return response.json();
-    //   })
-    //   .then((updatedStaff) => {
-    //     setStaffMembers((prevStaffMembers) =>
-    //       prevStaffMembers.map((staff) =>
-    //         staff.STAFF_ID === updatedStaff.STAFF_ID ? updatedStaff : staff
-    //       )
-    //     );
-    //     setShowModal(false); // Close the modal
-    //   })
-    //   .catch((err) => {
-    //     console.error('Error saving changes:', err);
-    //     alert('Failed to save changes. Please try again.');
-    //   });
+    const response = await fetch(`http://localhost:3001/staff/${currentStaff.STAFF_ID}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: currentStaff.name,
+        phone_number: currentStaff.phone_number,
+        email: currentStaff.email,
+        password: currentStaff.password,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to save changes.');
+        }
+        return response.json();
+      })
+      .then((updatedStaff) => {
+        setStaffMembers((prevStaffMembers) =>
+          prevStaffMembers.map((staff) =>
+            staff.STAFF_ID === updatedStaff.STAFF_ID ? updatedStaff : staff
+          )
+        );
+        setShowModal(false); // Close the modal
+      })
+      .catch((err) => {
+        console.error('Error saving changes:', err);
+        alert('Failed to save changes. Please try again.');
+      });
 
     // For now, we'll update the dummy data directly:
-    setStaffMembers((prevStaffMembers) =>
-      prevStaffMembers.map((staff) =>
-        staff.STAFF_ID === currentStaff.STAFF_ID ? currentStaff : staff
-      )
-    );
-    setShowModal(false); // Close the modal
+  //   setStaffMembers((prevStaffMembers) =>
+  //     prevStaffMembers.map((staff) =>
+  //       staff.STAFF_ID === currentStaff.STAFF_ID ? currentStaff : staff
+  //     )
+  //   );
+  //   setShowModal(false); // Close the modal
   };
 
   const handleDelete = (staff) => {
     // Commented out backend delete
-    // fetch(`http://localhost:3001/staff/${staff.STAFF_ID}`, {
-    //   method: 'DELETE',
-    // })
-    //   .then((response) => response.json())
-    //   .then(() => {
-    //     // Immediately remove the deleted staff from the state
-    //     setStaffMembers((prevStaffMembers) => prevStaffMembers.filter((item) => item.STAFF_ID !== staff.STAFF_ID));
-    //   })
-    //   .catch((err) => console.error(err));
+    fetch(`http://localhost:3001/staff/${staff.STAFF_ID}`, {
+      method: 'DELETE',
+    })
+      .then((response) => response.json())
+      .then(() => {
+        // Immediately remove the deleted staff from the state
+        setStaffMembers((prevStaffMembers) => prevStaffMembers.filter((item) => item.STAFF_ID !== staff.STAFF_ID));
+      })
+      .catch((err) => console.error(err));
 
     // For now, we'll remove the staff from the dummy data directly:
-    setStaffMembers((prevStaffMembers) => prevStaffMembers.filter((item) => item.STAFF_ID !== staff.STAFF_ID));
+    // setStaffMembers((prevStaffMembers) => prevStaffMembers.filter((item) => item.STAFF_ID !== staff.STAFF_ID));
   };
 
   const handleInputChange = (field, value) => {
