@@ -42,23 +42,20 @@ const AnimalDetails = () => {
       </nav>
 
       {/* Animal Details Section */}
-      <div className="container mx-auto p-8 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
-        {/* Left Column: Animal Profile */}
-        <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-lg">
-          <div className="relative group">
-            <img
-              src={animal.PHOTO_URL}
-              alt={animal.NAME}
-              className="w-40 h-40 object-cover rounded-full border-4 border-teal-600 transition-all transform group-hover:scale-110 duration-300"
-            />
+      <div className="container mx-auto p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Left Column: Animal Profile and Attributes */}
+        <div className="bg-white p-6 rounded-lg shadow-lg flex flex-col items-center">
+          <img
+            src={animal.PHOTO_URL}
+            alt={animal.NAME}
+            className="w-40 h-40 object-cover rounded-full border-4 border-teal-600 mb-4"
+          />
+          <h2 className="text-3xl font-bold text-teal-800">{animal.NAME}</h2>
+          <div className="flex items-center mt-2">
+            <FaPaw className="text-teal-600 text-2xl mr-2" />
+            <span className="text-lg text-gray-600">{animal.SPECIES}</span>
           </div>
-
-          <div className="flex items-center mt-4">
-            <h2 className="text-3xl font-bold text-teal-800">{animal.NAME}</h2>
-            <FaPaw className="text-teal-600 text-3xl ml-2" />
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+          <div className="mt-6 grid grid-cols-1 gap-4">
             <div className="flex items-center space-x-2 px-3 py-2 bg-teal-100 rounded-lg transition-all transform hover:scale-105 hover:shadow-xl hover:bg-teal-200">
               <FaWeightHanging className="text-teal-500" />
               <span className="font-semibold">Weight:</span>
@@ -90,7 +87,7 @@ const AnimalDetails = () => {
         </div>
 
         {/* Right Column: Description and Adopt Button */}
-        <div className="bg-white p-6 rounded-lg shadow-lg col-span-1 lg:col-span-1">
+        <div className="bg-white p-6 rounded-lg shadow-lg">
           <h3 className="text-2xl font-semibold text-teal-800">About {animal.NAME}</h3>
           <p className="mt-4 text-gray-600">{animal.DESCRIPTION || 'No description available.'}</p>
 
