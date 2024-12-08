@@ -63,6 +63,23 @@ const Home = () => {
       <section className="feature-cards py-14 bg-gray-50">
         <div className="container px-6 text-center">          
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+
+            {/* Browse Animals */}
+            <div className="bg-gradient-to-r from-[#325473] to-[#1a2b3b] p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105">
+              <div className="flex flex-col justify-center items-center mb-4">
+                <FaHeart className="text-5xl text-white mb-4" />
+                <h3 className="text-2xl font-semibold text-white">Browse Animals</h3>
+              </div>
+              <p className="text-lg text-white mb-4">
+              Explore our adoptable animals and find your perfect companion today!
+              </p>
+              <Link to="/animals">
+                <button className="w-full py-3 rounded-lg bg-[#1a222e] text-white font-semibold hover:bg-[#4b6282] transition-all">
+                  Browse Collection
+                </button>
+              </Link>
+            </div>
+
             {/* Adopt an Animal */}
             <div className="bg-gradient-to-r from-[#325473] to-[#1a2b3b] p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105">
               <div className="flex flex-col justify-center items-center mb-4">
@@ -77,23 +94,7 @@ const Home = () => {
                   Start Adoption
                 </button>
               </Link>
-            </div>
-
-            {/* Donate */}
-            <div className="bg-gradient-to-r from-[#325473] to-[#1a2b3b] p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105">
-              <div className="flex flex-col justify-center items-center mb-4">
-                <FaHeart className="text-5xl text-white mb-4" />
-                <h3 className="text-2xl font-semibold text-white">Donate</h3>
-              </div>
-              <p className="text-lg text-white mb-4">
-                Your generous donations help us provide food, shelter, and medical care for animals in need.
-              </p>
-              <Link to="/donate">
-                <button className="w-full py-3 rounded-lg bg-[#1a222e] text-white font-semibold hover:bg-[#4b6282] transition-all">
-                  Donate Now
-                </button>
-              </Link>
-            </div>
+            </div>            
 
             {/* Vet Services */}
             <div className="bg-gradient-to-r from-[#325473] to-[#1a2b3b] p-6 rounded-xl shadow-lg hover:shadow-2xl transition-all transform hover:scale-105">
