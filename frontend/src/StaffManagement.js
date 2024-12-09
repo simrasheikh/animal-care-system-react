@@ -7,31 +7,12 @@ const StaffManagement = () => {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [currentStaff, setCurrentStaff] = useState(null);
-  const [staffFilter, setStaffFilter] = useState('');
 
   // Commented out the data fetching from the backend for now
   useEffect(() => {
     const fetchStaff = async () => {
-      // try {
-      //   const response = await fetch(`http://localhost:3001/staff`, {
-      //     method: 'GET',
-      //     headers: {
-      //       'Content-Type': 'application/json',
-      //     },
-      //   });
-      //   const data = await response.json();
-
-      //   // Make sure the response is an array
-      //   const staffData = Array.isArray(data) ? data : []; // Ensure it's always an array
-
-      //   setStaffMembers(staffData); // Set the fetched staff data
-      //   console.log('Staff members:', staffData);
-      //   setLoading(false);
-      // } catch (error) {
-      //   console.error('Error fetching staff members:', error);
-      // }
       try {
-        fetch('http://localhost:3001/staff', {
+        fetch(`http://localhost:3001/staff`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -39,14 +20,13 @@ const StaffManagement = () => {
         })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
-            // setStaffMembers(data);
-            // setLoading(false);
-          })
-        } catch (error) {
-          console.error('Error fetching staff members:', error);
-        }
-      }; 
+            setStaffMembers(data.data);
+            setLoading(false);
+          }) 
+      } catch (error) {
+        console.error('Error fetching staff members:', error);
+      }
+    }; 
       
     fetchStaff();
   }, []);
@@ -113,10 +93,10 @@ const StaffManagement = () => {
   };
 
   // Filter staff by name or email
-  const filteredStaff = staffMembers.filter(staff =>
-    staff.name.toLowerCase().includes(staffFilter.toLowerCase()) ||
-    staff.email.toLowerCase().includes(staffFilter.toLowerCase())
-  );
+  // const staffMembers = staffMembers.filter(staff =>
+  //   staff.name.toLowerCase().includes(staffFilter.toLowerCase()) ||
+  //   staff.email.toLowerCase().includes(staffFilter.toLowerCase())
+  // );
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -147,7 +127,7 @@ const StaffManagement = () => {
           {/* Filtered Staff Members Box */}
           <div className="bg-green-100 text-green-800 p-4 rounded shadow-md">
             <h4 className="text-lg font-semibold">Filtered Staff Members</h4>
-            <p className="text-2xl font-bold">{filteredStaff.length}</p>
+            <p className="text-2xl font-bold">{staffMembers.length}</p>
           </div>
 
           {/* Add New Staff Button */}
@@ -159,8 +139,8 @@ const StaffManagement = () => {
           </Link>
         </div>
 
-        {/* Filter Input */}
-        <div className="mb-6">
+        Filter Input
+        {/* <div className="mb-6">
           <input
             type="text"
             placeholder="Filter staff by name or email"
@@ -169,12 +149,12 @@ const StaffManagement = () => {
             onChange={(e) => setStaffFilter(e.target.value)}
           />
         </div>
-
+ */}
         {/* Staff Management Table */}
         <div className="overflow-x-auto bg-white shadow-md rounded-lg p-4">
           {loading ? (
             <p className="text-center text-lg">Loading...</p>
-          ) : filteredStaff.length === 0 ? (
+          ) : staffMembers.length === 0 ? (
             <p className="text-center text-lg">No staff members found.</p>
           ) : (
             <table className="min-w-full table-auto">
@@ -189,7 +169,7 @@ const StaffManagement = () => {
                 </tr>
               </thead>
               <tbody>
-                {filteredStaff.map((staff) => (
+                {staffMembers.map((staff) => (
                   <tr key={staff.STAFF_ID} className="border-b hover:bg-gray-100 transition">
                     <td className="px-4 py-2">{staff.STAFF_ID}</td>
                     <td className="px-4 py-2">{staff.NAME}</td>
