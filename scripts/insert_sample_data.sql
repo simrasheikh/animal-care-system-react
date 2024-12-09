@@ -1,19 +1,5 @@
-INSERT INTO staff (name, 
--- role, 
-phone_number, email, password)
-VALUES ('Subata Naveen Khan', 
--- 'Admin', 
-'03314991818', 's.khan_18119@animalcare.com', 'subatacare123');
-
-INSERT INTO staff (name, 
--- role, 
-phone_number, email, password)
-VALUES ('Simra Sheikh', 
--- 'Admin', 
-'03175776779', 's.sheikh.27135@animalcare.com', 'simracare123');
-
-INSERT INTO staff (name, phone_number, email, password) VALUES ('John Smith', '1234567890', 's.sheikh.27135@animalcare.com', 'simracare123');
-INSERT INTO staff (name, phone_number, email, password) VALUES ('Simra Sheikh', '03175776779', 'jane.doe@example.com', 'securepassword');
+INSERT INTO staff (name, phone_number, email, password) VALUES ('Simra Sheikh', '03175776779', 's.sheikh.27135@animalcare.com', 'simracare123');
+INSERT INTO staff (name, phone_number, email, password) VALUES ('Subata Naveen Khan', '03314991818', 's.khan_18119@animalcare.com', 'subatacare123');
 INSERT INTO staff (name, phone_number, email, password) VALUES ('Alice Johnson', '5678901234', 'alice.johnson@example.com', 'alice2023');
 INSERT INTO staff (name, phone_number, email, password) VALUES ('Bob Brown', '4321098765', 'bob.brown@example.com', 'bobbrown!');
 INSERT INTO staff (name, phone_number, email, password) VALUES ('Emma Wilson', '8765432109', 'emma.wilson@example.com', 'emmapass');
@@ -23,104 +9,41 @@ INSERT INTO staff (name, phone_number, email, password) VALUES ('Ethan Lewis', '
 INSERT INTO staff (name, phone_number, email, password) VALUES ('Sophia Clark', '2109876543', 'sophia.clark@example.com', 'clarkSophia');
 INSERT INTO staff (name, phone_number, email, password) VALUES ('Liam Davis', '6789012345', 'liam.davis@example.com', 'davisLiam#');
 
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Bella', 'Dog', 'Labrador', 4, 'Female', 25.3, 'Friendly and energetic', 'https://example.com/bella.jpg');
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Max', 'Dog', 'Beagle', 3, 'Male', 18.5, 'Curious and loyal', 'https://example.com/max.jpg');
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Whiskers', 'Cat', 'Persian', 2, 'Female', 3.5, 'Calm and affectionate', 'https://example.com/whiskers.jpg');
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Charlie', 'Dog', 'Golden Retriever', 5, 'Male', 30.0, 'Playful and loving', 'https://example.com/charlie.jpg');
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Shadow', 'Cat', 'Siamese', 4, 'Male', 4.1, 'Mysterious and independent', 'https://example.com/shadow.jpg');
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Daisy', 'Dog', 'Bulldog', 6, 'Female', 23.7, 'Gentle and protective', 'https://example.com/daisy.jpg');
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Luna', 'Cat', 'Maine Coon', 3, 'Female', 6.2, 'Playful and curious', 'https://example.com/luna.jpg');
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Oscar', 'Dog', 'Pug', 2, 'Male', 10.8, 'Clownish and sociable', 'https://example.com/oscar.jpg');
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Simba', 'Cat', 'Bengal', 1, 'Male', 3.2, 'Adventurous and bold', 'https://example.com/simba.jpg');
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Milo', 'Dog', 'Border Collie', 3, 'Male', 20.5, 'Intelligent and energetic', 'https://example.com/milo.jpg');
+INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Bella', 'Dog', 'Labrador', 4, 'Female', 25.3, 'Friendly and energetic', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733716383/pexels-wildlittlethingsphoto-2253275_kzltg5.jpg');
+INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Max', 'Dog', 'Beagle', 3, 'Male', 18.5, 'Curious and loyal', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733716383/pexels-svetozar-milashevich-99573-1490908_mseqzb.jpg');
+INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Whiskers', 'Cat', 'Persian', 2, 'Female', 3.5, 'Calm and affectionate', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733716382/images_1_zxxrfl.jpg');
+INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Charlie', 'Dog', 'Golden Retriever', 5, 'Male', 30.0, 'Playful and loving', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733716382/istockphoto-467923438-612x612_hrt19w.jpg');
+INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Shadow', 'Cat', 'Siamese', 4, 'Male', 4.1, 'Mysterious and independent', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733716382/pexels-ingewallu-177809_sdomel.jpg');
+INSERT INTO animals (animal_name, species, breed, age, gender, weight, description, photo_url) VALUES ('Luna', 'Cat', 'Maine Coon', 3, 'Female', 6.2, 'Playful and curious', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733716382/funny-large-longhair-gray-kitten-600nw-1842198919_nbib5u.webp');
 
+INSERT INTO owners (owner_name, username, phone_number, email, password) VALUES ('John Doe', 'johndoe', '1234567890', 'john.doe@example.com', 'johnpassword');
+INSERT INTO owners (owner_name, username, phone_number, email, password) VALUES ('Jane Smith', 'janesmith', '2345678901', 'jane.smith@example.com', 'jane2023');
+INSERT INTO owners (owner_name, username, phone_number, email, password) VALUES ('Emily Davis', 'emilyd', '3456789012', 'emily.davis@example.com', 'davisEmily');
+INSERT INTO owners (owner_name, username, phone_number, email, password) VALUES ('Robert Johnson', 'robertj', '4567890123', 'robert.johnson@example.com', 'robertjohnson');
+INSERT INTO owners (owner_name, username, phone_number, email, password) VALUES ('Michael Brown', 'michaelb', '5678901234', 'michael.brown@example.com', 'brownMichael');
+INSERT INTO owners (owner_name, username, phone_number, email, password) VALUES ('Sarah Wilson', 'sarahw', '6789012345', 'sarah.wilson@example.com', 'wilsonSarah');
+INSERT INTO owners (owner_name, username, phone_number, email, password) VALUES ('Daniel Martin', 'danielm', '7890123456', 'daniel.martin@example.com', 'martinDaniel');
+INSERT INTO owners (owner_name, username, phone_number, email, password) VALUES ('Sophia Taylor', 'sophiat', '8901234567', 'sophia.taylor@example.com', 'taylorSophia');
+INSERT INTO owners (owner_name, username, phone_number, email, password) VALUES ('Chris Clark', 'chrisc', '9012345678', 'chris.clark@example.com', 'clarkChris');
+INSERT INTO owners (owner_name, username, phone_number, email, password) VALUES ('Olivia Lewis', 'olivial', '2109876543', 'olivia.lewis@example.com', 'lewisOlivia');
 
+INSERT INTO adoption_applications (animal_id, owner_id) VALUES (1, 1);
+INSERT INTO adoption_applications (animal_id, owner_id) VALUES (2, 2);
+INSERT INTO adoption_applications (animal_id, owner_id) VALUES (3, 3);
+INSERT INTO adoption_applications (animal_id, owner_id) VALUES (4, 4);
+INSERT INTO adoption_applications (animal_id, owner_id) VALUES (5, 5);
 
+INSERT INTO vets (name, image_url, phone_number, email) VALUES ('Dr. Sam Wilson', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733715727/portrait-handsome-smiling-young-man-folded-arms-smiling-joyful-cheerful-men-crossed-hands-isolated-studio-shot-172869765_xp6ak5.webp', '1231231234', 'sam.wilson@example.com');
+INSERT INTO vets (name, image_url, phone_number, email) VALUES ('Dr. Sarah Lee', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733715896/fashion-industry-black-woman-designer-600nw-2235667567_uwggc9.webp', '2342342345', 'sarah.lee@example.com');
+INSERT INTO vets (name, image_url, phone_number, email) VALUES ('Dr. Tom Brown', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733715726/istockphoto-1389465862-612x612_tidcoh.jpg', '3453453456', 'tom.brown@example.com');
+INSERT INTO vets (name, image_url, phone_number, email) VALUES ('Dr. Emily Carter', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733715896/depositphotos_315935436-stock-photo-beautiful-female-african-american-business_l7zrev.webp', '4564564567', 'emily.carter@example.com');
+INSERT INTO vets (name, image_url, phone_number, email) VALUES ('Dr. David Smith', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733715727/pexels-photo-2379004_ay6ifa.jpg', '5675675678', 'david.smith@example.com');
+INSERT INTO vets (name, image_url, phone_number, email) VALUES ('Dr. Olivia Jones', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733715896/professional-smiling-woman_ce0qdn.jpg', '6786786789', 'olivia.jones@example.com');
 
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, intake_date, description, PHOTO_URL)
-VALUES ('Max', 'Dog', 'Labrador', 5, 'Male', 32.29, SYSDATE - 5, 'Friendly dog', 
-'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733657384/edpkjzrzxkmfwqhjg0gy.jpg');
-
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, intake_date, description, PHOTO_URL)
-VALUES ('Whiskers', 'Cat', 'Persian', 3, 'Female', 3.5, SYSDATE - 20, 'Calm and affectionate',
-'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733656679/bybcjn9przyrlufv6qo1.jpg');
-
-INSERT INTO animals (animal_name, species, breed, age, gender, weight, intake_date, description, PHOTO_URL)
-VALUES ('Buddy', 'Dog', 'Beagle', 4, 'Male', 18.49, SYSDATE - 15, 'Energetic and curious', 
-'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733655012/charlie_zswu1n.jpg');
-
-INSERT INTO owners (owner_name, username, phone_number, email, password)
-VALUES ('John Doe', 'john123', '1234567890', 'john@example.com' , 'johndoepassword');
-
-INSERT INTO owners (owner_name, username, phone_number, email, password)
-VALUES ('Bob Johnson', 'bob123', '1112223333', 'bob@example.com' , 'bobjohnsonpassword123');
-
-INSERT INTO owners (owner_name, username, phone_number, email, password)
-VALUES ('Jane Smith', 'jane123', '0987654321', 'jane@example.com', 'janesmithpassword123');
-
-INSERT INTO adoption_applications (animal_id, owner_id)
-VALUES (1, 1);
-
-INSERT INTO adoption_applications (animal_id, owner_id)
-VALUES (1, 2);
-
-INSERT INTO adoption_applications (animal_id, owner_id)
-VALUES (1, 3);
-
-INSERT INTO adoption_applications (animal_id, owner_id)
-VALUES (2, 1);
-
-INSERT INTO adoption_applications (animal_id, owner_id)
-VALUES (2, 2);
-
-INSERT INTO adoption_applications (animal_id, owner_id)
-VALUES (2, 3);
-
-INSERT INTO adoption_applications (animal_id, owner_id)
-VALUES (3, 1);
-
-INSERT INTO adoption_applications (animal_id, owner_id)
-VALUES (3, 2);
-
-INSERT INTO adoption_applications (animal_id, owner_id)
-VALUES (3, 3);
-commit;
--- INSERT INTO vets (name, image_url, phone_number, email)
--- VALUES ('Dr. Brown', '1112223333', 'dr.brown@example.com');
-
-INSERT INTO vets (name, image_url, phone_number, email)
-VALUES ('Dr. Sarah Lee', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733649150/samples/smile.jpg', '5556667777', 'sarah.lee@example.com');
-
--- INSERT INTO vets (name, image_url, phone_number, email)
--- VALUES ('Dr. Kevin Smith', '8889990000', 'kevin.smith@example.com');
-
--- INSERT INTO vets (name, image_url, phone_number, email)
--- VALUES ('Dr. John Peter', '9990000111', 'john.peter@example.com');
-
-INSERT INTO vets (name, image_url, phone_number, email)
-VALUES ('Dr. Jane Bolt', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733655012/charlie_zswu1n.jpg', '0000111222', 'jane.bolt@example.com');
-
-INSERT INTO vets (name, image_url, phone_number, email)
-VALUES ('Dr. John Doe', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733655012/charlie_zswu1n.jpg', '1234567890', 'johndoe@example.com');
-
-insert into appointments (vet_id, owner_id, Appointment_Date_Time, notes) 
-values (1, 1, to_date('2024-12-11 10:00', 'YYYY-MM-DD HH24:MI'), 'Checkup');
-
-insert into appointments (vet_id, owner_id, Appointment_Date_Time, notes) 
-values (1, 3, to_date('2024-12-15 13:30', 'YYYY-MM-DD HH24:MI'), 'Checkup');
-
-insert into appointments (vet_id, owner_id, Appointment_Date_Time, notes) 
-values (1, 1, to_date('2024-12-20 14:30', 'YYYY-MM-DD HH24:MI'), 'Checkup');
-
+INSERT INTO appointments (vet_id, owner_id, appointment_date_time, notes) VALUES (1, 1, TO_DATE('2024-12-10 10:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'General Checkup');
+INSERT INTO appointments (vet_id, owner_id, appointment_date_time, notes) VALUES (2, 2, TO_DATE('2024-12-11 11:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Vaccination');
+INSERT INTO appointments (vet_id, owner_id, appointment_date_time, notes) VALUES (3, 3, TO_DATE('2024-12-12 09:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Dental Check');
+INSERT INTO appointments (vet_id, owner_id, appointment_date_time, notes) VALUES (4, 4, TO_DATE('2024-12-13 14:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Behavior Consultation');
+INSERT INTO appointments (vet_id, owner_id, appointment_date_time, notes) VALUES (5, 5, TO_DATE('2024-12-14 15:00:00', 'YYYY-MM-DD HH24:MI:SS'), 'Surgery Follow-Up');
 
 commit;
-
-
--- INSERT INTO Donations (donor_name, amount, purpose)
--- VALUES ('Global Pet Foundation', 500.00, 'Medical Care');
-
--- INSERT INTO Donations (donor_name, amount, purpose)
--- VALUES ('Anonymous', 200.00, 'Food and Shelter');
-
--- INSERT INTO Donations (donor_name, amount, purpose)
--- VALUES ('Jane Smith', 300.00, 'Vaccination');
