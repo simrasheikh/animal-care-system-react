@@ -13,26 +13,14 @@ import StaffDashboard from './StaffDashboard'; // Staff Dashboard Landing page
 import AnimalManagement from './AnimalManagement'; // Animal Management Page
 import StaffManagement from './StaffManagement'; // Staff Management Page
 import AdoptionApplications from './AdoptionApplications'; // Adoption Applications Page
-import MedicalRecords from './MedicalRecords'; // Medical Records Page
 import AddAnimal from './AddAnimal';  // Import AddAnimal
 import AddStaff from './AddStaff';  // Import AddStaff
-import AddMedicalRecord from './AddMedicalRecord';  // Import AddMedicalRecord page
-import Test from './Test';
+
 
 function App() {
   const [animals, setAnimals] = useState([]);
 
-  // Function to fetch animals based on filters
-  // const fetchAnimals = async (filters) => {
-  //   const params = new URLSearchParams(filters).toString();
-  //   const response = await fetch(`http://localhost:3002/animals?${params}`);
-  //   const data = await response.json();
-  //   setAnimals(data);
-  // };
-
-  // useEffect(() => {
-  //   fetchAnimals({ status: 'Available' }); // Default filter to fetch available animals
-  // }, []);
+  
   const fetchAnimals = async () => {
     try {
       fetch(`http://localhost:3001/animals`, {
@@ -57,9 +45,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        {/* test page */}
-        <Route path="/test" element={<Test />} /> 
-
+        
         {/* Home page */}
         <Route path="/" element={<Home />} />
 
@@ -93,12 +79,11 @@ function App() {
 
         {/* Staff Dashboard sub-pages */}
         <Route path="/staff-dashboard/animal-management" element={<AnimalManagement />} />
-        <Route path="/staff-dashboard/adoption-applications" element={<AdoptionApplications />} />
-        <Route path="/staff-dashboard/medical-records" element={<MedicalRecords />} />
+        <Route path="/staff-dashboard/adoption-applications" element={<AdoptionApplications />} />        
         <Route path="/staff-dashboard/animal-management/add" element={<AddAnimal />} />
         <Route path="/staff-dashboard/staff-management" element={<StaffManagement />} />
         <Route path="/staff-dashboard/staff-management/add-staff" element={<AddStaff />} />
-        <Route path="/staff-dashboard/medical-records/add" element={<AddMedicalRecord />} />
+        
       </Routes>
     </BrowserRouter>
   );

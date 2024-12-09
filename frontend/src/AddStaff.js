@@ -76,7 +76,7 @@ const AddStaff = () => {
           Dashboard
         </Link>
         <div className="space-x-4">
-          <Link to="/staff-dashboard" className="text-white hover:text-gray-300">Dashboard Home</Link>
+        <Link to="/staff-dashboard" className="text-white hover:text-gray-300">Dashboard Home</Link>
           <Link to="/staff-dashboard/animal-management" className="text-white hover:text-gray-300">Animal Management</Link>
           <Link to="/staff-dashboard/adoption-applications" className="text-white hover:text-gray-300">Adoption Applications</Link>
           <Link to="/staff-dashboard/staff-management" className="text-white hover:text-gray-300">Staff Management</Link>
