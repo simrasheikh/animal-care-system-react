@@ -1,3 +1,4 @@
+const { reject } = require("async");
 const oracledb = require("oracledb");
 
 async function getAllApps_m() {
@@ -30,6 +31,7 @@ async function approveApplication_m(app_id) {
     let conn;
     try {
         conn = await oracledb.getConnection();
+        console.log('accepting: ', app_id);
         const result = await conn.execute(
             `UPDATE adoption_applications SET status = 'Approved' WHERE ADOPTION_ID = :ADOPTION_ID`,
             { ADOPTION_ID: app_id },
@@ -45,6 +47,32 @@ async function approveApplication_m(app_id) {
         }
     } catch (err) {
         console.error('Error in approveApplication_m:', err);  // Debugging line
+        throw err;
+    } finally {
+        if (conn) await conn.close();
+    }
+}
+
+async function rejectApplication_m(app_id) {
+    let conn;
+    try {
+        conn = await oracledb.getConnection();
+        console.log('rejecting:', app_id);
+        const result = await conn.execute(
+            `UPDATE adoption_applications SET status = 'Rejected' WHERE ADOPTION_ID = :ADOPTION_ID`,
+            { ADOPTION_ID: app_id },
+            { autoCommit: true }
+        );
+
+        if (result.rowsAffected > 0) {
+            console.log('Adoption application rejected');
+            return true;
+        } else {
+            console.log('Failed to update AdoptionApplications');
+            return false;
+        }
+    } catch (err) {
+        console.error('Error in rejectApplication_m:', err);  // Debugging line
         throw err;
     } finally {
         if (conn) await conn.close();
@@ -83,5 +111,6 @@ async function submitAdoptionApplication_m(owner_id, animal_id) {
 module.exports = {
     getAllApps_m,
     approveApplication_m,
+    rejectApplication_m,
     submitAdoptionApplication_m,
 };

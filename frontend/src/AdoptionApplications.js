@@ -13,15 +13,6 @@ const AdoptionApplications = () => {
 
   // Dummy data for adoption applications
   useEffect(() => {
-    // setApplications([
-    //   { id: 1, animalName: 'Bella', adopterName: 'John Doe', status: 'Pending' },
-    //   { id: 2, animalName: 'Milo', adopterName: 'Jane Smith', status: 'Approved' },
-    //   { id: 3, animalName: 'Charlie', adopterName: 'Tom Johnson', status: 'Pending' },
-    //   { id: 4, animalName: 'Lucy', adopterName: 'Emily Davis', status: 'Rejected' },
-    // ]);
-
-    // Backend data fetching (commented out for now)
-    
     fetch('http://localhost:3001/adoption-applications', {
       method: 'GET',
       headers: {
@@ -51,7 +42,6 @@ const AdoptionApplications = () => {
     );
     setApplications(updatedApplications);
 
-    // Backend call to approve application (commented out for now)
     fetch(`http://localhost:3001/adoption-applications/${application.ADOPTION_ID}/approve`, {
       method: 'PUT',
       headers: {
@@ -82,13 +72,14 @@ const AdoptionApplications = () => {
     );
     setApplications(updatedApplications);
 
-    // Backend call to reject application (commented out for now)
-    /*
     fetch(`http://localhost:3001/adoption-applications/${application.ADOPTION_ID}/reject`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
+      body: JSON.stringify({ 
+        ADOPTION_ID: application.ADOPTION_ID,
+        STATUS: 'Rejected' }),
     })
       .then((response) => {
         if (!response.ok) {
@@ -102,7 +93,6 @@ const AdoptionApplications = () => {
       .catch((error) => {
         console.error('Error rejecting application:', error);
       });
-    */
   };
 
   // Filter applications by status
