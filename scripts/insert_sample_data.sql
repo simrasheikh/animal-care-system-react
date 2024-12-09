@@ -60,8 +60,8 @@ VALUES (3, 2);
 INSERT INTO adoption_applications (animal_id, owner_id)
 VALUES (3, 3);
 commit;
-INSERT INTO vets (name, image_url, phone_number, email)
-VALUES ('Dr. Brown', '1112223333', 'dr.brown@example.com');
+-- INSERT INTO vets (name, image_url, phone_number, email)
+-- VALUES ('Dr. Brown', '1112223333', 'dr.brown@example.com');
 
 INSERT INTO vets (name, image_url, phone_number, email)
 VALUES ('Dr. Sarah Lee', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733649150/samples/smile.jpg', '5556667777', 'sarah.lee@example.com');
@@ -78,7 +78,18 @@ VALUES ('Dr. Jane Bolt', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v173
 INSERT INTO vets (name, image_url, phone_number, email)
 VALUES ('Dr. John Doe', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733655012/charlie_zswu1n.jpg', '1234567890', 'johndoe@example.com');
 
+insert into appointments (vet_id, owner_id, Appointment_Date_Time, notes) 
+values (1, 1, to_date('2024-12-11 10:00', 'YYYY-MM-DD HH24:MI'), 'Checkup');
+
+insert into appointments (vet_id, owner_id, Appointment_Date_Time, notes) 
+values (1, 3, to_date('2024-12-15 13:30', 'YYYY-MM-DD HH24:MI'), 'Checkup');
+
+insert into appointments (vet_id, owner_id, Appointment_Date_Time, notes) 
+values (1, 1, to_date('2024-12-20 14:30', 'YYYY-MM-DD HH24:MI'), 'Checkup');
+
+
 commit;
+
 
 -- INSERT INTO Donations (donor_name, amount, purpose)
 -- VALUES ('Global Pet Foundation', 500.00, 'Medical Care');

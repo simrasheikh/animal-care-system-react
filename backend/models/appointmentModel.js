@@ -1,30 +1,65 @@
 // backend/models/appointmentModel.js
-const db = require('../config/db');
+const oracledb = require('oracledb');
+const { get } = require('../routes/appointmentRoutes');
 
-async function createAppointment({ vetId, ownerId, appointmentDate, appointmentTime, notes }) {
-  const sql = `
-    INSERT INTO Appointments (Vet_ID, Owner_ID, Appointment_Date, Appointment_Time, Notes)
-    VALUES (:vetId, :ownerId, TO_DATE(:appointmentDate, 'YYYY-MM-DD'), :appointmentTime, :notes)
-    RETURNING Appointment_ID INTO :appointmentId
-  `;
-  const binds = {
-    vetId,
-    ownerId,
-    appointmentDate,
-    appointmentTime,
-    notes,
-    appointmentId: { dir: db.oracledb.BIND_OUT, type: db.oracledb.NUMBER },
-  };
+async function getAppointments_m() {
+	let conn;
+	try {
+		conn = await oracledb.getConnection();
+		const result = await conn.execute(`SELECT * FROM appointments`);
 
-  try {
-    const result = await db.query(sql, binds);
-    return result.outBinds.appointmentId[0];
-  } catch (error) {
-    console.error('Error creating appointment:', error);
-    throw error; // Rethrow to be caught by the controller
-  }
+		const rows = result.rows;
+		const columns = result.metaData.map((meta) => meta.name);
+
+		const jsonResult = rows.map((row) => {
+			let obj = {};
+			row.forEach((value, index) => {
+				obj[columns[index]] = value;
+			});
+			return obj;
+		});
+
+		return jsonResult;
+
+	} catch (err) {
+		throw err;
+	} finally {
+		if (conn) {
+			await conn.close();
+		}
+	}
+}
+
+async function createAppointment_m(owner_id, details) {
+	let conn;
+	try {
+		conn = await oracledb.getConnection();
+		const appointment_date_time = details.appointmentDate + ' ' + details.appointmentTime;
+		console.log(appointment_date_time);
+		const result = await conn.execute(
+			`INSERT INTO appointments (owner_id, vet_id, notes, appointment_date_time)
+       VALUES (:owner_id, :vet_id, :notes, to_date(:appointment_date_time, 'YYYY-MM-DD HH24:MI'))`,
+			{
+				owner_id: owner_id,
+				vet_id: details.vetId,
+				notes: details.name,
+				appointment_date_time: appointment_date_time,
+			},
+			{ autoCommit: true }
+		);
+
+		return result.rowsAffected > 0;
+	} catch (err) {
+		// console.log(err);
+		throw err;
+	} finally {
+		if (conn) {
+			await conn.close();
+		}
+	}
 }
 
 module.exports = {
-  createAppointment,
+	getAppointments_m,
+	createAppointment_m,
 };

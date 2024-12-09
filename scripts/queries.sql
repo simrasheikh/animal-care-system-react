@@ -6,7 +6,7 @@ select * from owners;
 desc owners;
 insert into owners (owner_name, username, phone_number, email, password) 
 values ('subata', 'subarapsterc', '03314991818', 'subarapster.c@gmail.com', 'hehe123');
-
+select owner_id from owners where username = 'john123' and password = 'johndoepassword';
 select * from adoption_application_details;
 
 update adoption_applications set status = 'Approved' where owner_id = 1;
@@ -17,7 +17,7 @@ commit;
 -- 
 select * from vets;
 insert into owners (name, email, password) values ('John Doe', 'idk', 'password');
-select * from medicalrecords;
+select * from appointments;
 
 --List all animals that are available for adoption:
 SELECT animal_id, name, species, breed, age, health_status, vaccination_status

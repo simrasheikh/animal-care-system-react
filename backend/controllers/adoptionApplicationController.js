@@ -2,8 +2,8 @@ const {
     getAllApps_m,
     approveApplication_m,
     submitAdoptionApplication_m, 
-    validateOwnerDetails_c
 } = require("../models/adoptionApplicationModel");
+const { validateOwnerDetails_m } = require("../models/ownerModel");
 
 async function getAllApps_c(req, res) {
     try {
@@ -39,19 +39,12 @@ async function approveApplication_c(req, res) {
 }
 
 async function submitAdoptionApplication(req, res) {
-    const { username, password, animal_id } = req.body;  // Expect username and animal_id from the form
-    
+    const { username, password, animal_id } = req.body; 
     try {
-        // Fetch the owner_id from the database based on the username
-        console.log('username:', username);
-        console.log('password:', password);
-        const owner_id = await validateOwnerDetails_c(username, password);  // Function defined in ownerModel.js
+        const owner_id = await validateOwnerDetails_m(username, password);
         if (!owner_id) {
             return res.status(404).json({ message: "Incorrect details or user does not exist." });
         }
-
-        // const owner_id = owner.owner_id;
-        console.log('owner_id:', owner_id);
 
         // Submit the adoption application
         const adoptionApplication = await submitAdoptionApplication_m(owner_id, animal_id);

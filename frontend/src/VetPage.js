@@ -6,7 +6,7 @@ const VetPage = () => {
   const [vetsData, setVetsData] = useState([]); // Initialize as empty array
   const [selectedVet, setSelectedVet] = useState(null);
   const [appointmentDetails, setAppointmentDetails] = useState({
-    name: '',
+    notes: '',
     username: '',
     password: '',
     vetId: '',
@@ -58,10 +58,10 @@ const VetPage = () => {
     let isValid = true;
 
     // Validate Name
-    if (!appointmentDetails.name) {
-      errors.name = 'Name is required';
-      isValid = false;
-    }
+    // if (!appointmentDetails.notes) {
+    //   errors.notes = 'Name is required';
+    //   isValid = false;
+    // }
 
     // Validate Username
     if (!appointmentDetails.username) {
@@ -126,7 +126,6 @@ const VetPage = () => {
   
     // Prepare the data to be sent to the backend
     const appointmentData = {
-      name: appointmentDetails.name,
       username: appointmentDetails.username,
       password: appointmentDetails.password,
       vetId: selectedVet.VET_ID, // Pass vetId from selected vet
@@ -134,7 +133,7 @@ const VetPage = () => {
       appointmentDate: appointmentDetails.appointmentDate, // Send date as string
       notes: appointmentDetails.notes || "", // Optional notes field
     };
-    
+    console.log(appointmentData);
     try {
       const response = await fetch('http://localhost:3001/appointments', {
         method: 'POST',
@@ -257,13 +256,13 @@ const VetPage = () => {
               <input
                 type="text"
                 name="name"
-                value={appointmentDetails.name}
+                value={appointmentDetails.notes}
                 onChange={handleFormChange}
                 placeholder="Your Name"
                 className="w-full p-3 mb-4 border border-gray-300 rounded"
                 required
               />
-              {formErrors.name && <p className="text-red-500 text-sm">{formErrors.name}</p>}
+              {formErrors.name && <p className="text-red-500 text-sm">{formErrors.notes}</p>}
             </div>
 
             <div>

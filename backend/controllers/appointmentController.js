@@ -1,40 +1,40 @@
 // backend/controllers/appointmentController.js
-const { createAppointment } = require('../models/appointmentModel');
-const { getOwnerByEmail } = require('../models/ownerModel'); // Assuming you have this function
+const { 
+	getAppointments_m,
+	createAppointment_m 
+} = require('../models/appointmentModel');
+const { validateOwnerDetails_m } = require('../models/ownerModel'); 
 
-async function bookAppointment(req, res) {
-  const { name, email, phone, vetId, appointmentTime, appointmentDate, notes } = req.body;
+async function getAppointments_c(req, res) {
+	try {
+		const appointments = await getAppointments_m();
+		res.status(200).json(appointments);
+	} catch (error) {
+		res.status(500).json({ message: "Error fetching appointments", error });
+	}
+}
 
-  try {
-    // Log the incoming data
-    console.log('Received appointment data:', req.body);
+async function bookAppointment_c(req, res) {
+	const { username, password } = req.body;  
+	try {
+		const owner_id = await validateOwnerDetails_m(username, password);  
+		if (!owner_id) {
+			return res.status(404).json({ message: "Incorrect details or user does not exist." });
+		}
 
-    // Fetch the owner using the email address (since no session/cookie is implemented)
-    const owner = await getOwnerByEmail(email);
-    console.log('Fetched owner from email:', owner);
+		const appointment = await createAppointment_m(owner_id, req.body);
 
-    if (!owner) {
-      console.log('Owner not found');
-      return res.status(400).json({ message: 'Owner not found. Please register first.' });
-    }
-
-    // Create the appointment
-    const appointmentId = await createAppointment({
-      vetId,
-      ownerId: owner.owner_id,
-      appointmentDate,
-      appointmentTime,
-      notes,
-    });
-
-    console.log('Appointment successfully booked with ID:', appointmentId);
-    return res.status(200).json({ success: true, appointmentId });
-  } catch (error) {
-    console.error('Error in booking appointment:', error);
-    return res.status(500).json({ message: 'Failed to book appointment.' });
-  }
+		if (appointment) {
+			res.status(201).json({ message: "Appointment booked successfully" });
+		} else {
+			res.status(500).json({ message: "Error booking appointment" });
+		}
+	} catch (error) {
+		res.status(500).json({ message: "Error booking appointment", error });
+	}
 }
 
 module.exports = {
-  bookAppointment,
+	getAppointments_c,
+	bookAppointment_c,
 };

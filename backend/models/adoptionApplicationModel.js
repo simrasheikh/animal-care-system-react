@@ -51,23 +51,6 @@ async function approveApplication_m(app_id) {
     }
 }
 
-async function validateOwnerDetails_c(username, password) {
-    let conn;
-    try {
-        conn = await oracledb.getConnection();
-        const result = await conn.execute(
-            `SELECT * FROM owners WHERE username = :username AND password = :password`,
-            { username: username, password: password }
-        );
-        console.log('result:', result.rows[0][0]);
-        return result.rows[0][0];
-    } catch (err) {
-        throw err;
-    } finally {
-        if (conn) await conn.close();
-    }
-}
-
 async function submitAdoptionApplication_m(owner_id, animal_id) {
     let conn;
     console.log('owner_id:', owner_id);
@@ -101,5 +84,4 @@ module.exports = {
     getAllApps_m,
     approveApplication_m,
     submitAdoptionApplication_m,
-    validateOwnerDetails_c,
 };

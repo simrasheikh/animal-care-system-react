@@ -76,9 +76,26 @@ async function getOwnerByUsername_m(username) {
     }
 }
 
+async function validateOwnerDetails_m(username, password) {
+    let conn;
+    try {
+        conn = await oracledb.getConnection();
+        const result = await conn.execute(
+            `SELECT * FROM owners WHERE username = :username AND password = :password`,
+            { username: username, password: password }
+        );
+        return result.rows[0][0];
+    } catch (err) {
+        throw err;
+    } finally {
+        if (conn) await conn.close();
+    }
+}
+
 
 module.exports = {
     getOwners_m,
     signup_m,
     getOwnerByUsername_m,
+    validateOwnerDetails_m,
 };
