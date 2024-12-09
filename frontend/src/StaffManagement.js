@@ -122,13 +122,7 @@ const StaffManagement = () => {
           <div className="bg-teal-100 text-teal-800 p-4 rounded shadow-md">
             <h4 className="text-lg font-semibold">Total Staff Members</h4>
             <p className="text-2xl font-bold">{staffMembers.length}</p>
-          </div>
-
-          {/* Filtered Staff Members Box */}
-          <div className="bg-green-100 text-green-800 p-4 rounded shadow-md">
-            <h4 className="text-lg font-semibold">Filtered Staff Members</h4>
-            <p className="text-2xl font-bold">{staffMembers.length}</p>
-          </div>
+          </div>          
 
           {/* Add New Staff Button */}
           <Link to="/staff-dashboard/staff-management/add-staff">
@@ -139,7 +133,6 @@ const StaffManagement = () => {
           </Link>
         </div>
 
-        Filter Input
         {/* <div className="mb-6">
           <input
             type="text"
@@ -206,28 +199,28 @@ const StaffManagement = () => {
             <form onSubmit={handleSaveChanges} className="space-y-4">
               <input
                 type="text"
-                value={currentStaff.name}
+                value={currentStaff.NAME}
                 onChange={(e) => handleInputChange('name', e.target.value)}
                 placeholder="Name"
                 className="w-full p-3 border rounded"
               />
               <input
                 type="text"
-                value={currentStaff.phone_number}
+                value={currentStaff.PHONE_NUMBER}
                 onChange={(e) => handleInputChange('phone_number', e.target.value)}
                 placeholder="Phone Number"
                 className="w-full p-3 border rounded"
               />
               <input
                 type="email"
-                value={currentStaff.email}
+                value={currentStaff.EMAIL}
                 onChange={(e) => handleInputChange('email', e.target.value)}
                 placeholder="Email"
                 className="w-full p-3 border rounded"
               />
               <input
                 type="password"
-                value={currentStaff.password}
+                value={currentStaff.PASSWORD}
                 onChange={(e) => handleInputChange('password', e.target.value)}
                 placeholder="Password"
                 className="w-full p-3 border rounded"
