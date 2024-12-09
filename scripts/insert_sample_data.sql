@@ -60,11 +60,11 @@ VALUES (3, 2);
 INSERT INTO adoption_applications (animal_id, owner_id)
 VALUES (3, 3);
 commit;
--- INSERT INTO vets (name, image_url, phone_number, email)
--- VALUES ('Dr. Brown', '1112223333', 'dr.brown@example.com');
+INSERT INTO vets (name, image_url, phone_number, email)
+VALUES ('Dr. Brown', '1112223333', 'dr.brown@example.com');
 
--- INSERT INTO vets (name, image_url, phone_number, email)
--- VALUES ('Dr. Sarah Lee', '5556667777', 'sarah.lee@example.com');
+INSERT INTO vets (name, image_url, phone_number, email)
+VALUES ('Dr. Sarah Lee', 'https://res.cloudinary.com/dcxfxdmsu/image/upload/v1733649150/samples/smile.jpg', '5556667777', 'sarah.lee@example.com');
 
 -- INSERT INTO vets (name, image_url, phone_number, email)
 -- VALUES ('Dr. Kevin Smith', '8889990000', 'kevin.smith@example.com');
