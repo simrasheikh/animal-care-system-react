@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import textbg from './assets/vetlandingbg.jpg'; // The background image
-import vetImage from './assets/vet.jpeg';
+import textbg from './assets/vetlandingbg.jpg';
 
 const VetPage = () => {
   const [vetsData, setVetsData] = useState([]); // Initialize as empty array
@@ -90,6 +89,31 @@ const VetPage = () => {
 
     setFormErrors(errors);
     return isValid;
+  };
+
+  const generateTimeOptions = () => {
+    const options = [];
+    for (let hour = 9; hour <= 16; hour++) {
+      const hourFormatted = hour < 10 ? `0${hour}` : hour;
+      options.push(`${hourFormatted}:00`);
+      if (hour !== 16) {  // Skip adding 16:30
+        options.push(`${hourFormatted}:30`);
+      }
+    }
+    return options;
+  };
+
+  // Handle day selection to ensure Monday to Friday only
+  const handleDayChange = (e) => {
+    const selectedDay = new Date(e.target.value);
+    const dayOfWeek = selectedDay.getDay(); // 0 = Sunday, 6 = Saturday
+
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+      setErrorMessage("Please select a weekday (Monday to Friday).");
+    } else {
+      setErrorMessage('');
+      setAppointmentDetails({ ...appointmentDetails, appointmentDate: e.target.value });
+    }
   };
 
   const handleBookingSubmit = async (e) => {
@@ -219,19 +243,11 @@ const VetPage = () => {
           {errorMessage && <div className="text-red-500 text-center mb-4">{errorMessage}</div>}
 
           <div className="text-center mb-6">
-            {/* Use selectedVet.IMAGE_URL instead of vet.IMAGE_URL */}
             <img
               src={selectedVet.IMAGE_URL} // Corrected here
               alt={selectedVet.NAME}
               className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
-            />
-            <p className="text-lg">{selectedVet.SPECIALIZATION}</p>
-            <p className="text-gray-600">Available times:</p>
-            <ul className="list-disc list-inside text-gray-600">
-              {selectedVet.AVAILABLE_TIMES && selectedVet.AVAILABLE_TIMES.map((time, index) => (
-                <li key={index}>{time}</li>
-              ))}
-            </ul>
+            />            
             <p className="text-gray-600">Contact: {selectedVet.PHONE_NUMBER}</p>
           </div>
   
@@ -283,7 +299,7 @@ const VetPage = () => {
                 type="date"
                 name="appointmentDate"
                 value={appointmentDetails.appointmentDate}
-                onChange={handleFormChange}
+                onChange={handleDayChange} // Custom handler for restricting weekends
                 min="2024-01-01" // Can adjust this to the current date if needed
                 className="w-full p-3 mt-2 border border-gray-300 rounded"
                 required
@@ -302,7 +318,7 @@ const VetPage = () => {
                 required
               >
                 <option value="">Select Time</option>
-                {selectedVet.AVAILABLE_TIMES && selectedVet.AVAILABLE_TIMES.map((time, index) => (
+                {generateTimeOptions().map((time, index) => (
                   <option key={index} value={time}>
                     {time}
                   </option>
