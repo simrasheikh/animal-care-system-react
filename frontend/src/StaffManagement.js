@@ -46,10 +46,10 @@ const StaffManagement = () => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        name: currentStaff.name,
-        phone_number: currentStaff.phone_number,
-        email: currentStaff.email,
-        password: currentStaff.password,
+        name: currentStaff.NAME,
+        phone_number: currentStaff.PHONE_NUMBER,
+        email: currentStaff.EMAIL,
+        password: currentStaff.PASSWORD,
       }),
     })
       .then((response) => {

@@ -112,6 +112,7 @@ async function editStaff_m(id, details) {
     );
         return result.rowsAffected === 1;
     } catch (err) {
+        console.log(err);
         throw err;
     } finally {
         if (conn) {

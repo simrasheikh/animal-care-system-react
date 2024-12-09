@@ -144,7 +144,7 @@ const VetPage = () => {
       });
   
       const result = await response.json();
-  
+  console.log(result);
       if (result.success) {
         setSuccessMessage('Appointment successfully booked!');
       } else {
@@ -255,7 +255,7 @@ const VetPage = () => {
             <div>
               <input
                 type="text"
-                name="name"
+                name="notes"
                 value={appointmentDetails.notes}
                 onChange={handleFormChange}
                 placeholder="Your Name"
