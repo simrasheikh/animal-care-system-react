@@ -8,8 +8,8 @@ const VetPage = () => {
   const [selectedVet, setSelectedVet] = useState(null);
   const [appointmentDetails, setAppointmentDetails] = useState({
     name: '',
-    email: '',
-    phone: '',
+    username: '',
+    password: '',
     vetId: '',
     appointmentTime: '',
     appointmentDate: '', // Added appointment date field
@@ -64,17 +64,15 @@ const VetPage = () => {
       isValid = false;
     }
 
-    // Validate Email
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-    if (!appointmentDetails.email || !emailRegex.test(appointmentDetails.email)) {
-      errors.email = 'Please enter a valid email address';
+    // Validate Username
+    if (!appointmentDetails.username) {
+      errors.username = 'Username is required';
       isValid = false;
     }
 
-    // Validate Phone
-    const phoneRegex = /^[0-9]{10,15}$/;
-    if (!appointmentDetails.phone || !phoneRegex.test(appointmentDetails.phone)) {
-      errors.phone = 'Please enter a valid phone number (10-15 digits)';
+    // Validate Password
+    if (!appointmentDetails.password) {
+      errors.password = 'Password is required';
       isValid = false;
     }
 
@@ -105,8 +103,8 @@ const VetPage = () => {
     // Prepare the data to be sent to the backend
     const appointmentData = {
       name: appointmentDetails.name,
-      email: appointmentDetails.email,
-      phone: appointmentDetails.phone,
+      username: appointmentDetails.username,
+      password: appointmentDetails.password,
       vetId: selectedVet.VET_ID, // Pass vetId from selected vet
       appointmentTime: appointmentDetails.appointmentTime, // Send appointment time as string
       appointmentDate: appointmentDetails.appointmentDate, // Send date as string
@@ -195,7 +193,7 @@ const VetPage = () => {
                 onClick={() => handleVetClick(vet)}
               >
                 <img
-                  src={vetImage} // Use the right image based on vet ID
+                  src={vet.IMAGE_URL} // Use the right image based on vet ID
                   alt={vet.NAME}
                   className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
                 />
@@ -221,8 +219,9 @@ const VetPage = () => {
           {errorMessage && <div className="text-red-500 text-center mb-4">{errorMessage}</div>}
 
           <div className="text-center mb-6">
+            {/* Use selectedVet.IMAGE_URL instead of vet.IMAGE_URL */}
             <img
-              src={vetImage} // Use the correct image based on vet ID
+              src={selectedVet.IMAGE_URL} // Corrected here
               alt={selectedVet.NAME}
               className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
             />
@@ -235,7 +234,7 @@ const VetPage = () => {
             </ul>
             <p className="text-gray-600">Contact: {selectedVet.PHONE_NUMBER}</p>
           </div>
-
+  
           {/* Appointment Booking Form */}
           <form onSubmit={handleBookingSubmit} className="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md">
             <div>
@@ -253,31 +252,48 @@ const VetPage = () => {
 
             <div>
               <input
-                type="email"
-                name="email"
-                value={appointmentDetails.email}
+                type="text"
+                name="username"
+                value={appointmentDetails.username}
                 onChange={handleFormChange}
-                placeholder="Your Email"
+                placeholder="Username"
                 className="w-full p-3 mb-4 border border-gray-300 rounded"
                 required
               />
-              {formErrors.email && <p className="text-red-500 text-sm">{formErrors.email}</p>}
+              {formErrors.username && <p className="text-red-500 text-sm">{formErrors.username}</p>}
             </div>
 
             <div>
               <input
-                type="tel"
-                name="phone"
-                value={appointmentDetails.phone}
+                type="password"
+                name="password"
+                value={appointmentDetails.password}
                 onChange={handleFormChange}
-                placeholder="Your Phone"
+                placeholder="Password"
                 className="w-full p-3 mb-4 border border-gray-300 rounded"
                 required
               />
-              {formErrors.phone && <p className="text-red-500 text-sm">{formErrors.phone}</p>}
+              {formErrors.password && <p className="text-red-500 text-sm">{formErrors.password}</p>}
             </div>
 
+            {/* Day Selection (Monday to Friday only) */}
             <div>
+              <label htmlFor="appointmentDate" className="block text-sm font-semibold">Select Day:</label>
+              <input
+                type="date"
+                name="appointmentDate"
+                value={appointmentDetails.appointmentDate}
+                onChange={handleFormChange}
+                min="2024-01-01" // Can adjust this to the current date if needed
+                className="w-full p-3 mt-2 border border-gray-300 rounded"
+                required
+              />
+              {formErrors.appointmentDate && <p className="text-red-500 text-sm">{formErrors.appointmentDate}</p>}
+            </div>
+
+            {/* Time Selection */}
+            <div>
+              <label htmlFor="appointmentTime" className="block text-sm font-semibold">Select Time:</label>
               <select
                 name="appointmentTime"
                 value={appointmentDetails.appointmentTime}
@@ -285,7 +301,7 @@ const VetPage = () => {
                 className="w-full p-3 mb-4 border border-gray-300 rounded"
                 required
               >
-                <option value="">Select Available Time</option>
+                <option value="">Select Time</option>
                 {selectedVet.AVAILABLE_TIMES && selectedVet.AVAILABLE_TIMES.map((time, index) => (
                   <option key={index} value={time}>
                     {time}
@@ -293,19 +309,6 @@ const VetPage = () => {
                 ))}
               </select>
               {formErrors.appointmentTime && <p className="text-red-500 text-sm">{formErrors.appointmentTime}</p>}
-            </div>
-
-            {/* New Date Field for Appointment Date */}
-            <div>
-              <input
-                type="date"
-                name="appointmentDate"
-                value={appointmentDetails.appointmentDate}
-                onChange={handleFormChange}
-                className="w-full p-3 mb-4 border border-gray-300 rounded"
-                required
-              />
-              {formErrors.appointmentDate && <p className="text-red-500 text-sm">{formErrors.appointmentDate}</p>}
             </div>
 
             {isBooking ? (
